@@ -378,7 +378,7 @@ export const JetsSeatMap = ({
             </>
           }
           style={{
-            height: Dimensions.get('screen').height * 2.8,
+            height: params?.scale != undefined ? 2499 : 0,
             transformOrigin: `${scaleWrapStyle.transformOrigin}`,
             width: scaleWrapStyle.widthInPx,
             transform: [{scale: params?.scale ?? 1}],

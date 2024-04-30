@@ -82,9 +82,17 @@ export const JetsPlaneBody = ({
     width: bodyWidth || config.width,
   }
 
+  const [flatListHeight, setFlatListHeight] = useState(0)
+
+  const handleLayout = event => {
+    const {height} = event.nativeEvent.layout
+    setFlatListHeight(height)
+  }
+
   return (
     <View style={[styles.planeBody, bodyStyle]}>
       <FlatList
+        onLayout={handleLayout}
         data={content.length != 0 ? [content[activeDeck]] : []}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
