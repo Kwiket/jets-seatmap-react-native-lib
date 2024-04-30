@@ -74,7 +74,7 @@ export const getStyleByNumber = (number: number) => {
   }
 }
 
-export const getSeatRotationStyle = direction => {
+export const getSeatRotationStyle = (direction: string) => {
   switch (direction) {
     case 'nw':
       return {

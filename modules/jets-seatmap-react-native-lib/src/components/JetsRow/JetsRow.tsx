@@ -69,8 +69,6 @@ export const JetsRow = ({
             style={{
               height: seat.size.height,
               width: seat.size.width,
-              justifyContent: 'center',
-              alignItems: 'center',
               marginTop: seat.topOffset,
             }}>
             {seat.color ? (

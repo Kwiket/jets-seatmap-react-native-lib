@@ -22,23 +22,14 @@ export const JetsBulk = ({item}: {item: any}) => {
       children={
         <>
           {coloredBulkSVG != undefined && <SvgXml xml={coloredBulkSVG} width="100%" height="100%" />}
-          {/* <View
-            children={
-              <SvgXml
-                xml={coloredStickerSVG}
-                width="100%"
-                height={(item.height / 2) * 0.7 * params.antiScale - item.height}
-                style={{alignSelf: 'center', justifyContent: 'center'}}
-              />
-            }
-            style={{
-              width: '100%',
-              height: '60%',
-              position: 'absolute',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          /> */}
+          {coloredStickerSVG != undefined && (
+            <SvgXml
+              xml={coloredStickerSVG}
+              width="100%"
+              height={(item.height / 2) * 0.7 * params.antiScale - item.height}
+              style={{position: 'absolute', top: '20%'}}
+            />
+          )}
         </>
       }
       style={[

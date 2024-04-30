@@ -121,9 +121,7 @@ export const JetsSeatMap = ({
               currentDeckIndex: activeDeck,
             })
             hasReceivedFirstParams.current = false
-            setTimeout(() => {
-              setSeatMapInited(true)
-            }, 3200)
+            setSeatMapInited(true)
           }
         })
         .catch(err => {

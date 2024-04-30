@@ -91,6 +91,7 @@ export const JetsPlaneBody = ({
         extraData={activeDeck}
         onScroll={e => setScrollOffset(e.nativeEvent.contentOffset.y)}
         showsVerticalScrollIndicator={true}
+        bounces={false}
         ListHeaderComponent={
           !visibleFuselage ? (
             <View
