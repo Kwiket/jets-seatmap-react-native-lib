@@ -390,6 +390,7 @@ export const JetsSeatMap = ({
             onPress={() => {
               setActiveDeck(activeDeck == 1 ? 0 : 1)
             }}
+            activeDeck={activeDeck}
           />
         )}
       </TooltipViewModelProvider>
