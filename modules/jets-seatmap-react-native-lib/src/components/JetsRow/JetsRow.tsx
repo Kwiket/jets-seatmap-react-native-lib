@@ -4,7 +4,7 @@ import {SvgXml} from 'react-native-svg'
 import {JetsContext} from '../../common'
 import {seatTemplateService} from '../Seat'
 import {TooltipViewModel} from '../TooltipGlobal/TooltipViewModel'
-import {getContainerStyleByNumber, getStyleByNumber} from './SeatTypes'
+import {getContainerStyleByNumber, getSeatRotationStyle, getStyleByNumber} from './SeatTypes'
 
 export const JetsRow = ({
   seats,
@@ -96,11 +96,14 @@ export const JetsRow = ({
                 />
               </>
             }
-            style={{
-              height: seat.size.height,
-              width: seat.size.width,
-              marginTop: seat.topOffset,
-            }}
+            style={[
+              {
+                height: seat.size.height,
+                width: seat.size.width,
+                marginTop: seat.topOffset,
+              },
+              getSeatRotationStyle(seat.rotation),
+            ]}
           />
         )
       })}
