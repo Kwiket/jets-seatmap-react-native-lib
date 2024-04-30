@@ -2,7 +2,12 @@ import * as React from 'react'
 import Svg, {Path} from 'react-native-svg'
 
 const SVGComponent = props => (
-  <Svg xmlns="http://www.w3.org/2000/svg" width={1414} height={1414} viewBox="0 0 200 214" {...props}>
+  <Svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.width}
+    height={(props.width * 214) / 200}
+    viewBox="0 0 200 214"
+    {...props}>
     <Path
       className="nose-filling-straight"
       d="M1.5 213.5H198.5L198.3 189.5V189.5C198.432 183.009 197.551 176.63 195.513 170.466C183.455 134.002 137.233 2 100 2C62.7343 2.08626 16.4645 134.331 4.45578 170.661C2.43787 176.766 1.5 183.07 1.5 189.5V189.5L1.5 213.5Z"

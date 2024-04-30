@@ -85,7 +85,7 @@ export const JetsPlaneBody = ({
   const [flatListHeight, setFlatListHeight] = useState(0)
 
   const handleLayout = event => {
-    const {height} = event.nativeEvent.layout
+    const {height, width} = event.nativeEvent.layout
     setFlatListHeight(height)
   }
 
@@ -105,6 +105,7 @@ export const JetsPlaneBody = ({
             <View
               children={
                 <Nose
+                  width={params?.innerWidth != null ? params.innerWidth : 0}
                   mainColor={colorTheme?.fuselageFillColor}
                   windowColor={colorTheme?.fuselageWindowsColor}
                   outlineColor={colorTheme?.fuselageStrokeColor}
@@ -120,7 +121,11 @@ export const JetsPlaneBody = ({
           !visibleFuselage ? (
             <View
               children={
-                <Tail mainColor={colorTheme?.fuselageFillColor} outlineColor={colorTheme?.fuselageStrokeColor} />
+                <Tail
+                  width={params?.innerWidth != null ? params.innerWidth : 0}
+                  mainColor={colorTheme?.fuselageFillColor}
+                  outlineColor={colorTheme?.fuselageStrokeColor}
+                />
               }
               style={{width: '100%', alignItems: 'center'}}
             />
