@@ -17,12 +17,14 @@ export const JetsDeck = ({
   exits,
   bulks,
   isSingleDeck,
+  scrollOffset,
 }: {
   deck: any
   lang: string
   exits: ExitModel[]
   bulks: BulkModel[]
   isSingleDeck: boolean
+  scrollOffset: number
 }) => {
   const {rows, number, height, width, wingsInfo} = deck || {}
   const {params} = useContext(JetsContext)
@@ -32,8 +34,6 @@ export const JetsDeck = ({
   const elementRef = useRef(null)
 
   const [activeTooltip, setActiveTooltip] = useState(null)
-
-  const [scrollOffset, setScrollOffset] = useState(0)
 
   const deckStyle = {
     height,
@@ -50,6 +50,7 @@ export const JetsDeck = ({
   const renderItem = ({item, index}: {item: any; index: number}) => {
     return (
       <View
+        key={item.uniqId}
         children={
           <>
             <JetsRow
@@ -61,7 +62,7 @@ export const JetsDeck = ({
             />
           </>
         }
-        style={{top: item.topOffset, position: 'absolute', width: '100%', alignItems: 'center'}}
+        style={{top: item.topOffset, position: 'absolute', width: '100%', alignItems: 'center', height: 100}}
       />
     )
   }
@@ -73,6 +74,7 @@ export const JetsDeck = ({
   const renderBulk = ({item, index}: {item: any; index: number}) => {
     return (
       <View
+        key={item.uniqId}
         children={
           <>
             <JetsBulk item={item} />
@@ -89,33 +91,22 @@ export const JetsDeck = ({
 
       {number && !isSingleDeck && <JetsDeckTitle number={number} lang={lang} localeKey={DECK_LOCALE_KEY} />}
 
-      <FlatList
-        data={rows}
-        renderItem={renderItem}
-        keyExtractor={item => item.uniqId}
-        horizontal={false}
-        onScroll={e => setScrollOffset(e.nativeEvent.contentOffset.y)}
-        scrollEventThrottle={16}
-        style={{zIndex: 1, position: 'absolute', width: '100%', height: '100%'}}
+      <View
+        children={rows.map(item => renderItem({item: item}))}
+        style={{zIndex: 1, position: 'absolute', width: '100%'}}
       />
 
       {exits && exits.length && (
-        <FlatList
-          data={exits}
-          renderItem={renderExit}
-          keyExtractor={item => item.uniqId.toString()}
-          horizontal={false}
+        <View
+          children={exits.map(item => renderExit({item: item}))}
           style={{zIndex: 2, position: 'absolute', width: '100%', justifyContent: 'space-between'}}
         />
       )}
 
       {bulks != undefined && bulks.length && (
-        <FlatList
-          data={bulks}
-          renderItem={renderBulk}
-          keyExtractor={item => item.uniqId.toString()}
-          horizontal={false}
-          style={{position: 'absolute', width: '100%', height: '100%'}}
+        <View
+          children={bulks.map(item => renderBulk({item: item}))}
+          style={{zIndex: 2, position: 'absolute', width: '100%'}}
         />
       )}
       {tooltipViewModel.isActive.state && activeTooltip && <TooltipModal seat={activeTooltip.seat} />}

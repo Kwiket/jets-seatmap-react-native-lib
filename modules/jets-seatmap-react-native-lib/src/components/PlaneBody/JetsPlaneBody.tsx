@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import {View, StyleSheet, FlatList} from 'react-native'
 import Tail from '../../assets/img/tail'
 import Nose from '../../assets/img/nose'
@@ -22,6 +22,8 @@ export const JetsPlaneBody = ({
   config: any
 }) => {
   const {params, colorTheme} = useContext(JetsContext)
+
+  const [scrollOffset, setScrollOffset] = useState(0)
 
   const {lang, visibleFuselage} = config
   const {deckHeightSpacing, fuselageStrokeWidth, fuselageStrokeColor, floorColor, wingsWidth, fuselageFillColor} =
@@ -61,7 +63,7 @@ export const JetsPlaneBody = ({
             lang={lang}
             exits={exits[item.number - 1]}
             bulks={bulks[item.number - 1]}
-            // style={{position: 'absolute'}}
+            scrollOffset={scrollOffset}
             isSingleDeck={content.length === 1}
           />
         </View>
@@ -87,6 +89,7 @@ export const JetsPlaneBody = ({
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         extraData={activeDeck}
+        onScroll={e => setScrollOffset(e.nativeEvent.contentOffset.y)}
         showsVerticalScrollIndicator={true}
         ListHeaderComponent={
           !visibleFuselage ? (

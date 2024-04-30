@@ -63,6 +63,7 @@ export const JetsRow = ({
         return (
           <TouchableOpacity
             key={seat.uniqId}
+            disabled={seat.type == 'aisle'}
             onPress={() => handlePress(seat)}
             onLayout={event => onSeatLayout(event, seat.uniqId)}
             style={{
