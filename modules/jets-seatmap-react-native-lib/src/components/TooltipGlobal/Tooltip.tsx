@@ -58,7 +58,7 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
         style={[
           styles.triangle,
           {
-            top: viewModel?.topOffset.state != undefined ? (viewModel.position.state == 'top' ? -50 : viewHeight) : 0,
+            top: viewModel?.topOffset.state != undefined ? (viewModel.position.state == 'top' ? -50 : viewHeight -10) : 0,
             left: viewModel?.xOffset.state != undefined ? viewModel.xOffset.state : 0,
             borderColor: tooltipBackgroundColor,
             transform: [{scaleY: viewModel?.position.state == 'bottom' ? -1 : 1}],
