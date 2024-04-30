@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400');
+
+.jets-demo {
+  width: 100%;
+  height: 95vh;
+  display: flex;
+}
+
+.jets-demo > div {
+  height: 100%;
+}
+
+.jets-demo--seat-map::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+.jets-demo--seat-map::-webkit-scrollbar:horizontal {
+  /* height: 11px; */
+}
+.jets-demo--seat-map::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.jets-demo--seat-map::-webkit-scrollbar-track {
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.jets-demo--seat-map {
+  width: 70%;
+  overflow: scroll;
+  border: 1px solid gray;
+}
+
+.jets-demo--seat-map > div {
+  height: 100%;
+}
+
+.jets-demo--controllers {
+  /* padding-top: 60px; */
+  margin-right: 50px;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+}
+
+.jets-demo--controller {
+  display: flex;
+  width: 100%;
+  height: 250px;
+  margin-bottom: 10px;
+}
+
+.jets-demo--controller > textarea {
+  width: 75%;
+  resize: none;
+  font-size: 13px;
+  font-family: monospace;
+}
+
+.jets-demo--btn {
+  width: 25%;
+  height: 100%;
+  font-family: 'Montserrat', monospace;
+}
+
+.deck-exit__image {
+  width: 72px;
+  height: 72px;
+}
+
+.clear-air-style-icon > svg > path {
+  fill: darkorange;
+}
+
+.clear-air-style-label {
+  color: darkorange;
+  font-weight: bold;
+}

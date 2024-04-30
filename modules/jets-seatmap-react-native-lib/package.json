@@ -1,0 +1,13 @@
+{
+  "name": "react-native-jets-seatmap-react-native-lib",
+  "version": "0.0.0",
+  "description": "React library that helps to render a plane seat map by flight relying on Quicket GmbH API and data.",
+  "main": "src/index",
+  "author": " <> ()",
+  "license": "UNLICENSED",
+  "homepage": "#readme",
+  "reactNative": {
+    "minIOSVersion": "16.0",
+    "minAndroidVersion": "21"
+  }
+}
