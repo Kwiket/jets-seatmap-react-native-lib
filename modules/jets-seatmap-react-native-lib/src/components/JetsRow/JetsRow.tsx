@@ -4,7 +4,7 @@ import {SvgXml} from 'react-native-svg'
 import {JetsContext} from '../../common'
 import {seatTemplateService} from '../Seat'
 import {TooltipViewModel} from '../TooltipGlobal/TooltipViewModel'
-import {getStyleByNumber} from './SeatTypes'
+import {getContainerStyleByNumber, getStyleByNumber} from './SeatTypes'
 
 export const JetsRow = ({
   seats,
@@ -66,29 +66,42 @@ export const JetsRow = ({
             disabled={seat.type == 'aisle'}
             onPress={() => handlePress(seat)}
             onLayout={event => onSeatLayout(event, seat.uniqId)}
+            children={
+              <>
+                {seat.color ? (
+                  <SvgXml xml={seatTemplateService.getSeatIcon(seat.seatType, svgStyle)} width="100%" height="100%" />
+                ) : null}
+                <View
+                  children={
+                    <Text
+                      children={seat.number}
+                      style={[
+                        {
+                          fontSize: 30,
+                          color: 'white',
+                          textAlign: 'center',
+                        },
+                        getStyleByNumber(seat.seatIconType),
+                      ]}
+                    />
+                  }
+                  style={[
+                    {
+                      position: 'absolute',
+                      top: '18%',
+                      width: '100%',
+                    },
+                    getContainerStyleByNumber(seat.seatIconType),
+                  ]}
+                />
+              </>
+            }
             style={{
               height: seat.size.height,
               width: seat.size.width,
               marginTop: seat.topOffset,
-            }}>
-            {seat.color ? (
-              <SvgXml xml={seatTemplateService.getSeatIcon(seat.seatType, svgStyle)} width="100%" height="100%" />
-            ) : null}
-            <Text
-              style={[
-                {
-                  fontSize: 30,
-                  color: 'white',
-                  position: 'absolute',
-                  top: '18%',
-                  width: '100%',
-                  textAlign: 'center',
-                },
-                getStyleByNumber(seat.seatIconType),
-              ]}>
-              {seat.number}
-            </Text>
-          </TouchableOpacity>
+            }}
+          />
         )
       })}
     </View>
