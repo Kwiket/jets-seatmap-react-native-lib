@@ -25,6 +25,8 @@ export const JetsPlaneBody = ({
 
   const [scrollOffset, setScrollOffset] = useState(0)
 
+  const [flatListHeight, setFlatListHeight] = useState(0)
+
   const {lang, visibleFuselage} = config
   const {deckHeightSpacing, fuselageStrokeWidth, fuselageStrokeColor, floorColor, wingsWidth, fuselageFillColor} =
     colorTheme
@@ -65,6 +67,7 @@ export const JetsPlaneBody = ({
             bulks={bulks[item.number - 1]}
             scrollOffset={scrollOffset}
             isSingleDeck={content.length === 1}
+            flatListHeight={flatListHeight}
           />
         </View>
         {index < content.length - 1 && !showOneDeck && (
@@ -81,8 +84,6 @@ export const JetsPlaneBody = ({
   const bodyStyle = {
     width: bodyWidth || config.width,
   }
-
-  const [flatListHeight, setFlatListHeight] = useState(0)
 
   const handleLayout = event => {
     const {height, width} = event.nativeEvent.layout

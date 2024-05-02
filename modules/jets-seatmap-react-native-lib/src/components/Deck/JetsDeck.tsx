@@ -18,6 +18,7 @@ export const JetsDeck = ({
   bulks,
   isSingleDeck,
   scrollOffset,
+  flatListHeight,
 }: {
   deck: any
   lang: string
@@ -25,6 +26,7 @@ export const JetsDeck = ({
   bulks: BulkModel[]
   isSingleDeck: boolean
   scrollOffset: number
+  flatListHeight: number
 }) => {
   const {rows, number, height, width, wingsInfo} = deck || {}
   const {params} = useContext(JetsContext)
@@ -59,6 +61,7 @@ export const JetsDeck = ({
               top={item.topOffset}
               onPress={handlePressSeat}
               scrollOffset={scrollOffset}
+              flatListHeight={flatListHeight}
             />
           </>
         }

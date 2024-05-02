@@ -11,11 +11,13 @@ export const JetsRow = ({
   top,
   onPress,
   scrollOffset,
+  flatListHeight,
 }: {
   seats: SeatModel[]
   top: number
   onPress: (seat: SeatModel) => void
   scrollOffset: number
+  flatListHeight: number
 }) => {
   const tooltipViewModel = useContext(TooltipViewModel)
   const {params, colorTheme} = useContext(JetsContext)
@@ -40,8 +42,6 @@ export const JetsRow = ({
     tooltipViewModel?.isActive.setState(true)
 
     const screenHeight = Dimensions.get('screen').height
-
-    console.log(y - scrollOffset * 0.3)
 
     if (y - scrollOffset * 0.3 < screenHeight * 0.4) {
       tooltipViewModel?.position.setState('top')

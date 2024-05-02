@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import {View, Text, StyleSheet, Dimensions} from 'react-native'
 import {SvgXml} from 'react-native-svg'
 import {JetsContext, LOCALES_MAP} from '../../common'
 import {JetsButton} from '../Button/JetsButton'
@@ -49,6 +49,7 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
                 ? viewModel?.topOffset.state + 150
                 : viewModel?.topOffset.state - viewHeight - 40
               : 0,
+          width: (Dimensions.get('screen').width - 10) / params.scale,
           backgroundColor: tooltipBackgroundColor,
           borderColor: tooltipBorderColor,
           borderWidth: 2,
@@ -58,7 +59,8 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
         style={[
           styles.triangle,
           {
-            top: viewModel?.topOffset.state != undefined ? (viewModel.position.state == 'top' ? -50 : viewHeight -10) : 0,
+            top:
+              viewModel?.topOffset.state != undefined ? (viewModel.position.state == 'top' ? -50 : viewHeight - 10) : 0,
             left: viewModel?.xOffset.state != undefined ? viewModel.xOffset.state : 0,
             borderColor: tooltipBackgroundColor,
             transform: [{scaleY: viewModel?.position.state == 'bottom' ? -1 : 1}],
@@ -131,14 +133,18 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
             <></>
           )
         }
-        style={{flexDirection: 'row', width: '100%', justifyContent: 'space-between', paddingTop: 40}}
+        style={{flexDirection: 'row', width: '100%', paddingTop: 40, paddingHorizontal: 5}}
       />
       <View
         children={
           <>
             <JetsButton
               content={LOCALES_MAP['EN'][CANCEL_BTN_KEY]}
-              style={{color: tooltipCancelButtonTextColor, backgroundColor: tooltipCancelButtonBackgroundColor}}
+              style={{
+                color: tooltipCancelButtonTextColor,
+                backgroundColor: tooltipCancelButtonBackgroundColor,
+                marginRight: 15,
+              }}
               onClick={() => viewModel?.isActive.setState(false)}
             />
             <JetsButton
@@ -148,6 +154,7 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
               style={{
                 color: tooltipSelectButtonTextColor,
                 backgroundColor: tooltipSelectButtonBackgroundColor,
+                marginLeft: 15,
               }}
             />
           </>
@@ -161,8 +168,7 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
 const styles = StyleSheet.create({
   tooltip: {
     position: 'absolute',
-    left: 0,
-    right: 0,
+
     backgroundColor: 'white',
     zIndex: 2000,
     paddingHorizontal: 20,
