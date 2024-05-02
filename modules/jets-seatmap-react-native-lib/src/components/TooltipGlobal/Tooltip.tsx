@@ -1,14 +1,14 @@
 import React, {useContext, useState} from 'react'
 import {View, Text, StyleSheet, Dimensions} from 'react-native'
 import {SvgXml} from 'react-native-svg'
-import {JetsContext, LOCALES_MAP} from '../../common'
+import {DEFAULT_SEAT_PASSENGER_TYPES, JetsContext, LOCALES_MAP} from '../../common'
 import {JetsButton} from '../Button/JetsButton'
 import {TooltipViewModel} from './TooltipViewModel'
 
 const TooltipModal = ({seat}: {seat: SeatModel}) => {
   const viewModel = useContext(TooltipViewModel)
 
-  const {colorTheme, params} = useContext(JetsContext)
+  const {colorTheme, params, onSeatSelect, onSeatUnselect, isSeatSelectDisabled} = useContext(JetsContext)
 
   const {
     tooltipBackgroundColor,
@@ -37,6 +37,17 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
     setViewHeight(height)
   }
 
+  const tooltipWidth = (Dimensions.get('screen').width - 10) / params.scale
+
+  let restrictionsLabel = ''
+  if (seat.passengerTypes) {
+    const existingRestrictions = DEFAULT_SEAT_PASSENGER_TYPES
+    const filteredPassengerTypes = seat.passengerTypes.filter(type => existingRestrictions.includes(type))
+    let typeStrings = filteredPassengerTypes.map(type => LOCALES_MAP['EN'][type])
+    const isRestrictionApplied = filteredPassengerTypes.length < existingRestrictions.length
+    restrictionsLabel = isRestrictionApplied ? `${LOCALES_MAP['EN'][RESTRICTION_KEY]}: ${typeStrings.join(', ')}` : ''
+  }
+
   return (
     <View
       onLayout={onLayout}
@@ -49,7 +60,7 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
                 ? viewModel?.topOffset.state + 150
                 : viewModel?.topOffset.state - viewHeight - 40
               : 0,
-          width: (Dimensions.get('screen').width - 10) / params.scale,
+          width: tooltipWidth,
           backgroundColor: tooltipBackgroundColor,
           borderColor: tooltipBorderColor,
           borderWidth: 2,
@@ -67,9 +78,24 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
           },
         ]}
       />
-      <Text style={[styles.title, {color: tooltipHeaderColor}]}>{`Economy ${seat.number}`}</Text>
+      <View
+        children={
+          <>
+            <Text style={[styles.title, {color: tooltipHeaderColor}]}>{`${seat.classType || seat.rowName} ${
+              seat.number
+            }`}</Text>
+            <Text style={[styles.title, {color: tooltipHeaderColor}]}>{`${seat.price}`}</Text>
+          </>
+        }
+        style={{flexDirection: 'row', justifyContent: 'space-between'}}
+      />
+
+      <Text style={[styles.title, {color: tooltipHeaderColor}]}>{`${
+        seat?.passenger?.passengerLabel != undefined ? seat.passenger.passengerLabel : restrictionsLabel
+      }`}</Text>
+
       {seat.features != undefined &&
-        seat.features.map(item => (
+        seat.features.map((item: any) => (
           <View
             key={item.uniqId}
             children={
@@ -78,7 +104,7 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
                   flexDirection: 'row',
                   width: '100%',
                   alignItems: 'flex-start',
-                  paddingVertical: 10,
+                  paddingVertical: 20,
                   justifyContent: 'flex-start',
                   alignContent: 'flex-start',
                   left: 0,
@@ -104,15 +130,53 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
             }
           />
         ))}
+
+      {seat.additionalProps != undefined &&
+        seat.additionalProps.map((item: any) => (
+          <View
+            key={item.uniqId}
+            children={
+              <View
+                style={{
+                  flexDirection: 'row',
+                  width: '100%',
+                  alignItems: 'flex-start',
+                  paddingVertical: 20,
+                  justifyContent: 'flex-start',
+                  alignContent: 'flex-start',
+                  left: 0,
+                }}
+                children={
+                  <>
+                    {item.icon ? (
+                      <SvgXml xml={item.icon} width={45} height={45} />
+                    ) : (
+                      <Text
+                        children={item.title}
+                        style={{fontSize: 45, textAlign: 'left', marginLeft: 10, color: tooltipFontColor}}
+                      />
+                    )}
+
+                    <Text
+                      children={item.value}
+                      style={{fontSize: 45, textAlign: 'left', marginLeft: 10, color: tooltipFontColor}}
+                    />
+                  </>
+                }
+              />
+            }
+          />
+        ))}
+
       <View
         children={
           seat.measurements != undefined ? (
-            seat.measurements.map(item => (
+            seat.measurements.map((item: any) => (
               <View
                 key={item.uniqId}
                 children={
                   <>
-                    <SvgXml xml={item.icon} width={100} height={100} fill={tooltipFontColor} />
+                    <SvgXml xml={item.icon} width={100} height={100} fill={tooltipIconColor} />
                     <Text children={item.title} style={{fontSize: 45, color: tooltipFontColor}} />
                     <Text children={item.value} style={{fontSize: 45, color: tooltipFontColor}} />
                   </>
@@ -133,7 +197,12 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
             <></>
           )
         }
-        style={{flexDirection: 'row', width: '100%', paddingTop: 40, paddingHorizontal: 5}}
+        style={{
+          flexDirection: 'row',
+          paddingTop: 40,
+          paddingHorizontal: 5,
+          justifyContent: 'space-between',
+        }}
       />
       <View
         children={
@@ -147,16 +216,35 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
               }}
               onClick={() => viewModel?.isActive.setState(false)}
             />
-            <JetsButton
-              content={LOCALES_MAP['EN'][SELECT_BTN_KEY]}
-              className="jets-btn jets-tooltip--btn "
-              disabled={true}
-              style={{
-                color: tooltipSelectButtonTextColor,
-                backgroundColor: tooltipSelectButtonBackgroundColor,
-                marginLeft: 15,
-              }}
-            />
+            {seat.passenger ? (
+              <JetsButton
+                onClick={() => {
+                  onSeatUnselect(seat)
+                  viewModel?.isActive.setState(false)
+                }}
+                content={LOCALES_MAP['EN'][UNSELECT_BTN_KEY]}
+                disabled={seat.passenger.readonly}
+                style={{
+                  color: tooltipSelectButtonTextColor,
+                  backgroundColor: tooltipSelectButtonBackgroundColor,
+                  marginLeft: 15,
+                }}
+              />
+            ) : (
+              <JetsButton
+                onClick={() => {
+                  onSeatSelect(seat)
+                  viewModel?.isActive.setState(false)
+                }}
+                content={LOCALES_MAP['EN'][SELECT_BTN_KEY]}
+                disabled={isSeatSelectDisabled(seat)}
+                style={{
+                  color: tooltipSelectButtonTextColor,
+                  backgroundColor: tooltipSelectButtonBackgroundColor,
+                  marginLeft: 15,
+                }}
+              />
+            )}
           </>
         }
         style={{flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 20, paddingTop: 40}}
@@ -168,7 +256,6 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
 const styles = StyleSheet.create({
   tooltip: {
     position: 'absolute',
-
     backgroundColor: 'white',
     zIndex: 2000,
     paddingHorizontal: 20,
@@ -176,7 +263,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 55,
-    paddingVertical: 20,
+    paddingTop: 30,
     fontWeight: 'bold',
   },
   triangle: {

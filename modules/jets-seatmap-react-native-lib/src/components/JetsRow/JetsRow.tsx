@@ -1,4 +1,4 @@
-import React, {useContext, useState, useRef} from 'react'
+import React, {useContext, useState, useRef, useEffect} from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native'
 import {SvgXml} from 'react-native-svg'
 import {JetsContext} from '../../common'
@@ -63,7 +63,7 @@ export const JetsRow = ({
         return (
           <TouchableOpacity
             key={seat.uniqId}
-            disabled={seat.type == 'aisle'}
+            disabled={seat.type == 'aisle' || seat.status == 'unavailable'}
             onPress={() => handlePress(seat)}
             onLayout={event => onSeatLayout(event, seat.uniqId)}
             children={
@@ -94,6 +94,25 @@ export const JetsRow = ({
                     getContainerStyleByNumber(seat.seatIconType),
                   ]}
                 />
+                {seat.passenger != undefined ? (
+                  <View
+                    children={
+                      <Text children={seat.passenger.abbr} style={{color: 'white', fontSize: 36, fontWeight: 'bold'}} />
+                    }
+                    style={[
+                      {
+                        borderRadius: 50,
+                        backgroundColor:
+                          seat.passenger.passengerColor != undefined
+                            ? seat.passenger.passengerColor
+                            : colorTheme.defaultPassengerBadgeColor,
+                      },
+                      styles.marker,
+                    ]}
+                  />
+                ) : (
+                  <></>
+                )}
               </>
             }
             style={[
@@ -117,5 +136,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignContent: 'flex-start',
     flexDirection: 'row',
+  },
+  marker: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })

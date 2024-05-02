@@ -6,7 +6,13 @@ export const SeatMap = ({flight}) => {
   return (
     <View>
       {flight != undefined ? (
-        <JetsSeatMap flight={flight} config={CONFIG_MOCK} passengers={PASSENGERS_MOCK} currentDeckIndex={1} />
+        <JetsSeatMap
+          flight={flight}
+          config={CONFIG_MOCK}
+          passengers={PASSENGERS_MOCK}
+          currentDeckIndex={1}
+          availability={AVAILABILITY_MOCK}
+        />
       ) : (
         <JetsSeatMap flight={FLIGHT_MOCK} config={CONFIG_MOCK} passengers={PASSENGERS_MOCK} currentDeckIndex={1} />
       )}

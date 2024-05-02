@@ -8,7 +8,7 @@ const PASSENGERS_MOCK = [
     id: '2',
     seat: {
       price: 0,
-      seatLabel: '21F',
+      seatLabel: '31A',
     },
     passengerLabel: 'Alex Test',
     passengerColor: 'brown',
@@ -18,7 +18,7 @@ const PASSENGERS_MOCK = [
     id: '4',
     seat: {
       price: 0,
-      seatLabel: '21J',
+      seatLabel: '31J',
     },
     passengerLabel: 'Big Lebowski',
     passengerColor: 'green',
@@ -30,6 +30,6 @@ const PASSENGERS_MOCK = [
     passengerLabel: 'John Snow',
     passengerColor: 'orange',
   },
-];
+]
 
-export default PASSENGERS_MOCK;
+export default PASSENGERS_MOCK

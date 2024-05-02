@@ -51,7 +51,6 @@ import {
   THEME_DECK_SELECTOR_SIZE,
   THEME_FUSELAGE_OUTLINE_WIDTH,
   THEME_NOT_AVAILABLE_SEATS_COLOR,
-  JetsLocalStorageService,
 } from '../../common'
 import {Dimensions, Text, TouchableOpacity, View} from 'react-native'
 import {JetsPlaneBody} from '../PlaneBody/JetsPlaneBody'

@@ -1,7 +1,7 @@
 const AVAILABILITY_MOCK = [
   {
     currency: 'USD',
-    label: '20A',
+    label: '31C',
     price: 33,
     onlyForPassengerType: ['ADT', 'CHD', 'INF'],
     additionalProps: [
@@ -18,7 +18,7 @@ const AVAILABILITY_MOCK = [
   },
   {
     currency: 'USD',
-    label: '20E',
+    label: '40A',
     price: 33,
     onlyForPassengerType: ['ADT', 'CHD', 'INF'],
     additionalProps: [
@@ -35,20 +35,20 @@ const AVAILABILITY_MOCK = [
   },
   {
     currency: 'USD',
-    label: '20K',
+    label: '31A',
     price: 33,
     onlyForPassengerType: ['ADT', 'CHD', 'INF'],
     color: 'magenta',
   },
   {
     currency: 'USD',
-    label: '21F',
+    label: '31B',
     price: 13,
     onlyForPassengerType: ['ADT', 'CHD', 'INF'],
   },
   {
     currency: 'USD',
-    label: '21J',
+    label: '31J',
     price: 13,
     onlyForPassengerType: ['CHD', 'INF'],
   },

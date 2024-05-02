@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {View, StyleSheet, FlatList} from 'react-native'
 import Tail from '../../assets/img/tail'
 import Nose from '../../assets/img/nose'
