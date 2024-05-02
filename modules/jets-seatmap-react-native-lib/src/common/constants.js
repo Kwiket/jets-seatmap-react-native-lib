@@ -226,4 +226,7 @@ export const THEME_DECK_SELECTOR_FILL_COLOR = '#fff'
 export const THEME_DECK_SELECTOR_STROKE_COLOR = 'rgba(50, 50, 50, 0.5)'
 export const THEME_DECK_SELECTOR_SIZE = 25
 
+export const THEME_EXIT_ICON_HEIGHT = 72
+export const THEME_EXIT_ICON_WIDTH = 72
+
 //#endregion

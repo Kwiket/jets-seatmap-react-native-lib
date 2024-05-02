@@ -5,7 +5,7 @@ import {DEFAULT_STYLE_POSITION, JetsContext} from '../../common'
 
 export const JetsDeckExit = ({type, topOffset}: {type: string; topOffset: number}) => {
   const {colorTheme} = useContext(JetsContext)
-  const {exitIconUrlLeft, exitIconUrlRight} = colorTheme
+  const {exitIconUrlLeft, exitIconUrlRight, exitIconWidth, exitIconHeight} = colorTheme
   const isBuiltInIcons = !exitIconUrlLeft || !exitIconUrlRight
 
   const [style, setStyle] = useState(() => {
@@ -40,7 +40,11 @@ export const JetsDeckExit = ({type, topOffset}: {type: string; topOffset: number
         <ArrowSvg direction={type} />
       ) : (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <SvgUri width="100%" height="100%" uri={type === 'left' ? exitIconUrlLeft : exitIconUrlRight} />
+          <SvgUri
+            width={exitIconWidth}
+            height={exitIconHeight}
+            uri={type === 'left' ? exitIconUrlLeft : exitIconUrlRight}
+          />
         </View>
       )}
     </View>

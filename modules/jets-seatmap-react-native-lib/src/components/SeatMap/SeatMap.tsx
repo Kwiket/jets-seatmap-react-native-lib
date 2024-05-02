@@ -51,6 +51,8 @@ import {
   THEME_DECK_SELECTOR_SIZE,
   THEME_FUSELAGE_OUTLINE_WIDTH,
   THEME_NOT_AVAILABLE_SEATS_COLOR,
+  THEME_EXIT_ICON_WIDTH,
+  THEME_EXIT_ICON_HEIGHT,
 } from '../../common'
 import {Dimensions, Text, TouchableOpacity, View} from 'react-native'
 import {JetsPlaneBody} from '../PlaneBody/JetsPlaneBody'
@@ -457,6 +459,8 @@ JetsSeatMap.defaultProps = {
       deckSelectorStrokeColor: THEME_DECK_SELECTOR_STROKE_COLOR,
       deckSelectorFillColor: THEME_DECK_SELECTOR_FILL_COLOR,
       deckSelectorSize: THEME_DECK_SELECTOR_SIZE,
+      exitIconHeight: THEME_EXIT_ICON_HEIGHT,
+      exitIconWidth: THEME_EXIT_ICON_WIDTH,
       exitIconUrlLeft: null,
       exitIconUrlRight: null,
     },
