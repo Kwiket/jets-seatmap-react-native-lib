@@ -65,7 +65,7 @@ export const JetsDeck = ({
             />
           </>
         }
-        style={{top: item.topOffset, position: 'absolute', width: '100%', alignItems: 'center', height: 100}}
+        style={{top: item.topOffset, position: 'absolute', width: '100%', alignItems: 'center'}}
       />
     )
   }
@@ -90,13 +90,13 @@ export const JetsDeck = ({
 
   return (
     <View style={[styles.deck, deckStyle]} ref={elementRef}>
-      {params?.visibleWings && <JetsWing wingsInfo={wingsInfo} />}
+      {/* {params?.visibleWings && <JetsWing wingsInfo={wingsInfo} />} */}
 
       {number && !isSingleDeck && <JetsDeckTitle number={number} lang={lang} localeKey={DECK_LOCALE_KEY} />}
 
       <View
         children={rows.map(item => renderItem({item: item}))}
-        style={{zIndex: 1, position: 'absolute', width: '100%'}}
+        style={{zIndex: 1, position: 'absolute', width: width}}
       />
 
       {exits && exits.length && (
