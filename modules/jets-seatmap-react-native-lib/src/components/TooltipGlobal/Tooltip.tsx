@@ -96,7 +96,7 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
       />
 
       <Text style={[styles.title, {color: tooltipHeaderColor}]}>{`${
-        seat?.passenger?.passengerLabel != undefined ? passengerLabel : restrictionsLabel
+        passengerLabel.length ? passengerLabel : restrictionsLabel
       }`}</Text>
 
       {seat.features != undefined &&
