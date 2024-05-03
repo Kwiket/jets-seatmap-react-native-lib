@@ -107,6 +107,8 @@ export const JetsPlaneBody = ({
               children={
                 <Nose
                   width={params?.innerWidth != null ? params.innerWidth : 0}
+                  wingsWidth={params?.visibleWings != undefined && params?.visibleWings ? colorTheme?.wingsWidth : 0}
+                  storkeWidth={params != undefined ? colorTheme?.fuselageStrokeWidth / (params?.innerWidth / 200) : 0}
                   mainColor={colorTheme?.fuselageFillColor}
                   windowColor={colorTheme?.fuselageWindowsColor}
                   outlineColor={colorTheme?.fuselageStrokeColor}
@@ -124,6 +126,8 @@ export const JetsPlaneBody = ({
               children={
                 <Tail
                   width={params?.innerWidth != null ? params.innerWidth : 0}
+                  wingsWidth={params?.visibleWings != undefined && params?.visibleWings ? colorTheme?.wingsWidth : 0}
+                  storkeWidth={params != undefined ? colorTheme?.fuselageStrokeWidth / (params?.innerWidth / 200) : 0}
                   mainColor={colorTheme?.fuselageFillColor}
                   outlineColor={colorTheme?.fuselageStrokeColor}
                 />
