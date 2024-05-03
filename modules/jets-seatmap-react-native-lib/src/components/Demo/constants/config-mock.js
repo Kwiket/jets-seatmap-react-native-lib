@@ -29,7 +29,7 @@ const CONFIG_MOCK = {
     deckSeparation: 0,
 
     floorColor: '#595959',
-    seatLabelColor: 'black',
+    seatLabelColor: 'white',
     seatStrokeColor: 'rgb(230, 230, 230)',
     seatStrokeWidth: 1,
     seatArmrestColor: '#cccccc',

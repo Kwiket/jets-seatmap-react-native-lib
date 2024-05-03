@@ -268,38 +268,6 @@ export const JetsSeatMap = ({
     return tmpData
   }
 
-  const showTooltip = (data, element, event) => {
-    const seat = prepareSeatDataForEmit(data)
-    onTooltipRequested({seat, element: element.current, event: event.nativeEvent})
-
-    if (!params.builtInTooltip) {
-      return
-    }
-
-    const notAvailable =
-      data.type !== ENTITY_TYPE_MAP.seat ||
-      (data.status !== ENTITY_STATUS_MAP.available && data.status !== ENTITY_STATUS_MAP.selected)
-
-    if (notAvailable) return
-
-    const nextPassenger = service.getNextPassenger(passengersList)
-    const tooltipData = service.calculateTooltipData(
-      data,
-      element.current,
-      seatMapRef.current,
-      params?.antiScale,
-      params?.isHorizontal,
-    )
-
-    setSelectAvailable(!!nextPassenger)
-    setActiveTooltip({
-      ...tooltipData,
-      nextPassenger,
-      lang: configuration.lang,
-      seatmapElement: seatMapRef.current,
-    })
-  }
-
   const onSeatSelect = seat => {
     const {data, passengers: newPassengers} = service.selectSeatHandler(content, seat, passengersList)
 
@@ -318,14 +286,6 @@ export const JetsSeatMap = ({
     setActiveTooltip(null)
 
     onSeatUnselected(newPassengers)
-  }
-
-  const onTooltipClose = (data, element, event) => {
-    if (data && element) {
-      const seat = prepareSeatDataForEmit(data)
-      onSeatMouseLeave({seat, element: element.current, event: event.nativeEvent})
-    }
-    setActiveTooltip(null)
   }
 
   const isSeatSelectDisabled = seatData => {
@@ -349,8 +309,6 @@ export const JetsSeatMap = ({
 
   const providerValue = {
     onSeatClick,
-    showTooltip,
-    onTooltipClose,
     onSeatSelect,
     onSeatUnselect,
     isSeatSelectDisabled,
@@ -359,6 +317,7 @@ export const JetsSeatMap = ({
     colorTheme,
     activeTooltip,
     componentOverrides,
+    onTooltipRequested,
   }
 
   return (
@@ -479,11 +438,5 @@ JetsSeatMap.defaultProps = {
   },
   onLayoutUpdated: data => {
     console.log('Layout updated: ', data)
-  },
-  onSeatMouseLeave: data => {
-    console.log('Seat mouse leave: ', data)
-  },
-  onSeatMouseClick: data => {
-    console.log('Seat mouse click: ', data)
   },
 }

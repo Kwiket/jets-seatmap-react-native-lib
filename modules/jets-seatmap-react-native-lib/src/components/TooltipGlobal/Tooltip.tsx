@@ -5,7 +5,7 @@ import {DEFAULT_SEAT_PASSENGER_TYPES, JetsContext, LOCALES_MAP} from '../../comm
 import {JetsButton} from '../Button/JetsButton'
 import {TooltipViewModel} from './TooltipViewModel'
 
-const TooltipModal = ({seat}: {seat: SeatModel}) => {
+const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
   const viewModel = useContext(TooltipViewModel)
 
   const {colorTheme, params, onSeatSelect, onSeatUnselect, isSeatSelectDisabled} = useContext(JetsContext)
@@ -43,9 +43,14 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
   if (seat.passengerTypes) {
     const existingRestrictions = DEFAULT_SEAT_PASSENGER_TYPES
     const filteredPassengerTypes = seat.passengerTypes.filter(type => existingRestrictions.includes(type))
-    let typeStrings = filteredPassengerTypes.map(type => LOCALES_MAP['EN'][type])
+    let typeStrings = filteredPassengerTypes.map(type => LOCALES_MAP[lang][type])
     const isRestrictionApplied = filteredPassengerTypes.length < existingRestrictions.length
-    restrictionsLabel = isRestrictionApplied ? `${LOCALES_MAP['EN'][RESTRICTION_KEY]}: ${typeStrings.join(', ')}` : ''
+    restrictionsLabel = isRestrictionApplied ? `${LOCALES_MAP[lang][RESTRICTION_KEY]}: ${typeStrings.join(', ')}` : ''
+  }
+
+  let passengerLabel = ''
+  if (seat.passenger) {
+    passengerLabel = seat.passenger?.passengerLabel || `${LOCALES_MAP['EN'][PASSENGER_KEY]} ${seat.passenger?.id}`
   }
 
   return (
@@ -91,7 +96,7 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
       />
 
       <Text style={[styles.title, {color: tooltipHeaderColor}]}>{`${
-        seat?.passenger?.passengerLabel != undefined ? seat.passenger.passengerLabel : restrictionsLabel
+        seat?.passenger?.passengerLabel != undefined ? passengerLabel : restrictionsLabel
       }`}</Text>
 
       {seat.features != undefined &&
@@ -209,8 +214,8 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
           <>
             <JetsButton
               content={LOCALES_MAP['EN'][CANCEL_BTN_KEY]}
+              foregroundColor={{color: tooltipCancelButtonTextColor}}
               style={{
-                color: tooltipCancelButtonTextColor,
                 backgroundColor: tooltipCancelButtonBackgroundColor,
                 marginRight: 15,
               }}
@@ -222,10 +227,10 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
                   onSeatUnselect(seat)
                   viewModel?.isActive.setState(false)
                 }}
-                content={LOCALES_MAP['EN'][UNSELECT_BTN_KEY]}
+                content={LOCALES_MAP[lang][UNSELECT_BTN_KEY]}
                 disabled={seat.passenger.readonly}
+                foregroundColor={{color: tooltipSelectButtonTextColor}}
                 style={{
-                  color: tooltipSelectButtonTextColor,
                   backgroundColor: tooltipSelectButtonBackgroundColor,
                   marginLeft: 15,
                 }}
@@ -236,10 +241,10 @@ const TooltipModal = ({seat}: {seat: SeatModel}) => {
                   onSeatSelect(seat)
                   viewModel?.isActive.setState(false)
                 }}
-                content={LOCALES_MAP['EN'][SELECT_BTN_KEY]}
+                content={LOCALES_MAP[lang][SELECT_BTN_KEY]}
                 disabled={isSeatSelectDisabled(seat)}
+                foregroundColor={{color: tooltipSelectButtonTextColor}}
                 style={{
-                  color: tooltipSelectButtonTextColor,
                   backgroundColor: tooltipSelectButtonBackgroundColor,
                   marginLeft: 15,
                 }}

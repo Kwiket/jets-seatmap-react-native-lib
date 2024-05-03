@@ -20,7 +20,7 @@ export const JetsRow = ({
   flatListHeight: number
 }) => {
   const tooltipViewModel = useContext(TooltipViewModel)
-  const {params, colorTheme} = useContext(JetsContext)
+  const {params, colorTheme, onTooltipRequested} = useContext(JetsContext)
 
   const seatMeasurements = useRef({})
 
@@ -38,6 +38,7 @@ export const JetsRow = ({
     tooltipViewModel?.xOffset.setState(pageX / params.scale)
 
     onPress(seat)
+    onTooltipRequested(seat)
 
     tooltipViewModel?.isActive.setState(true)
 
@@ -78,7 +79,7 @@ export const JetsRow = ({
                       style={[
                         {
                           fontSize: 30,
-                          color: 'white',
+                          color: colorTheme.seatLabelColor ?? 'white',
                           textAlign: 'center',
                         },
                         getStyleByNumber(seat.seatIconType),

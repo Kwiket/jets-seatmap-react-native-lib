@@ -112,7 +112,9 @@ export const JetsDeck = ({
           style={{zIndex: 2, position: 'absolute', width: '100%'}}
         />
       )}
-      {tooltipViewModel.isActive.state && activeTooltip && <TooltipModal seat={activeTooltip.seat} />}
+      {params.builtInTooltip && tooltipViewModel.isActive.state && activeTooltip && (
+        <TooltipModal seat={activeTooltip.seat} lang={lang} />
+      )}
     </View>
   )
 }

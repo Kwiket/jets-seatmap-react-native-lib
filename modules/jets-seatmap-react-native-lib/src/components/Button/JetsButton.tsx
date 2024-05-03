@@ -1,27 +1,29 @@
 import React from 'react'
-import {TouchableOpacity, Text, StyleSheet, ViewStyle} from 'react-native'
+import {TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle} from 'react-native'
 
 export const JetsButton = ({
   content,
   onClick,
   disabled,
   style,
+  foregroundColor,
   ...attrs
 }: {
   content: string
   onClick: () => void
   disabled: boolean
   style: ViewStyle
+  foregroundColor: TextStyle
 }) => {
   return (
     <TouchableOpacity
+      children={<Text children={content} style={[styles.text, foregroundColor]} />}
       {...attrs}
       style={[styles.button, style, disabled && styles.disabled]}
       onPress={onClick}
       disabled={disabled}
-      activeOpacity={0.7}>
-      <Text style={styles.text}>{content}</Text>
-    </TouchableOpacity>
+      activeOpacity={0.7}
+    />
   )
 }
 

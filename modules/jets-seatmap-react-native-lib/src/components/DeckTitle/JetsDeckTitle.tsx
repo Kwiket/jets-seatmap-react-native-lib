@@ -9,15 +9,16 @@ export const JetsDeckTitle = ({number, lang, localeKey}: {number: number; lang: 
   const style = {
     transform: [{scale: params.antiScale}, {translateY: 30}],
     height: DEFAULT_DECK_TITLE_HEIGHT,
-    color: colorTheme.deckLabelTitleColor,
   }
 
   return (
-    <View ref={elementRef} style={[styles.deckTitle, style]}>
-      <Text>
-        {LOCALES_MAP[lang][localeKey]}: {number}
-      </Text>
-    </View>
+    <View
+      ref={elementRef}
+      children={
+        <Text children={`${LOCALES_MAP[lang][localeKey]}: ${number}`} style={{color: colorTheme.deckLabelTitleColor}} />
+      }
+      style={[styles.deckTitle, style]}
+    />
   )
 }
 
