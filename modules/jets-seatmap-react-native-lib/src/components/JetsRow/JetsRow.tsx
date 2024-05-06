@@ -20,7 +20,7 @@ export const JetsRow = ({
   flatListHeight: number
 }) => {
   const tooltipViewModel = useContext(TooltipViewModel)
-  const {params, colorTheme, onTooltipRequested} = useContext(JetsContext)
+  const {params, colorTheme, onTooltipRequested, seatOverride} = useContext(JetsContext)
 
   const seatMeasurements = useRef({})
 
@@ -68,53 +68,60 @@ export const JetsRow = ({
             onPress={() => handlePress(seat)}
             onLayout={event => onSeatLayout(event, seat.uniqId)}
             children={
-              <>
-                {seat.color ? (
-                  <SvgXml xml={seatTemplateService.getSeatIcon(seat.seatType, svgStyle)} width="100%" height="100%" />
-                ) : null}
-                <View
-                  children={
-                    <Text
-                      children={seat.number}
-                      style={[
-                        {
-                          fontSize: 30,
-                          color: colorTheme.seatLabelColor ?? 'white',
-                          textAlign: 'center',
-                        },
-                        getStyleByNumber(seat.seatIconType),
-                      ]}
-                    />
-                  }
-                  style={[
-                    {
-                      position: 'absolute',
-                      top: '18%',
-                      width: '100%',
-                    },
-                    getContainerStyleByNumber(seat.seatIconType),
-                  ]}
-                />
-                {seat.passenger != undefined ? (
+              seatOverride != undefined ? (
+                seatOverride({seat: seat})
+              ) : (
+                <>
+                  {seat.color ? (
+                    <SvgXml xml={seatTemplateService.getSeatIcon(seat.seatType, svgStyle)} width="100%" height="100%" />
+                  ) : null}
                   <View
                     children={
-                      <Text children={seat.passenger.abbr} style={{color: 'white', fontSize: 36, fontWeight: 'bold'}} />
+                      <Text
+                        children={seat.number}
+                        style={[
+                          {
+                            fontSize: 30,
+                            color: colorTheme.seatLabelColor ?? 'white',
+                            textAlign: 'center',
+                          },
+                          getStyleByNumber(seat.seatIconType),
+                        ]}
+                      />
                     }
                     style={[
                       {
-                        borderRadius: 50,
-                        backgroundColor:
-                          seat.passenger.passengerColor != undefined
-                            ? seat.passenger.passengerColor
-                            : colorTheme.defaultPassengerBadgeColor,
+                        position: 'absolute',
+                        top: '18%',
+                        width: '100%',
                       },
-                      styles.marker,
+                      getContainerStyleByNumber(seat.seatIconType),
                     ]}
                   />
-                ) : (
-                  <></>
-                )}
-              </>
+                  {seat.passenger != undefined ? (
+                    <View
+                      children={
+                        <Text
+                          children={seat.passenger.abbr}
+                          style={{color: 'white', fontSize: 36, fontWeight: 'bold'}}
+                        />
+                      }
+                      style={[
+                        {
+                          borderRadius: 50,
+                          backgroundColor:
+                            seat.passenger.passengerColor != undefined
+                              ? seat.passenger.passengerColor
+                              : colorTheme.defaultPassengerBadgeColor,
+                        },
+                        styles.marker,
+                      ]}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </>
+              )
             }
             style={[
               {

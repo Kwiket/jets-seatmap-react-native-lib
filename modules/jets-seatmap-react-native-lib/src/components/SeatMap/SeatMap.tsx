@@ -74,7 +74,7 @@ export const JetsSeatMap = ({
   onLayoutUpdated,
   onSeatMouseLeave,
   onSeatMouseClick,
-  componentOverrides,
+  seatOverride,
 }) => {
   const colorTheme = JetsDataHelper.mergeColorThemeWithConstraints(
     JetsSeatMap.defaultProps.config.colorTheme,
@@ -316,7 +316,7 @@ export const JetsSeatMap = ({
     params,
     colorTheme,
     activeTooltip,
-    componentOverrides,
+    seatOverride,
     onTooltipRequested,
   }
 
