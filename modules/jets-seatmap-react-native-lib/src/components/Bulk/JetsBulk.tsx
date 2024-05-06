@@ -17,6 +17,11 @@ export const JetsBulk = ({item}: {item: any}) => {
   coloredBulkSVG = coloredBulkSVG?.replace('$baseColor', bulkBaseColor)
   coloredBulkSVG = coloredBulkSVG?.replace('$cutColor', bulkCutColor)
 
+  //   console.log(
+  //     Math.abs((item.width / 2) * 0.7 * params.antiScale) - item.width,
+  //     Math.abs((item.height / 2) * 0.7 * params.antiScale) - item.height,
+  //   )
+
   return (
     <View
       children={
@@ -25,22 +30,30 @@ export const JetsBulk = ({item}: {item: any}) => {
           {coloredStickerSVG != undefined && (
             <View
               children={
-                <SvgXml
-                  xml={coloredStickerSVG}
-                  width={100}
-                  height={Math.abs((item.height / 2) * 0.7 * params.antiScale) - item.height}
+                <View
+                  children={
+                    <SvgXml xml={coloredStickerSVG} width={Math.abs((item.height / 2) * 0.5)} height={'100%'} />
+                  }
                   style={{
-                    position: 'absolute',
-                    // left:
-                    //   (item.width * bulkScaleCoff) / 2 -
-                    //   (Math.abs((item.width / 2) * 0.7 * params.antiScale) - item.width),
-                    top:
-                      (item.height * bulkScaleCoff) / 2 -
-                      (Math.abs((item.height / 2) * 0.7 * params.antiScale) - item.height),
+                    // position: 'absolute',
+                    // top: '50%',
+                    // left: '50%',
+                    transform: [{translateY: -50}],
+                    // width: 100,
+                    // height: Math.abs((item.height / 2) * 0.7 * params.antiScale) - item.height,
                   }}
                 />
               }
-              style={{position: 'absolute', top: 0, left: 0, width: '100%', alignItems: 'center'}}
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                // backgroundColor: 'red',
+                height: item.height * 0.7,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
             />
           )}
         </>

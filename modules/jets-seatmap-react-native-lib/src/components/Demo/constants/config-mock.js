@@ -1,7 +1,7 @@
 import {Dimensions} from 'react-native'
 
 const CONFIG_MOCK = {
-  width: Dimensions.get('window').width - 40,
+  width: Dimensions.get('window').width,
   height: 3500,
 
   horizontal: false,
