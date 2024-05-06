@@ -37,7 +37,9 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
     setViewHeight(height)
   }
 
-  const tooltipWidth = (Dimensions.get('screen').width - 10) / params.scale
+  console.log(params)
+
+  const tooltipWidth = params.innerWidth - (params.visibleWings ? colorTheme.wingsWidth * 2 : 0)
 
   let restrictionsLabel = ''
   if (seat.passengerTypes) {

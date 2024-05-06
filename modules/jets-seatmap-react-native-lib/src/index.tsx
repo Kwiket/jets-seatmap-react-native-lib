@@ -91,7 +91,7 @@ export const SeatMap = ({flight}) => {
           passengers={PASSENGERS_MOCK}
           currentDeckIndex={1}
           availability={AVAILABILITY_MOCK}
-          seatOverride={SeatOverride}
+        //   seatOverride={SeatOverride}
         />
       ) : (
         <JetsSeatMap flight={FLIGHT_MOCK} config={CONFIG_MOCK} passengers={PASSENGERS_MOCK} currentDeckIndex={1} />
