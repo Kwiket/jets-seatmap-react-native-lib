@@ -102,7 +102,7 @@ export const JetsPlaneBody = ({
         showsVerticalScrollIndicator={true}
         bounces={false}
         ListHeaderComponent={
-          !visibleFuselage ? (
+          visibleFuselage ? (
             <View
               children={
                 <Nose
@@ -121,7 +121,7 @@ export const JetsPlaneBody = ({
           )
         }
         ListFooterComponent={
-          !visibleFuselage ? (
+          visibleFuselage ? (
             <View
               children={
                 <Tail

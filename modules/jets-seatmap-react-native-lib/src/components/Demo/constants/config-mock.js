@@ -6,7 +6,7 @@ const CONFIG_MOCK = {
   horizontal: false,
   rightToLeft: false,
 
-  visibleFuselage: false,
+  visibleFuselage: true,
   visibleWings: false,
 
   builtInDeckSelector: true,
@@ -14,7 +14,6 @@ const CONFIG_MOCK = {
 
   builtInTooltip: true,
   externalPassengerManagement: false,
-
   lang: 'EN',
 
   apiUrl: 'https://sandbox.quicket.io/api/v1',
