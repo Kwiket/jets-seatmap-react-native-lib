@@ -5,6 +5,7 @@ import Nose from '../../assets/img/nose'
 import {JetsContext} from '../../common'
 import {JetsDeck} from '../Deck/JetsDeck'
 import {JetsDeckSeparator} from '../DeckSeparator/JetsDeckSeparator'
+import {JetsWing} from '../Wing/JetsWing'
 
 export const JetsPlaneBody = ({
   activeDeck,
@@ -28,14 +29,20 @@ export const JetsPlaneBody = ({
   const [flatListHeight, setFlatListHeight] = useState(0)
 
   const {lang, visibleFuselage} = config
+
   const {deckHeightSpacing, fuselageStrokeWidth, fuselageStrokeColor, floorColor, wingsWidth, fuselageFillColor} =
     colorTheme
+
+  const wingsSpace = params?.visibleWings ? wingsWidth * 2 : 0
+
+  const bodyWidth = (params?.innerWidth || 0) - wingsSpace
 
   const decksWrapperStyle = {
     borderLeftWidth: fuselageStrokeWidth,
     borderLeftColor: fuselageStrokeColor,
     borderRightWidth: fuselageStrokeWidth,
     borderRightColor: fuselageStrokeColor,
+    width: bodyWidth,
   }
 
   const deckFloorStyle = {
@@ -49,7 +56,7 @@ export const JetsPlaneBody = ({
     const deckToShow = config?.horizontal && !config?.rightToLeft ? content.length - 1 - index : index
 
     return !showOneDeck || index === deckToShow ? (
-      <View key={item.uniqId + index} style={decksWrapperStyle}>
+      <View key={item.uniqId + index} style={[decksWrapperStyle, {alignSelf: 'center'}]}>
         <View
           style={[
             deckFloorStyle,
@@ -73,13 +80,14 @@ export const JetsPlaneBody = ({
         {index < content.length - 1 && !showOneDeck && (
           <JetsDeckSeparator key={'separator-' + index} width={params.innerWidth - wingsWidth * 2} />
         )}
+        {params?.visibleWings && <JetsWing item={item} />}
       </View>
     ) : null
   }
 
   const keyExtractor = (item: any) => item.uniqId.toString()
-  const wingsSpace = params?.visibleWings ? wingsWidth * 2 : 0
-  const bodyWidth = (params?.innerWidth || 0) - wingsSpace
+  //   const wingsSpace = params?.visibleWings ? wingsWidth * 2 : 0
+  //   const bodyWidth = (params?.innerWidth || 0) - wingsSpace
 
   const bodyStyle = {
     width: bodyWidth || config.width,
@@ -91,7 +99,7 @@ export const JetsPlaneBody = ({
   }
 
   return (
-    <View style={[styles.planeBody, bodyStyle]}>
+    <View style={[styles.planeBody]}>
       <FlatList
         onLayout={handleLayout}
         data={content.length != 0 ? [content[activeDeck]] : []}
@@ -114,7 +122,7 @@ export const JetsPlaneBody = ({
                   outlineColor={colorTheme?.fuselageStrokeColor}
                 />
               }
-              style={{width: '100%', alignItems: 'center'}}
+              style={{width: '100%', alignItems: 'center', top: 10}}
             />
           ) : (
             <></>
@@ -132,7 +140,7 @@ export const JetsPlaneBody = ({
                   outlineColor={colorTheme?.fuselageStrokeColor}
                 />
               }
-              style={{width: '100%', alignItems: 'center'}}
+              style={{width: '100%', alignItems: 'center', top: -10}}
             />
           ) : (
             <></>
@@ -146,5 +154,6 @@ export const JetsPlaneBody = ({
 const styles = StyleSheet.create({
   planeBody: {
     marginHorizontal: 'auto',
+    // backgroundColor: 'red',
   },
 })

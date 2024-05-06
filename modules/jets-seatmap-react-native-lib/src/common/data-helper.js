@@ -3,6 +3,7 @@ import {
   THEME_FUSELAGE_OUTLINE_WIDTH,
   FUSELAGE_HEIGHT_TO_WIDTH_RATIO,
   ENTITY_TYPE_MAP,
+  cssColors,
 } from './constants'
 
 export class JetsDataHelper {
@@ -213,10 +214,11 @@ export class JetsDataHelper {
   }
 
   static _isColor(strColor) {
-    const hex = /^#([A-Fa-f0-9]{3}){1,2}$/i;
-    const rgb = /^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/i;
-    const rgba = /^rgba\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),\s*(0|1|0?\.\d+)\)$/i;
-    return hex.test(strColor) || rgb.test(strColor) || rgba.test(strColor);
+    const hex = /^#([A-Fa-f0-9]{3}){1,2}$/i
+    const rgb = /^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/i
+    const rgba = /^rgba\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),\s*(0|1|0?\.\d+)\)$/i
+
+    return hex.test(strColor) || rgb.test(strColor) || rgba.test(strColor) || cssColors.includes(strColor)
   }
 
   static mergeColorThemeWithConstraints = (defaultTheme, theme) => {

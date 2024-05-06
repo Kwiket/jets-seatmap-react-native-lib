@@ -4,7 +4,7 @@ import {JetsContext, DEFAULT_DECK_PADDING_SIZE} from '../../common'
 import {JetsBulk} from '../Bulk'
 import {JetsDeckExit} from '../DeckExit/JetsDeckExit'
 import {JetsDeckTitle} from '../DeckTitle/JetsDeckTitle'
-import {JetsWing} from '../Wing'
+import {JetsWing} from '../Wing/JetsWing'
 import {JetsRow} from '../JetsRow/JetsRow'
 import TooltipModal from '../TooltipGlobal/Tooltip'
 import {TooltipViewModel} from '../TooltipGlobal/TooltipViewModel'
@@ -63,6 +63,21 @@ export const JetsDeck = ({
               scrollOffset={scrollOffset}
               flatListHeight={flatListHeight}
             />
+            {/* {index == 1 ? (
+              <View
+                style={{
+                  position: 'absolute',
+                  height: 1000,
+                  width: 10000,
+                  top: 100,
+                  left: -100,
+                  backgroundColor: 'green',
+                  zIndex: 0,
+                }}
+              />
+            ) : (
+              <></>
+            )} */}
           </>
         }
         style={{top: item.topOffset, position: 'absolute', width: '100%', alignItems: 'center'}}
@@ -95,21 +110,21 @@ export const JetsDeck = ({
       {number && !isSingleDeck && <JetsDeckTitle number={number} lang={lang} localeKey={DECK_LOCALE_KEY} />}
 
       <View
-        children={rows.map(item => renderItem({item: item}))}
-        style={{zIndex: 1, position: 'absolute', width: width}}
+        children={rows.map((item, index) => renderItem({item: item, index: index}))}
+        style={{zIndex: 3, position: 'absolute', width: width}}
       />
 
       {exits && exits.length && (
         <View
           children={exits.map(item => renderExit({item: item}))}
-          style={{zIndex: 2, position: 'absolute', width: '100%', justifyContent: 'space-between'}}
+          style={{zIndex: 4, position: 'absolute', width: '100%', justifyContent: 'space-between'}}
         />
       )}
 
       {bulks != undefined && bulks.length && (
         <View
           children={bulks.map(item => renderBulk({item: item}))}
-          style={{zIndex: 2, position: 'absolute', width: '100%'}}
+          style={{zIndex: 5, position: 'absolute', width: '100%'}}
         />
       )}
       {params.builtInTooltip && tooltipViewModel.isActive.state && activeTooltip && (
@@ -126,5 +141,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     position: 'absolute',
+    zIndex: 1
   },
 })

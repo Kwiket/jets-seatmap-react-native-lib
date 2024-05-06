@@ -13,4 +13,4 @@ export * from './Seat';
 export * from './SeatMap';
 export * from './Tail';
 export * from './TooltipGlobal/Tooltip';
-export * from './Wing';
+export * from './Wing/JetsWing';

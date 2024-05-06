@@ -9,16 +9,16 @@ const SVGComponent = props => (
     viewBox="0 0 200 214"
     {...props}>
     <Path
-      stroke={props.outlineColor ?? '#e5eaee'}
-      strokeWidth={props.storkeWidth}
+      // stroke={props.outlineColor ?? '#e5eaee'}
+      // strokeWidth={props.storkeWidth}
       className="nose-filling-straight"
       d="M1.5 213.5H198.5L198.3 189.5V189.5C198.432 183.009 197.551 176.63 195.513 170.466C183.455 134.002 137.233 2 100 2C62.7343 2.08626 16.4645 134.331 4.45578 170.661C2.43787 176.766 1.5 183.07 1.5 189.5V189.5L1.5 213.5Z"
     />
     <Path
       className="nose-filling"
       fill={props.outlineColor ?? '#e5eaee'}
-      stroke={props.outlineColor ?? '#e5eaee'}
-      strokeWidth={props.storkeWidth}
+      // stroke={props.outlineColor ?? '#e5eaee'}
+      // strokeWidth={props.storkeWidth}
       d="M1.5 191C1.5 191 2.03703 191.308 3 191C9.75537 188.837 37.4722 179.675 47.8 179.5C61.1 179.4 86.8 190 100.1 190C113 190 137.9 179.5 150.8 179.6C163 179.7 197.1 191 197.1 191H198.5V189.4V189.4C198.5 182.97 197.562 176.666 195.544 170.561C183.535 134.232 137.266 2 100 2C62.7343 2.08626 16.4645 134.331 4.45578 170.661C2.43787 176.766 1.5 183.07 1.5 189.5V189.5V191Z"
     />
     <Path
@@ -29,6 +29,7 @@ const SVGComponent = props => (
       className="nose-outline"
       fill={props.mainColor ?? '#e5eaee'}
       stroke={props.outlineColor ?? '#e5eaee'}
+      strokeWidth={props.storkeWidth}
       d="M198.5 213.5V190.435C198.5 183.385 197.47 176.464 195.252 169.772C182.801 132.214 136.97 2 100 2C63.0303 2 17.199 132.214 4.7484 169.772C2.53029 176.464 1.5 183.385 1.5 190.435V213.5"
     />
     <Path
