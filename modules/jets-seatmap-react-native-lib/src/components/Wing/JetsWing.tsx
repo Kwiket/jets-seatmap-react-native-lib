@@ -2,7 +2,7 @@ import React, {useContext, useRef} from 'react'
 import {View, StyleSheet} from 'react-native'
 import {JetsContext} from '../../common'
 
-export const JetsWing = ({item}) => {
+export const JetsWing = ({item}: {item: {wingsInfo: {start: number, finish: number, }}}) => {
   const {params, colorTheme} = useContext(JetsContext)
 
   return (

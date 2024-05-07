@@ -21,5 +21,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     backgroundColor: '#fff',
+    zIndex: 100000,
   },
 })

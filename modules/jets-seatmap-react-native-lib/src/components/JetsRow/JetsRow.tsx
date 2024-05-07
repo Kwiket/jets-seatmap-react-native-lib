@@ -40,7 +40,9 @@ export const JetsRow = ({
     tooltipViewModel?.xOffset.setState(pageX / params.scale)
 
     onPress(seat)
-    onTooltipRequested(seat)
+    // onTooltipRequested(seat)
+
+    console.log(y, scrollOffset)
 
     tooltipViewModel?.isActive.setState(true)
 
@@ -51,7 +53,7 @@ export const JetsRow = ({
       flatListHeight - (y - ((params.innerWidth - colorTheme.wingsWidth * 2) * 240) / 200) < screenHeight
     ) {
       tooltipViewModel?.position.setState('bottom')
-    } else if (y - scrollOffset * 0.3 < screenHeight * 0.4) {
+    } else if (y - scrollOffset * params.scale < screenHeight * 0.5) {
       tooltipViewModel?.position.setState('top')
     } else {
       tooltipViewModel?.position.setState('bottom')

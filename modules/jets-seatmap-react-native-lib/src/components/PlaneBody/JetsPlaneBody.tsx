@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect, useRef, useState} from 'react'
 import {View, StyleSheet, FlatList} from 'react-native'
 import Tail from '../../assets/img/tail'
 import Nose from '../../assets/img/nose'
@@ -31,6 +31,8 @@ export const JetsPlaneBody = ({
   const [flatListHeight, setFlatListHeight] = useState(0)
 
   const {lang, visibleFuselage} = config
+
+  const flatListRef = useRef(null)
 
   const {deckHeightSpacing, fuselageStrokeWidth, fuselageStrokeColor, floorColor, wingsWidth, fuselageFillColor} =
     colorTheme
@@ -93,12 +95,13 @@ export const JetsPlaneBody = ({
   const handleLayout = (event: any) => {
     const {height, width} = event.nativeEvent.layout
     setFlatListHeight(height)
-    console.log(height)
   }
 
   return (
     <View style={[styles.planeBody]}>
       <FlatList
+        key={activeDeck}
+        ref={flatListRef}
         onLayout={handleLayout}
         data={content.length != 0 ? [content[activeDeck]] : []}
         renderItem={renderItem}
