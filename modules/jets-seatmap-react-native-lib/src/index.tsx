@@ -1,8 +1,8 @@
 import {Text, View} from 'react-native'
 import {SvgXml} from 'react-native-svg'
-import {JetsSeatMap, seatTemplateService} from './components'
+import {JetsSeatMap as SeatMap, seatTemplateService} from './components'
 import {AVAILABILITY_MOCK, CONFIG_MOCK, FLIGHT_MOCK, PASSENGERS_MOCK} from './components/Demo/constants'
-import {getContainerStyleByNumber, getStyleByNumber} from './components/JetsRow/models/SeatTypes'
+import {getContainerStyleByNumber, getStyleByNumber} from './components/Seat/models/SeatTypes'
 
 const SeatOverride = ({seat}: {seat: SeatModel}) => {
   return (
@@ -81,20 +81,33 @@ const SeatOverride = ({seat}: {seat: SeatModel}) => {
   )
 }
 
-export const SeatMap = ({flight}) => {
+export const JetsSeatMap = ({
+  flight,
+}: {
+  flight: FlightModel
+  availability: AvailabilityModel
+  passengers: ParamsModel
+  config: ConfigModel
+  currentDeckIndex: number
+  onSeatMapInited: any
+  onSeatSelected: any
+  onSeatUnselected: any
+  onTooltipRequested: any
+  onLayoutUpdated: any
+  seatOverride: JSX.Element
+}) => {
   return (
     <View>
       {flight != undefined ? (
-        <JetsSeatMap
+        <SeatMap
           flight={flight}
           config={CONFIG_MOCK}
           passengers={PASSENGERS_MOCK}
-          currentDeckIndex={1}
-        //   availability={AVAILABILITY_MOCK}
-        //   seatOverride={SeatOverride}
+          availability={AVAILABILITY_MOCK}
+          //   seatOverride={SeatOverride}
         />
       ) : (
-        <JetsSeatMap flight={FLIGHT_MOCK} config={CONFIG_MOCK} passengers={PASSENGERS_MOCK} currentDeckIndex={1} />
+        <SeatMap flight={FLIGHT_MOCK} config={CONFIG_MOCK} passengers={PASSENGERS_MOCK} currentDeckIndex={1} />
       )}
     </View>
   )

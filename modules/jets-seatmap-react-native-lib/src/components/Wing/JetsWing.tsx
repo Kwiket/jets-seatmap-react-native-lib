@@ -1,8 +1,8 @@
-import React, {useContext, useRef} from 'react'
-import {View, StyleSheet} from 'react-native'
+import React, {useContext} from 'react'
+import {View} from 'react-native'
 import {JetsContext} from '../../common'
 
-export const JetsWing = ({item}: {item: {wingsInfo: {start: number, finish: number, }}}) => {
+export const JetsWing = ({item}: {item: {wingsInfo: {start: number; finish: number}}}) => {
   const {params, colorTheme} = useContext(JetsContext)
 
   return (
@@ -19,9 +19,3 @@ export const JetsWing = ({item}: {item: {wingsInfo: {start: number, finish: numb
     />
   )
 }
-
-const styles = StyleSheet.create({
-  wings: {
-    position: 'absolute',
-  },
-})

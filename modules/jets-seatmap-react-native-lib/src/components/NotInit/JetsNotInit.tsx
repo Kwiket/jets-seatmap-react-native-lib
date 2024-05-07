@@ -3,13 +3,16 @@ import {View, StyleSheet, ActivityIndicator, Dimensions} from 'react-native'
 
 export const JetsNotInit = () => {
   return (
-    <View style={styles.container}>
-      <ActivityIndicator
-        size="large"
-        color="#000"
-        style={{alignSelf: 'center', top: Dimensions.get('screen').height * 0.4, position: 'absolute'}}
-      />
-    </View>
+    <View
+      children={
+        <ActivityIndicator
+          size="large"
+          color="#000"
+          style={{alignSelf: 'center', top: Dimensions.get('screen').height * 0.4, position: 'absolute'}}
+        />
+      }
+      style={styles.container}
+    />
   )
 }
 

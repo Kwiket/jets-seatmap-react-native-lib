@@ -10,9 +10,10 @@ export const JetsNoData = () => {
   }
 
   return (
-    <View style={[styles.container, containerStyle]}>
-      <Text style={styles.text}>Seat map is not found for the flight</Text>
-    </View>
+    <View
+      children={<Text children={'Seat map is not found for the flight'} style={styles.text} />}
+      style={[styles.container, containerStyle]}
+    />
   )
 }
 

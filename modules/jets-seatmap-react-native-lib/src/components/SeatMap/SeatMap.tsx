@@ -15,8 +15,6 @@ import {
   DEFAULT_RTL,
   DEFAULT_UNITS,
   JetsContext,
-  ENTITY_STATUS_MAP,
-  ENTITY_TYPE_MAP,
   THEME_DECK_LABEL_TITLE_COLOR,
   THEME_FLOOR_COLOR,
   THEME_SEAT_LABEL_COLOR,
@@ -73,30 +71,51 @@ export const JetsSeatMap = ({
   onTooltipRequested,
   onLayoutUpdated,
   seatOverride,
+}: {
+  flight: FlightModel
+  availability: AvailabilityModel
+  passengers: ParamsModel
+  config: ConfigModel
+  currentDeckIndex: number
+  onSeatMapInited: any
+  onSeatSelected: any
+  onSeatUnselected: any
+  onTooltipRequested: any
+  onLayoutUpdated: any
+  seatOverride: JSX.Element
 }) => {
   const colorTheme = JetsDataHelper.mergeColorThemeWithConstraints(
     JetsSeatMap.defaultProps.config.colorTheme,
     config.colorTheme,
   )
   config.colorTheme = colorTheme
+
   const configuration = {...JetsSeatMap.defaultProps.config, ...config}
 
   const [content, setContent] = useState([])
+
   const [isSeatMapInited, setSeatMapInited] = useState(false)
-  const [passengersList, setPassengersList] = useState([])
+
+  const [passengersList, setPassengersList] = useState<ParamsModel | []>([])
+
   const [activeTooltip, setActiveTooltip] = useState(null)
-  const [isSelectAvailable, setSelectAvailable] = useState(false)
+
   const [activeDeck, setActiveDeck] = useState(0)
+
   const [params, setParams] = useState<ParamsModel | null>(null)
 
   const [exits, setExits] = useState([])
+
   const [bulks, setBulks] = useState([])
 
+  const [deckSwitchState, setDeckSwitchState] = useState(0)
+
   const hasReceivedFirstParams = useRef(false)
-  const seatMapRef = useRef()
+
   const service = new JetsSeatMapService(configuration)
 
   const shouldShowOnlyOneDeck = params?.singleDeckMode && content.length > 1
+
   const shouldShowBuiltInDeckSelector = params?.builtInDeckSelector && shouldShowOnlyOneDeck
 
   useEffect(() => {
@@ -174,7 +193,6 @@ export const JetsSeatMap = ({
     if (!shouldShowOnlyOneDeck || content.length < 2) {
       return
     }
-
     let nextDeck = (activeDeck + 1) % content.length
 
     if (value !== undefined) {
@@ -186,6 +204,7 @@ export const JetsSeatMap = ({
     }
 
     const scaledTotalDecksHeight = `${params?.separateDeckHeights[nextDeck] * (params.scale || 1)}px`
+
     const totalDecksHeight = params?.separateDeckHeights[nextDeck]
 
     setParams({...params, scaledTotalDecksHeight, totalDecksHeight})
@@ -208,6 +227,7 @@ export const JetsSeatMap = ({
     }
 
     const deckHeight = params?.separateDeckHeights[activeDeck]
+
     const height = shouldShowOnlyOneDeck ? deckHeight : params?.totalDecksHeight
 
     const data = {
@@ -242,6 +262,7 @@ export const JetsSeatMap = ({
 
   const isSeatSelectDisabled = (seatData: SeatModel) => {
     const nextPassenger = service.getNextPassenger(passengersList)
+
     return (
       !nextPassenger ||
       (nextPassenger?.passengerType &&
@@ -271,7 +292,9 @@ export const JetsSeatMap = ({
     onTooltipRequested,
   }
 
-  console.log(scaleWrapStyle)
+  useEffect(() => {
+    setDeckSwitchState(currentDeckIndex != undefined ? currentDeckIndex : 0)
+  }, [])
 
   return (
     <JetsContext.Provider value={providerValue}>
@@ -281,7 +304,7 @@ export const JetsSeatMap = ({
             <>
               <JetsPlaneBody
                 showOneDeck={shouldShowOnlyOneDeck}
-                activeDeck={activeDeck}
+                activeDeck={deckSwitchState}
                 content={content}
                 exits={exits}
                 bulks={bulks}
@@ -302,9 +325,9 @@ export const JetsSeatMap = ({
         {shouldShowBuiltInDeckSelector && (
           <JetsDeckSelector
             onPress={() => {
-              setActiveDeck(activeDeck == 1 ? 0 : 1)
+              setDeckSwitchState(deckSwitchState == 1 ? 0 : 1)
             }}
-            activeDeck={activeDeck}
+            activeDeck={deckSwitchState}
           />
         )}
       </TooltipViewModelProvider>
@@ -378,19 +401,19 @@ JetsSeatMap.defaultProps = {
       exitIconUrlRight: null,
     },
   },
-  onSeatMapInited: data => {
+  onSeatMapInited: (data: any) => {
     console.log('JetsSeatMap initialized!', data)
   },
-  onSeatSelected: passenger => {
+  onSeatSelected: (passenger: ParamsModel) => {
     console.log('Passenger boarded: ', passenger)
   },
-  onSeatUnselected: passenger => {
+  onSeatUnselected: (passenger: ParamsModel) => {
     console.log('Passenger unboarded: ', passenger)
   },
-  onTooltipRequested: data => {
+  onTooltipRequested: (data: any) => {
     console.log('Tooltip requested: ', data)
   },
-  onLayoutUpdated: data => {
+  onLayoutUpdated: (data: any) => {
     console.log('Layout updated: ', data)
   },
 }

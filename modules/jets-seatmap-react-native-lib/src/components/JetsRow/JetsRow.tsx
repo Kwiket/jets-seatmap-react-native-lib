@@ -1,30 +1,16 @@
-import React, {useContext, useState, useRef, useEffect} from 'react'
-import {View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native'
-import {SvgXml} from 'react-native-svg'
+import React, {useContext, useRef} from 'react'
+import {View, TouchableOpacity, StyleSheet} from 'react-native'
 import {JetsContext} from '../../common'
-import {seatTemplateService} from '../Seat'
+import {JetsSeat} from '../Seat'
 import {TooltipViewModel} from '../TooltipGlobal/TooltipViewModel'
-import {getContainerStyleByNumber, getSeatRotationStyle, getStyleByNumber} from './models/SeatTypes'
+import {getSeatRotationStyle} from '../Seat/models/SeatTypes'
 
-export const JetsRow = ({
-  seats,
-  top,
-  onPress,
-  scrollOffset,
-  flatListHeight,
-  config,
-}: {
-  seats: SeatModel[]
-  top: number
-  onPress: (seat: SeatModel) => void
-  scrollOffset: number
-  flatListHeight: number
-  config: any
-}) => {
+export const JetsRow = ({seats, top, onPress, scrollOffset, flatListHeight, config}: RowModel) => {
   const tooltipViewModel = useContext(TooltipViewModel)
-  const {params, colorTheme, onTooltipRequested, seatOverride} = useContext(JetsContext)
 
-  const seatMeasurements = useRef({})
+  const {params, colorTheme, onTooltipRequested} = useContext(JetsContext)
+
+  const seatMeasurements: any = useRef({})
 
   const onSeatLayout = (event: any, seatId: any) => {
     event.target.measureInWindow((x: number, y: number, width: number, height: number) => {
@@ -34,24 +20,19 @@ export const JetsRow = ({
 
   const handlePress = (seat: SeatModel) => {
     const {x, y, width, height} = seatMeasurements.current[seat.uniqId]
-    const pageX = x
-
-    tooltipViewModel?.topOffset.setState(top + seat.topOffset)
-    tooltipViewModel?.xOffset.setState(pageX / params.scale)
-
-    onPress(seat)
-    // onTooltipRequested(seat)
-
-    console.log(y, scrollOffset)
-
-    tooltipViewModel?.isActive.setState(true)
 
     const screenHeight = config.height
 
-    if (
-      flatListHeight - (y - ((params.innerWidth - colorTheme.wingsWidth * 2) * 240) / 200) > 0 &&
-      flatListHeight - (y - ((params.innerWidth - colorTheme.wingsWidth * 2) * 240) / 200) < screenHeight
-    ) {
+    const tailHeight = y - ((params.innerWidth - colorTheme.wingsWidth * 2) * 240) / 200
+
+    tooltipViewModel?.topOffset.setState(top + seat.topOffset)
+    tooltipViewModel?.xOffset.setState(x / params.scale)
+
+    onPress(seat)
+    onTooltipRequested(seat)
+    tooltipViewModel?.isActive.setState(true)
+
+    if (flatListHeight - tailHeight > 0 && flatListHeight - tailHeight < screenHeight) {
       tooltipViewModel?.position.setState('bottom')
     } else if (y - scrollOffset * params.scale < screenHeight * 0.5) {
       tooltipViewModel?.position.setState('top')
@@ -63,75 +44,13 @@ export const JetsRow = ({
   return (
     <View style={[styles.row]}>
       {seats.map(seat => {
-        const svgStyle = {
-          strokeColor: colorTheme.seatStrokeColor,
-          armrestColor: colorTheme.seatArmrestColor,
-          fillColor: seat.color,
-          strokeWidth: colorTheme.seatStrokeWidth,
-        }
-
         return (
           <TouchableOpacity
             key={seat.uniqId}
             disabled={seat.type == 'aisle' || seat.status == 'unavailable'}
             onPress={() => handlePress(seat)}
             onLayout={event => onSeatLayout(event, seat.uniqId)}
-            children={
-              seatOverride != undefined ? (
-                seatOverride({seat: seat})
-              ) : (
-                <>
-                  {seat.color ? (
-                    <SvgXml xml={seatTemplateService.getSeatIcon(seat.seatType, svgStyle)} width="100%" height="100%" />
-                  ) : null}
-                  <View
-                    children={
-                      <Text
-                        children={seat.number}
-                        style={[
-                          {
-                            fontSize: 30,
-                            color: colorTheme.seatLabelColor ?? 'white',
-                            textAlign: 'center',
-                          },
-                          getStyleByNumber(seat.seatIconType),
-                        ]}
-                      />
-                    }
-                    style={[
-                      {
-                        position: 'absolute',
-                        top: '18%',
-                        width: '100%',
-                      },
-                      getContainerStyleByNumber(seat.seatIconType),
-                    ]}
-                  />
-                  {seat.passenger != undefined ? (
-                    <View
-                      children={
-                        <Text
-                          children={seat.passenger.abbr}
-                          style={{color: 'white', fontSize: 36, fontWeight: 'bold'}}
-                        />
-                      }
-                      style={[
-                        {
-                          borderRadius: 50,
-                          backgroundColor:
-                            seat.passenger.passengerColor != undefined
-                              ? seat.passenger.passengerColor
-                              : colorTheme.defaultPassengerBadgeColor,
-                        },
-                        styles.marker,
-                      ]}
-                    />
-                  ) : (
-                    <></>
-                  )}
-                </>
-              )
-            }
+            children={<JetsSeat seat={seat} />}
             style={[
               {
                 height: seat.size.height,
@@ -153,12 +72,5 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignContent: 'flex-start',
     flexDirection: 'row',
-  },
-  marker: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 })

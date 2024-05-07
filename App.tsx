@@ -2,12 +2,12 @@ import {NavigationContainer, useNavigation} from '@react-navigation/native'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import React from 'react'
 import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native'
-import {SeatMap} from 'react-native-jets-seatmap-react-native-lib'
+import {JetsSeatMap} from 'react-native-jets-seatmap-react-native-lib'
 
 const DemoScreen = ({route, navigation}) => {
   const {config} = route.params
 
-  return <SafeAreaView children={<SeatMap flight={config} />} />
+  return <SafeAreaView children={<JetsSeatMap flight={config} />} />
 }
 
 const FirstScreen = () => {
@@ -102,7 +102,6 @@ const FirstScreen = () => {
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator()
-  //   return <SafeAreaView children={<TestButton />} />
 
   return (
     <NavigationContainer

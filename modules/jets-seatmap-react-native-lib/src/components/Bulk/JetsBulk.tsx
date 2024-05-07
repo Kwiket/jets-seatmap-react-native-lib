@@ -6,15 +6,19 @@ import {BULK_TEMPLATE_MAP, STICKER_TEMPLATE_MAP} from './constants'
 
 export const JetsBulk = ({item}: {item: BulkModel}) => {
   const {params, colorTheme} = useContext(JetsContext)
+
   const {bulkBaseColor, bulkCutColor, bulkIconColor} = colorTheme
 
   const bulkScaleCoff = 0.7
 
   let coloredBulkSVG = BULK_TEMPLATE_MAP.get(item.id)
+
   let coloredStickerSVG = STICKER_TEMPLATE_MAP.get(item.iconType ? item.iconType.toLowerCase().trim() : '')
 
   coloredStickerSVG = coloredStickerSVG?.replace('$stickerColor', bulkIconColor)
+
   coloredBulkSVG = coloredBulkSVG?.replace('$baseColor', bulkBaseColor)
+  
   coloredBulkSVG = coloredBulkSVG?.replace('$cutColor', bulkCutColor)
 
   return (

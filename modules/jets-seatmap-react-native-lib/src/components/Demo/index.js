@@ -52,19 +52,19 @@ export const DemoComponent = () => {
       <div className="jets-demo--controllers">
         <div className="jets-demo--controller">
           <textarea onChange={e => onFlightChange(e)} defaultValue={defaultFlight} />
-          <JetsButton className="jets-btn jets-demo--btn" content="INIT SEAT MAP" onClick={onSetFlight} />
+          <JetsButton className="jets-btn jets-demo--btn" content="INIT SEAT MAP" onPress={onSetFlight} />
         </div>
         <div className="jets-demo--controller">
           <textarea onChange={e => onAvailabilityChange(e)} defaultValue={defaultAvailability} />
-          <JetsButton className="jets-btn jets-demo--btn" content="SET AVAILABILITY" onClick={onSetAvailability} />
+          <JetsButton className="jets-btn jets-demo--btn" content="SET AVAILABILITY" onPress={onSetAvailability} />
         </div>
         <div className="jets-demo--controller">
           <textarea onChange={e => onPassengersChange(e)} defaultValue={defaultPassengers} />
-          <JetsButton className="jets-btn jets-demo--btn" content="SET PASSENGERS" onClick={onSetPassengers} />
+          <JetsButton className="jets-btn jets-demo--btn" content="SET PASSENGERS" onPress={onSetPassengers} />
         </div>
         <div className="jets-demo--controller">
           <textarea onChange={e => onDeckChange(e)} defaultValue={0} />
-          <JetsButton className="jets-btn jets-demo--btn" content="SET DECK" onClick={onSetDeck} />
+          <JetsButton className="jets-btn jets-demo--btn" content="SET DECK" onPress={onSetDeck} />
         </div>
       </div>
       <div className="jets-demo--seat-map">

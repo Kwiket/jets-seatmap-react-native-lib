@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react'
-import {View, Text, StyleSheet, Dimensions} from 'react-native'
+import {View, Text, StyleSheet} from 'react-native'
 import {SvgXml} from 'react-native-svg'
 import {DEFAULT_SEAT_PASSENGER_TYPES, JetsContext, LOCALES_MAP} from '../../common'
 import {JetsButton} from '../Button/JetsButton'
@@ -26,15 +26,20 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
   } = colorTheme
 
   const CANCEL_BTN_KEY = 'cancel'
+
   const SELECT_BTN_KEY = 'select'
+
   const UNSELECT_BTN_KEY = 'unselect'
+
   const PASSENGER_KEY = 'passenger'
+
   const RESTRICTION_KEY = 'seatRestrictions'
 
   const [viewHeight, setViewHeight] = useState(0)
 
   const onLayout = (event: any) => {
     const {height} = event.nativeEvent.layout
+
     setViewHeight(height)
   }
 
@@ -43,9 +48,13 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
   let restrictionsLabel = ''
   if (seat.passengerTypes) {
     const existingRestrictions = DEFAULT_SEAT_PASSENGER_TYPES
+
     const filteredPassengerTypes = seat.passengerTypes.filter(type => existingRestrictions.includes(type))
+
     let typeStrings = filteredPassengerTypes.map(type => LOCALES_MAP[lang][type])
+
     const isRestrictionApplied = filteredPassengerTypes.length < existingRestrictions.length
+
     restrictionsLabel = isRestrictionApplied ? `${LOCALES_MAP[lang][RESTRICTION_KEY]}: ${typeStrings.join(', ')}` : ''
   }
 
@@ -203,6 +212,7 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
                   paddingVertical: 20,
                   justifyContent: 'center',
                   alignItems: 'center',
+                  backgroundColor: tooltipIconBackgroundColor,
                 }}
               />
             ))
@@ -227,11 +237,11 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
                 backgroundColor: tooltipCancelButtonBackgroundColor,
                 marginRight: 15,
               }}
-              onClick={() => viewModel?.isActive.setState(false)}
+              onPress={() => viewModel?.isActive.setState(false)}
             />
             {seat.passenger ? (
               <JetsButton
-                onClick={() => {
+                onPress={() => {
                   onSeatUnselect(seat)
                   viewModel?.isActive.setState(false)
                 }}
@@ -245,7 +255,7 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
               />
             ) : (
               <JetsButton
-                onClick={() => {
+                onPress={() => {
                   onSeatSelect(seat)
                   viewModel?.isActive.setState(false)
                 }}

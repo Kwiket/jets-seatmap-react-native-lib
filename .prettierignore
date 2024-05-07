@@ -1,0 +1,7 @@
+ios/
+android/
+node_modules/
+.bundle/
+.vscode/
+README.md
+package.json

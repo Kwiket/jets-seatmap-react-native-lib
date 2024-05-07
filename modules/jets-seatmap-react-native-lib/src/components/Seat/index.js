@@ -1,3 +1,2 @@
-export * from './ui/SeatIcon';
 export * from './JetsSeat';
-export * from './service';
+export * from './library/service';

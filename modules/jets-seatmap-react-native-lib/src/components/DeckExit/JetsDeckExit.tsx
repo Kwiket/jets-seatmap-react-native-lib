@@ -5,21 +5,12 @@ import {DEFAULT_STYLE_POSITION, JetsContext} from '../../common'
 
 export const JetsDeckExit = ({type, topOffset}: {type: string; topOffset: number}) => {
   const {colorTheme} = useContext(JetsContext)
+  
   const {exitIconUrlLeft, exitIconUrlRight, exitIconWidth, exitIconHeight} = colorTheme
+
   const isBuiltInIcons = !exitIconUrlLeft || !exitIconUrlRight
 
-  const [style, setStyle] = useState(() => {
-    const xOffset = 0
-
-    return {
-      position: 'absolute',
-      top: topOffset,
-      left: type === 'left' ? xOffset : DEFAULT_STYLE_POSITION,
-      right: type === 'right' ? xOffset : DEFAULT_STYLE_POSITION,
-      width: 72,
-      height: 72,
-    }
-  })
+  const xOffset = 0
 
   const ArrowSvg = ({direction}: {direction: string}) => (
     <Svg width="72" height="72" viewBox="0 0 114 114">
@@ -34,18 +25,33 @@ export const JetsDeckExit = ({type, topOffset}: {type: string; topOffset: number
   )
 
   return (
-    <View style={style}>
-      {isBuiltInIcons ? (
-        <ArrowSvg direction={type} />
-      ) : (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <SvgUri
-            width={exitIconWidth}
-            height={exitIconHeight}
-            uri={type === 'left' ? exitIconUrlLeft : exitIconUrlRight}
-          />
-        </View>
-      )}
-    </View>
+    <View
+      children={
+        <>
+          {isBuiltInIcons ? (
+            <ArrowSvg direction={type} />
+          ) : (
+            <View
+              children={
+                <SvgUri
+                  width={exitIconWidth}
+                  height={exitIconHeight}
+                  uri={type === 'left' ? exitIconUrlLeft : exitIconUrlRight}
+                />
+              }
+              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
+            />
+          )}
+        </>
+      }
+      style={{
+        position: 'absolute',
+        top: topOffset,
+        left: type === 'left' ? xOffset : DEFAULT_STYLE_POSITION,
+        right: type === 'right' ? xOffset : DEFAULT_STYLE_POSITION,
+        width: 72,
+        height: 72,
+      }}
+    />
   )
 }

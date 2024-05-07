@@ -3,14 +3,14 @@ import {TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle} from 'react-na
 
 export const JetsButton = ({
   content,
-  onClick,
+  onPress,
   disabled,
   style,
   foregroundColor,
   ...attrs
 }: {
   content: string
-  onClick: () => void
+  onPress: () => void
   disabled: boolean
   style: ViewStyle
   foregroundColor: TextStyle
@@ -20,7 +20,7 @@ export const JetsButton = ({
       children={<Text children={content} style={[styles.text, foregroundColor]} />}
       {...attrs}
       style={[styles.button, style, disabled && styles.disabled]}
-      onPress={onClick}
+      onPress={onPress}
       disabled={disabled}
       activeOpacity={0.7}
     />
@@ -30,7 +30,7 @@ export const JetsButton = ({
 JetsButton.defaultProps = {
   content: 'Btn',
   disabled: false,
-  onClick: () => {},
+  onPress: () => {},
 }
 
 const styles = StyleSheet.create({

@@ -3,8 +3,8 @@ import {View, TouchableOpacity, StyleSheet} from 'react-native'
 import {SvgXml} from 'react-native-svg'
 import {JetsContext} from '../../common'
 
-export const JetsDeckSelector = ({onPress, activeDeck}: {onPress: () => void; activeDeck: number}) => {
-  const {params, colorTheme} = useContext(JetsContext)
+export const JetsDeckSelector = ({activeDeck, onPress}: {activeDeck: number; onPress: () => void}) => {
+  const {params, colorTheme, switchDeck} = useContext(JetsContext)
 
   const {deckSelectorStrokeColor, deckSelectorFillColor, deckSelectorSize} = colorTheme
 
