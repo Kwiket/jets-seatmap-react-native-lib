@@ -229,7 +229,7 @@ Example of data seatmap receives:
     price: 33,
     onlyForPassengerType: ['ADT', 'CHD', 'INF'],
     additionalProps: [        
-      { label: 'Clear air', icon: null, cssClass: 'clear-air-style' },
+      { label: 'Clear air', icon: null },
       { label: 'USB plug', icon: 'power' },
     ],
     color: 'green'            // individual seat's color
@@ -503,7 +503,7 @@ If `builtInTooltip` flag is set to `false` - native tooltip will not show up and
 
 ```typescript
 interface iTooltipData {
-  element: HTMLElement;       // HTML element of clicked/hovered seat, may be used for tooltip positioning
+  element: JSX.Element;       // JSX element of clicked seat, may be used for tooltip positioning
   event: DOMEvent;            // DOM event for more precise coordinates processing
   seat: ISeatData             // detailed seat info, see below
 }
