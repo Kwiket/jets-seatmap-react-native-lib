@@ -48,7 +48,7 @@ export const JetsRow = ({
 
     if (
       flatListHeight - (y - ((params.innerWidth - colorTheme.wingsWidth * 2) * 240) / 200) > 0 &&
-      flatListHeight - (y - ((params.innerWidth - colorTheme.wingsWidth * 2) * 240) / 200) < screenHeight / 2
+      flatListHeight - (y - ((params.innerWidth - colorTheme.wingsWidth * 2) * 240) / 200) < screenHeight
     ) {
       tooltipViewModel?.position.setState('bottom')
     } else if (y - scrollOffset * 0.3 < screenHeight * 0.4) {
