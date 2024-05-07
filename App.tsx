@@ -1,17 +1,17 @@
-import {NavigationContainer, useNavigation} from '@react-navigation/native'
-import {createNativeStackNavigator} from '@react-navigation/native-stack'
-import React from 'react'
-import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native'
-import {JetsSeatMap} from 'react-native-jets-seatmap-react-native-lib'
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React from 'react';
+import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+import {JetsSeatMap} from 'react-native-jets-seatmap-react-native-lib';
 
 const DemoScreen = ({route, navigation}) => {
-  const {config} = route.params
+  const {config} = route.params;
 
-  return <SafeAreaView children={<JetsSeatMap flight={config} />} />
-}
+  return <SafeAreaView children={<JetsSeatMap flight={config} />} />;
+};
 
 const FirstScreen = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const firstType = {
     id: '111',
@@ -22,7 +22,7 @@ const FirstScreen = () => {
     arrival: 'CAN',
     cabinClass: 'A',
     planeCode: '',
-  }
+  };
 
   const secondType = {
     id: '111',
@@ -33,7 +33,7 @@ const FirstScreen = () => {
     arrival: 'CAN',
     cabinClass: 'A',
     planeCode: '',
-  }
+  };
 
   const thirdType = {
     id: '111',
@@ -44,7 +44,7 @@ const FirstScreen = () => {
     arrival: 'JFK',
     cabinClass: 'A',
     planeCode: '',
-  }
+  };
 
   const forthType = {
     id: '111',
@@ -55,7 +55,7 @@ const FirstScreen = () => {
     arrival: 'DXB',
     cabinClass: 'A',
     planeCode: '',
-  }
+  };
 
   return (
     <View
@@ -65,7 +65,7 @@ const FirstScreen = () => {
             onPress={() => {
               navigation.navigate('demoScreen', {
                 config: firstType,
-              })
+              });
             }}
             children={<Text children="config 1" />}
           />
@@ -73,7 +73,7 @@ const FirstScreen = () => {
             onPress={() => {
               navigation.navigate('demoScreen', {
                 config: secondType,
-              })
+              });
             }}
             children={<Text children="config 2" />}
           />
@@ -81,7 +81,7 @@ const FirstScreen = () => {
             onPress={() => {
               navigation.navigate('demoScreen', {
                 config: thirdType,
-              })
+              });
             }}
             children={<Text children="config 3" />}
           />
@@ -89,7 +89,7 @@ const FirstScreen = () => {
             onPress={() => {
               navigation.navigate('demoScreen', {
                 config: forthType,
-              })
+              });
             }}
             children={<Text children="config 4" />}
           />
@@ -97,11 +97,11 @@ const FirstScreen = () => {
       }
       style={{alignItems: 'center', justifyContent: 'space-evenly', flex: 1}}
     />
-  )
-}
+  );
+};
 
 function App(): React.JSX.Element {
-  const Stack = createNativeStackNavigator()
+  const Stack = createNativeStackNavigator();
 
   return (
     <NavigationContainer
@@ -117,7 +117,7 @@ function App(): React.JSX.Element {
         />
       }
     />
-  )
+  );
 }
 
-export default App
+export default App;

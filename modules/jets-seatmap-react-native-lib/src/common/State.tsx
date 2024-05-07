@@ -1,10 +1,10 @@
-import {useState} from 'react'
+import {useState} from 'react';
 
 export const $State = (initialState: any) => {
-  const [state, setState] = useState(initialState)
+  const [state, setState] = useState(initialState);
 
   return {
     state,
     setState,
-  }
-}
+  };
+};

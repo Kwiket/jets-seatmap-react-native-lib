@@ -35,7 +35,7 @@ export const LOCALE_PL = {
   wifi_enabled: 'Wi-Fi włączone',
   wifiEnabled: 'Wi-Fi włączone',
   wingInWindow: 'Skrzydło z okna',
-}
+};
 
 export const LOCALE_ES = {
   audio_video_ondemand: 'Audio y video bajo demanda (%s)',
@@ -74,7 +74,7 @@ export const LOCALE_ES = {
   wifi_enabled: 'Wi-Fi habilitado',
   wifiEnabled: 'Wi-Fi habilitado',
   wingInWindow: 'Vista del ala desde la ventana',
-}
+};
 
 export const LOCALE_DE = {
   audio_video_ondemand: 'Audio & Video nach Anfrage (%s)',
@@ -114,7 +114,7 @@ export const LOCALE_DE = {
   wifi_enabled: 'Wi-Fi aktiviert',
   wifiEnabled: 'Wi-Fi aktiviert',
   wingInWindow: 'Flügelfenster',
-}
+};
 
 export const LOCALE_EN = {
   ADT: 'adults',
@@ -160,7 +160,7 @@ export const LOCALE_EN = {
   wifi_enabled: 'WiFi enabled',
   wifiEnabled: 'WiFi enabled',
   wingInWindow: 'Wing from window view',
-}
+};
 
 export const LOCALE_CN = {
   restrictedLegroom: '腿部空间较小',
@@ -200,7 +200,7 @@ export const LOCALE_CN = {
   deck: '甲板',
   personalTvInArmrest: '扶手里的个人电视',
   invertedSeat: '倒座',
-}
+};
 
 export const LOCALE_RU = {
   restrictedLegroom: 'Мало места для ног',
@@ -240,7 +240,7 @@ export const LOCALE_RU = {
   deck: 'Этаж',
   personalTvInArmrest: 'Персональный телевизор в подлокотнике',
   invertedSeat: 'Сиденье заднего хода',
-}
+};
 
 export const LOCALE_AR = {
   ADT: 'بالغين',
@@ -286,7 +286,7 @@ export const LOCALE_AR = {
   wifi_enabled: 'واي فاي مفعل',
   wifiEnabled: 'واي فاي مفعل',
   wingInWindow: 'جناح من نافذة العرض',
-}
+};
 
 export const LOCALE_CS = {
   ADT: 'dospělí',
@@ -332,7 +332,7 @@ export const LOCALE_CS = {
   wifi_enabled: 'WiFi povoleno',
   wifiEnabled: 'WiFi povoleno',
   wingInWindow: 'Křídlo z okenního výhledu',
-}
+};
 
 export const LOCALE_FR = {
   ADT: 'adultes',
@@ -378,7 +378,7 @@ export const LOCALE_FR = {
   wifi_enabled: 'WiFi activé',
   wifiEnabled: 'WiFi activé',
   wingInWindow: 'Vue de l’aile depuis la fenêtre',
-}
+};
 
 export const LOCALE_PT = {
   ADT: 'adultos',
@@ -424,7 +424,7 @@ export const LOCALE_PT = {
   wifi_enabled: 'WiFi habilitado',
   wifiEnabled: 'WiFi habilitado',
   wingInWindow: 'Vista da asa da janela',
-}
+};
 
 export const LOCALE_IT = {
   ADT: 'adulti',
@@ -470,7 +470,7 @@ export const LOCALE_IT = {
   wifi_enabled: 'WiFi abilitato',
   wifiEnabled: 'WiFi abilitato',
   wingInWindow: 'Ala vista dalla finestra',
-}
+};
 
 export const LOCALE_UK = {
   ADT: 'дорослі',
@@ -516,7 +516,7 @@ export const LOCALE_UK = {
   wifi_enabled: 'WiFi увімкнено',
   wifiEnabled: 'WiFi увімкнено',
   wingInWindow: 'Вигляд крила з вікна',
-}
+};
 
 export const LOCALE_JA = {
   ADT: '大人',
@@ -562,7 +562,7 @@ export const LOCALE_JA = {
   wifi_enabled: 'WiFi有効',
   wifiEnabled: 'WiFi有効',
   wingInWindow: '窓からの翼の眺め',
-}
+};
 
 export const LOCALE_KO = {
   ADT: '성인',
@@ -608,7 +608,7 @@ export const LOCALE_KO = {
   wifi_enabled: 'WiFi 사용 가능',
   wifiEnabled: 'WiFi 사용 가능',
   wingInWindow: '창에서 날개 뷰',
-}
+};
 
 export const LOCALE_TR = {
   ADT: 'yetişkinler',
@@ -654,4 +654,4 @@ export const LOCALE_TR = {
   wifi_enabled: 'WiFi etkin',
   wifiEnabled: 'WiFi etkin',
   wingInWindow: 'Pencereden kanat görünümü',
-}
+};

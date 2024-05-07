@@ -1,11 +1,11 @@
-import React, {useContext, useRef, useState} from 'react'
-import {View, FlatList} from 'react-native'
-import Tail from '../../assets/img/tail'
-import Nose from '../../assets/img/nose'
-import {JetsContext} from '../../common'
-import {JetsDeck} from '../Deck/JetsDeck'
-import {JetsDeckSeparator} from '../DeckSeparator/JetsDeckSeparator'
-import {JetsWing} from '../Wing/JetsWing'
+import React, {useContext, useRef, useState} from 'react';
+import {View, FlatList} from 'react-native';
+import Tail from '../../assets/img/tail';
+import Nose from '../../assets/img/nose';
+import {JetsContext} from '../../common';
+import {JetsDeck} from '../Deck/JetsDeck';
+import {JetsDeckSeparator} from '../DeckSeparator/JetsDeckSeparator';
+import {JetsWing} from '../Wing/JetsWing';
 
 export const JetsPlaneBody = ({
   activeDeck,
@@ -16,30 +16,30 @@ export const JetsPlaneBody = ({
   showOneDeck,
   isSeatMapInited,
 }: {
-  activeDeck: number
-  content: any
-  exits: ExitModel[][]
-  bulks: BulkModel[][]
-  showOneDeck: boolean | undefined
-  config: any
-  isSeatMapInited: boolean
+  activeDeck: number;
+  content: any;
+  exits: ExitModel[][];
+  bulks: BulkModel[][];
+  showOneDeck: boolean | undefined;
+  config: any;
+  isSeatMapInited: boolean;
 }) => {
-  const {params, colorTheme} = useContext(JetsContext)
+  const {params, colorTheme} = useContext(JetsContext);
 
-  const [scrollOffset, setScrollOffset] = useState(0)
+  const [scrollOffset, setScrollOffset] = useState(0);
 
-  const [flatListHeight, setFlatListHeight] = useState(0)
+  const [flatListHeight, setFlatListHeight] = useState(0);
 
-  const {lang, visibleFuselage} = config
+  const {lang, visibleFuselage} = config;
 
-  const flatListRef = useRef(null)
+  const flatListRef = useRef(null);
 
   const {deckHeightSpacing, fuselageStrokeWidth, fuselageStrokeColor, floorColor, wingsWidth, fuselageFillColor} =
-    colorTheme
+    colorTheme;
 
-  const wingsSpace = params?.visibleWings ? wingsWidth * 2 : 0
+  const wingsSpace = params?.visibleWings ? wingsWidth * 2 : 0;
 
-  const bodyWidth = (params?.innerWidth || 0) - wingsSpace
+  const bodyWidth = (params?.innerWidth || 0) - wingsSpace;
 
   const decksWrapperStyle = {
     borderLeftWidth: fuselageStrokeWidth,
@@ -47,25 +47,25 @@ export const JetsPlaneBody = ({
     borderRightWidth: fuselageStrokeWidth,
     borderRightColor: fuselageStrokeColor,
     width: bodyWidth,
-  }
+  };
 
   const deckFloorStyle = {
     backgroundColor: floorColor,
     paddingVertical: deckHeightSpacing,
     borderLeftColor: fuselageFillColor,
     borderRightColor: fuselageFillColor,
-  }
+  };
 
-  const keyExtractor = (item: any) => item.uniqId.toString()
+  const keyExtractor = (item: any) => item.uniqId.toString();
 
   const handleLayout = (event: any) => {
-    const {height, width} = event.nativeEvent.layout
+    const {height, width} = event.nativeEvent.layout;
 
-    setFlatListHeight(height)
-  }
+    setFlatListHeight(height);
+  };
 
   const renderItem = ({item, index}: {item: DeckModel; index: number}) => {
-    const deckToShow = config?.horizontal && !config?.rightToLeft ? content.length - 1 - index : index
+    const deckToShow = config?.horizontal && !config?.rightToLeft ? content.length - 1 - index : index;
 
     return !showOneDeck || index === deckToShow ? (
       <View
@@ -107,8 +107,8 @@ export const JetsPlaneBody = ({
         }
         style={[decksWrapperStyle, {alignSelf: 'center'}]}
       />
-    ) : null
-  }
+    ) : null;
+  };
 
   return (
     <View
@@ -175,5 +175,5 @@ export const JetsPlaneBody = ({
       }
       style={[{marginHorizontal: 'auto'}]}
     />
-  )
-}
+  );
+};

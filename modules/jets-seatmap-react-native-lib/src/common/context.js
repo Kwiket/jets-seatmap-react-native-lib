@@ -1,3 +1,3 @@
-import React from 'react'
+import React from 'react';
 
-export const JetsContext = React.createContext()
+export const JetsContext = React.createContext();

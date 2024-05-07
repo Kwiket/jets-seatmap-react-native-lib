@@ -1,11 +1,11 @@
 interface AvailabilityModel {
-  currency: string
-  label: string
-  price: number
-  onlyForPassengerType: string[]
+  currency: string;
+  label: string;
+  price: number;
+  onlyForPassengerType: string[];
   additionalProps: {
-    label: string
-    icon: any
-  }[]
-  color: string
+    label: string;
+    icon: any;
+  }[];
+  color: string;
 }

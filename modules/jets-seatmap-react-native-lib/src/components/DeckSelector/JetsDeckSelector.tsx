@@ -1,19 +1,19 @@
-import React, {useContext} from 'react'
-import {View, TouchableOpacity, StyleSheet} from 'react-native'
-import {SvgXml} from 'react-native-svg'
-import {JetsContext} from '../../common'
+import React, {useContext} from 'react';
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
+import {SvgXml} from 'react-native-svg';
+import {JetsContext} from '../../common';
 
 export const JetsDeckSelector = ({activeDeck, onPress}: {activeDeck: number; onPress: () => void}) => {
-  const {params, colorTheme, switchDeck} = useContext(JetsContext)
+  const {params, colorTheme, switchDeck} = useContext(JetsContext);
 
-  const {deckSelectorStrokeColor, deckSelectorFillColor, deckSelectorSize} = colorTheme
+  const {deckSelectorStrokeColor, deckSelectorFillColor, deckSelectorSize} = colorTheme;
 
   const style = {
     backgroundColor: deckSelectorFillColor,
     height: deckSelectorSize,
     width: deckSelectorSize,
     ...(params?.rightToLeft ? {right: 0} : {left: 0}),
-  }
+  };
 
   const buttonSVG = `
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 384.97 384.97" >
@@ -28,7 +28,7 @@ export const JetsDeckSelector = ({activeDeck, onPress}: {activeDeck: number; onP
     	</g>
     </g>
     </svg>
-    `
+    `;
 
   return (
     <TouchableOpacity
@@ -41,8 +41,8 @@ export const JetsDeckSelector = ({activeDeck, onPress}: {activeDeck: number; onP
       }
       style={[styles.deckSelector, style, {transform: activeDeck == 1 ? [{rotate: '180deg'}] : []}]}
     />
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   deckSelector: {
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(128, 128, 128, 0.5)',
     zIndex: 2500,
   },
-})
+});

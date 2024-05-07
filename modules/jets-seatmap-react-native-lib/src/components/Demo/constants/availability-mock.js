@@ -63,6 +63,5 @@ const AVAILABILITY_MOCK = [
     label: '70E',
     price: 1488,
   },
-  
-]
-export default AVAILABILITY_MOCK
+];
+export default AVAILABILITY_MOCK;

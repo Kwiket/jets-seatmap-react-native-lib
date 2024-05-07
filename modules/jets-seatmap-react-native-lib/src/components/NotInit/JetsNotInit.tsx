@@ -1,5 +1,5 @@
-import React from 'react'
-import {View, StyleSheet, ActivityIndicator, Dimensions} from 'react-native'
+import React from 'react';
+import {View, StyleSheet, ActivityIndicator, Dimensions} from 'react-native';
 
 export const JetsNotInit = () => {
   return (
@@ -13,8 +13,8 @@ export const JetsNotInit = () => {
       }
       style={styles.container}
     />
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     zIndex: 100000,
   },
-})
+});

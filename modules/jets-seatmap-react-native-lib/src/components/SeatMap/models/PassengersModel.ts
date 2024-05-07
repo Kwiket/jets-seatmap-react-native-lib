@@ -1,9 +1,9 @@
 interface PassengersModel {
-  id: string
+  id: string;
   seat: {
-    price: number
-    seatLabel: string
-  }
-  passengerLabel: string
-  passengerColor: string
+    price: number;
+    seatLabel: string;
+  };
+  passengerLabel: string;
+  passengerColor: string;
 }

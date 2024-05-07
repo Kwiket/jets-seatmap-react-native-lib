@@ -6,6 +6,7 @@ communication between the seatmap and a parent layer that embeds seatmap (furthe
 &nbsp;
 
 Prerequisites:
+
 - Homebrew
 - Node
 - OpenJDK
@@ -17,7 +18,6 @@ Prerequisites:
 - react-native-svg
 - react-native-base64
 
-
 If you're unable to run the project, please, make sure to [download and install](https://reactnative.dev/docs/environment-setup) the latest SDK for corresponding OS
 
 &nbsp;
@@ -27,40 +27,44 @@ If you're unable to run the project, please, make sure to [download and install]
 1. Install Xcode from AppStore run and accept licence.
 
 2. Install brew:
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-3. Install JDK 
-    1. brew install openjdk@{version}
-    2. echo 'export PATH="/opt/homebrew/opt/openjdk@{version}/bin:$PATH"' >> ~/.zshrc
+3. Install JDK
+
+   1. brew install openjdk@{version}
+   2. echo 'export PATH="/opt/homebrew/opt/openjdk@{version}/bin:$PATH"' >> ~/.zshrc
 
 4. Install React-Native
 
 5. Install Android SDK, maybe Android-Studio And set ANDROID-HOME
-    1. echo 'export ANDROID_HOME="{YOUR PATH TO ANDROID SDK FOLDER}"' >> ~/.zshrc
-    2. echo 'export PATH="$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH"' >> ~/.zshrc
+
+   1. echo 'export ANDROID_HOME="{YOUR PATH TO ANDROID SDK FOLDER}"' >> ~/.zshrc
+   2. echo 'export PATH="$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH"' >> ~/.zshrc
 
 6. Make sure after reboot you still able to see those variables.
 
-8. Install Yarn brew install yarn
+7. Install Yarn brew install yarn
 
-9. Brew install watchman
-    1. brew install watchman
-    2. Watchman may not work with Flipper for Apple silicon processors  (https://github.com/facebook/flipper/issues/5412)
-    3. for rn 0.74+ Flipper is deprecated
+8. Brew install watchman
 
-10. Clone lib repository 
+   1. brew install watchman
+   2. Watchman may not work with Flipper for Apple silicon processors (https://github.com/facebook/flipper/issues/5412)
+   3. for rn 0.74+ Flipper is deprecated
 
-11. yarn add @react-native-async-storage/async-storage
+9. Clone lib repository
 
-12. yarn add react-native-svg
+10. yarn add @react-native-async-storage/async-storage
 
-13. yarn add react-native-base64
+11. yarn add react-native-svg
 
-14. To apply changes clean cache:
-    1. cd android && ./gradlew clean 
+12. yarn add react-native-base64
+
+13. To apply changes clean cache:
+
+    1. cd android && ./gradlew clean
     2. cd iOS && pod install --repo-update
 
-15. Add api details to `config-mock.js` or to you own config:
+14. Add api details to `config-mock.js` or to you own config:
 
 ```
   apiUrl: JETS_BASE_API_URL,
@@ -75,7 +79,6 @@ Run App:
 By default you will see a loading progress bar - just input your flight parameters and seat map will be rendered
 
 Now you can customize the source code of the library, first of all apply you styles as StyleSheet or jsx/tsx styles.
-
 
 To connect the library to the project, you need to run:
 
@@ -101,7 +104,7 @@ Create your [config](#config) and embed seatmap into your component page via `<J
   availability={availability_data}
   passengers={passengers_data}
   config={config_data}
-  currentDeckIndex={deckIndex}            // could be used to specify rendered deck or to switch decks on the fly from 
+  currentDeckIndex={deckIndex} // could be used to specify rendered deck or to switch decks on the fly from
   onSeatMapInited={seatMapInitedHandler}
   onSeatSelected={seatSelectedHandler}
   onSeatUnselected={seatUnselectedHandler}
@@ -128,8 +131,7 @@ Create your [config](#config) and embed seatmap into your component page via `<J
     - [ onSeatSelected](#-onseatselected)
     - [ onSeatUnselected](#-onseatunselected)
     - [ seatOverride](#-seatOverride)
-    
-    
+
 The `flight` prop is requred.
 
 &nbsp;
@@ -194,18 +196,18 @@ interface IIncomingSeat {
   currency: string;
   label: string;
   price: number;
-  color?: string;                                 // color of the seat
+  color?: string; // color of the seat
   onlyForPassengerType?: TPassengerType[];
-  additionalProps?: TAdditionalProp[];            // additionalProps from individual seats would exted the list of seat's features
-                                                  // up to 12 features and props could be displayed in tooltip for a seat 
+  additionalProps?: TAdditionalProp[]; // additionalProps from individual seats would exted the list of seat's features
+  // up to 12 features and props could be displayed in tooltip for a seat
 }
 
 type TSeatAvailability = IIncomingSeat[];
 
 type TAdditionalProp = {
-   label: String; 
-   icon: String;            // suported icons are ["+", "-", "dot", "wifi", "movie", "power"], "dot' is default
-}
+  label: String;
+  icon: String; // suported icons are ["+", "-", "dot", "wifi", "movie", "power"], "dot' is default
+};
 ```
 
 Example of data seatmap receives:
@@ -214,25 +216,26 @@ Example of data seatmap receives:
 [
   {
     currency: 'USD',
-    label: '*',               // properties from wildcard would be used to replace unspecified properties for individual seats
+    label: '*', // properties from wildcard would be used to replace unspecified properties for individual seats
     price: 33,
     onlyForPassengerType: ['ADT', 'CHD', 'INF'],
-    additionalProps: [        // additionalProps from wildcard would be merged with specified additionalProps for individual seats (applied to all seats)
-      { label: 'Test prop for all', icon: 'dot' },
-      { label: 'Another test prop for all', icon: 'wifi' },
+    additionalProps: [
+      // additionalProps from wildcard would be merged with specified additionalProps for individual seats (applied to all seats)
+      {label: 'Test prop for all', icon: 'dot'},
+      {label: 'Another test prop for all', icon: 'wifi'},
     ],
-    color: 'lightgrey'        // all the seats that don't have individual colors set will be colored with wildcard color value
+    color: 'lightgrey', // all the seats that don't have individual colors set will be colored with wildcard color value
   },
   {
     currency: 'USD',
     label: '20E',
     price: 33,
     onlyForPassengerType: ['ADT', 'CHD', 'INF'],
-    additionalProps: [        
-      { label: 'Clear air', icon: null },
-      { label: 'USB plug', icon: 'power' },
+    additionalProps: [
+      {label: 'Clear air', icon: null},
+      {label: 'USB plug', icon: 'power'},
     ],
-    color: 'green'            // individual seat's color
+    color: 'green', // individual seat's color
   },
   {
     currency: 'USD',
@@ -375,11 +378,11 @@ type TLang = 'CN' | 'DE' | 'EN' | 'ES' | 'PL' | 'RU' | 'AR' | 'CS' | 'FR' | 'PT'
 Minimal config could look like this:
 
 ```javascript
-width: 400;   
-height: 600;                              
+width: 400;
+height: 600;
 lang: 'EN';
 units: 'metric';
-apiUrl: 'PROVIDED_API_URL',               
+apiUrl: 'PROVIDED_API_URL',
 apiAppId: 'PROVIDED_APP_ID',
 apiKey: 'PROVIDED_API_KEY',
 ```
@@ -390,8 +393,8 @@ Full config looks like this:
 
 {
   width: 400,                               // width of seatmap,
-  height: 600,                              // height of seatmap,                       
-  lang: 'EN',                                            
+  height: 600,                              // height of seatmap,
+  lang: 'EN',
   rightToLeft: false,                       // changes tooltip text alignment (and decks placement) for RTL languages support
   visibleFuselage: true,                    // should nose and tail graphics be rendered
   visibleWings: false,                      // should position of wings be shown (helps to see how far/close they are from/to certain seats)
@@ -402,15 +405,15 @@ Full config looks like this:
   builtInTooltip: true,                     // see `onTooltipRequested` section
   externalPassengerManagement: false,       // see `onTooltipRequested` section
 
-  apiUrl: 'PROVIDED_API_URL',               
+  apiUrl: 'PROVIDED_API_URL',
   apiAppId: 'PROVIDED_APP_ID',
   apiKey: 'PROVIDED_API_KEY',
 
-  colorTheme: {                            
+  colorTheme: {
     deckLabelTitleColor: 'white',
     deckHeightSpacing: 100,                 // additional space on both ends of a deck (for aesthetics only)
 
-    wingsWidth: 50,                          
+    wingsWidth: 50,
     deckSeparation: 0,
 
     floorColor: 'rgb(30,60,90)',            // color of decks floor
@@ -420,7 +423,7 @@ Full config looks like this:
     seatArmrestColor: '#cccccc',
     notAvailableSeatsColor: 'lightgray',    // fill color for seats that are not available, applied when seat `availability` has been set
 
-    bulkBaseColor : 'dimgrey',              // colors for bulks 
+    bulkBaseColor : 'dimgrey',              // colors for bulks
     bulkCutColor : 'lightgrey',
     bulkIconColor: 'darkslategray',
 
@@ -470,12 +473,12 @@ This event fires up when seatmap (DOM tree, content) is initialized. It provides
 
 ```typescript
 interface iInitialLayoutData {
-  currentDeckIndex: number;     // shows current deck if "builtInDeckSelector" flag is set in config, otherwise 0
-  decksCount: number;           // number of decks available for provided flight
-  heightInPx: number;           // sum of lengths of all elements of the plane (decks, fuselage, separators) using internal units. Multiply by "scaleFactor" to get real pixel value on screen
-  scaleFactor: number;          // scale applied to fit into provided boundaries
-  widthInPx: number;            // outer width of the plane. CAUTION: if "horizontal" flag is set - height and width are swapped around to reflect that
-  error: string;                // error message if not possible to build a seat map
+  currentDeckIndex: number; // shows current deck if "builtInDeckSelector" flag is set in config, otherwise 0
+  decksCount: number; // number of decks available for provided flight
+  heightInPx: number; // sum of lengths of all elements of the plane (decks, fuselage, separators) using internal units. Multiply by "scaleFactor" to get real pixel value on screen
+  scaleFactor: number; // scale applied to fit into provided boundaries
+  widthInPx: number; // outer width of the plane. CAUTION: if "horizontal" flag is set - height and width are swapped around to reflect that
+  error: string; // error message if not possible to build a seat map
 }
 ```
 
@@ -487,11 +490,11 @@ Event is fired after `onSeatMapInited` and on every deck switch if `builtInDeckS
 
 ```typescript
 interface iLayoutData {
-  currentDeckIndex: number;     
-  decksCount: number;           
-  heightInPx: number;           // when fired after deck switch - reflects the size of plane with current deck visible, not total length 
-  scaleFactor: number;          
-  widthInPx: number;            
+  currentDeckIndex: number;
+  decksCount: number;
+  heightInPx: number; // when fired after deck switch - reflects the size of plane with current deck visible, not total length
+  scaleFactor: number;
+  widthInPx: number;
 }
 ```
 
@@ -503,43 +506,42 @@ If `builtInTooltip` flag is set to `false` - native tooltip will not show up and
 
 ```typescript
 interface iTooltipData {
-  element: JSX.Element;       // JSX element of clicked seat, may be used for tooltip positioning
-  event: DOMEvent;            // DOM event for more precise coordinates processing
-  seat: ISeatData             // detailed seat info, see below
+  element: JSX.Element; // JSX element of clicked seat, may be used for tooltip positioning
+  event: DOMEvent; // DOM event for more precise coordinates processing
+  seat: ISeatData; // detailed seat info, see below
 }
 
 interface ISeatData {
-  additionalProps: ISeatFeature[]   // additional props for seat converted to ISeatFeature, see Availability section 
+  additionalProps: ISeatFeature[]; // additional props for seat converted to ISeatFeature, see Availability section
   uniqId: string;
-  color: string;                    // how seat is shown on seatmap
-  features: ISeatFeature[];         // seat features like wifi, leg room, etc
-  letter: string;                   // letter in the row
-  measurements: IMeasurement[];     // shown in tooltip
-  status: string;                   // is seat available or not, see Availability section
-  type: string;                     // in most cases just "seat"
-  label: string;                    // includes row number and letter
-  classType: string;                // Economy, Business, etc
-  classCode: string;                // short for classType
-  rowName: string;                  // if rows inside current cabin class have special marks - it would be here ("World Traveller" as an example)
-  seatType: string;                 // format is "classCode-number", number indicates specific code of a seat in class
+  color: string; // how seat is shown on seatmap
+  features: ISeatFeature[]; // seat features like wifi, leg room, etc
+  letter: string; // letter in the row
+  measurements: IMeasurement[]; // shown in tooltip
+  status: string; // is seat available or not, see Availability section
+  type: string; // in most cases just "seat"
+  label: string; // includes row number and letter
+  classType: string; // Economy, Business, etc
+  classCode: string; // short for classType
+  rowName: string; // if rows inside current cabin class have special marks - it would be here ("World Traveller" as an example)
+  seatType: string; // format is "classCode-number", number indicates specific code of a seat in class
 }
 
 interface ISeatFeature {
-  icon: string;           // SVG icon for the feature
-  title: string;          // generic name for the feature
+  icon: string; // SVG icon for the feature
+  title: string; // generic name for the feature
   uniqId: string;
-  value: string;          // text shown in tooltip
-  key: string;            // used to get translated "value" (i18n)
+  value: string; // text shown in tooltip
+  key: string; // used to get translated "value" (i18n)
 }
 
 // similar to ISeatFeature but uses different icons and displayed separately in the tooltip
 interface IMeasurement {
-  icon: string;           // SVG icon for the measurement
-  title: string;          // name like "Pitch", "Recline"
+  icon: string; // SVG icon for the measurement
+  title: string; // name like "Pitch", "Recline"
   uniqId: string;
-  value: string;          // value shown in tooltip
+  value: string; // value shown in tooltip
 }
-
 ```
 
 &nbsp;
@@ -590,4 +592,4 @@ interface ISeat {
 
 ### <a name="seatOverride"></a> seatOverride
 
-Seat map prop thats can be provided if you want to use custom Jeats Seat, the value should have type JSX.Element 
+Seat map prop thats can be provided if you want to use custom Jeats Seat, the value should have type JSX.Element

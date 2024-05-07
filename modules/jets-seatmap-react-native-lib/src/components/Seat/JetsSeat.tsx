@@ -1,19 +1,19 @@
-import {useContext} from 'react'
-import {SvgXml} from 'react-native-svg'
-import {StyleSheet, Text, View} from 'react-native'
-import {JetsContext} from '../../common'
-import {getContainerStyleByNumber, getStyleByNumber} from './models/SeatTypes'
-import {seatTemplateService} from './library/service'
+import {useContext} from 'react';
+import {SvgXml} from 'react-native-svg';
+import {StyleSheet, Text, View} from 'react-native';
+import {JetsContext} from '../../common';
+import {getContainerStyleByNumber, getStyleByNumber} from './models/SeatTypes';
+import {seatTemplateService} from './library/service';
 
 export const JetsSeat = ({seat}: {seat: SeatModel}) => {
-  const {colorTheme, seatOverride} = useContext(JetsContext)
+  const {colorTheme, seatOverride} = useContext(JetsContext);
 
   const svgStyle = {
     strokeColor: colorTheme.seatStrokeColor,
     armrestColor: colorTheme.seatArmrestColor,
     fillColor: seat.color,
     strokeWidth: colorTheme.seatStrokeWidth,
-  }
+  };
 
   return (
     <>
@@ -69,8 +69,8 @@ export const JetsSeat = ({seat}: {seat: SeatModel}) => {
         </>
       )}
     </>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   marker: {
@@ -80,4 +80,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-})
+});

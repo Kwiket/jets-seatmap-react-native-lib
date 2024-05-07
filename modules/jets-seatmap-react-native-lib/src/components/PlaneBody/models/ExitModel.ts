@@ -1,5 +1,5 @@
 interface ExitModel {
-  topOffset: number
-  type: string
-  uniqId: string
+  topOffset: number;
+  type: string;
+  uniqId: string;
 }

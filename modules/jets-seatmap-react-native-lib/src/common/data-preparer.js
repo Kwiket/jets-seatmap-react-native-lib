@@ -1,4 +1,4 @@
-import {JetsDataHelper} from './data-helper'
+import {JetsDataHelper} from './data-helper';
 import {
   CLASS_CODE_MAP,
   LOCALES_MAP,
@@ -8,11 +8,11 @@ import {
   DEFAULT_DECK_TITLE_HEIGHT,
   DEFAULT_INDEX_ROW_HEIGHT,
   SEAT_SIZE_BY_TYPE,
-} from './constants'
-import {Utils} from './utils'
+} from './constants';
+import {Utils} from './utils';
 
-const DEFAULT_INDEX_ROW_SEAT_TOP_OFFSET = 50
-const DEFAULT_INDEX_ROW_SEAT_HEIGHT = 50
+const DEFAULT_INDEX_ROW_SEAT_TOP_OFFSET = 50;
+const DEFAULT_INDEX_ROW_SEAT_HEIGHT = 50;
 
 const SEAT_FEATURES_ICONS = {
   '+': '<svg width="20" height="20" viewBox="-1 -1 22 22" xmlns="http://www.w3.org/2000/svg"><path d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM7.29 14.29L3.7 10.7C3.31 10.31 3.31 9.68 3.7 9.29C4.09 8.9 4.72 8.9 5.11 9.29L8 12.17L14.88 5.29C15.27 4.9 15.9 4.9 16.29 5.29C16.68 5.68 16.68 6.31 16.29 6.7L8.7 14.29C8.32 14.68 7.68 14.68 7.29 14.29Z" fill="#11d900"></path></svg>',
@@ -27,7 +27,7 @@ const SEAT_FEATURES_ICONS = {
   audioVideo:
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 21"><path d="M6.51,8.59h3.57L8.44,11.13H4.88ZM18.45,2.31,17.43,0,15,1.08l2.53,1.65Zm-3.16,1.4L12.77,2.07,9.51,3.52,12,5.17Zm-4.42,7.41h3.57l1.64-2.53H12.51Zm-1.05-5L7.29,4.51,4,6,6.56,7.6ZM18.5,8.59l-1.64,2.53h2.67V8.59Zm-16,11.24A1.16,1.16,0,0,0,3.63,21H18.37a1.16,1.16,0,0,0,1.16-1.16V13.2H2.47Zm.17-13V11.2L4.51,8.41Z" fill="#4f6f8f"></path></svg>',
   dot: '<svg width="20" height="20" viewBox="-1 -1 22 22" xmlns="http://www.w3.org/2000/svg"><path d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0Z" fill="#4f6f8f"></path></svg>',
-}
+};
 
 const SEAT_MEASUREMENTS_ICONS = {
   recline:
@@ -36,149 +36,149 @@ const SEAT_MEASUREMENTS_ICONS = {
     '<svg width="35" height="50" viewBox="0 0 35 50" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M31.1151 33.3111C32.0089 33.4715 32.8177 33.9081 33.4335 34.5238C34.2198 35.31 34.7141 36.4106 34.7141 37.6011C34.7141 38.7916 34.2198 39.8922 33.4335 40.6784C32.6472 41.4645 31.5464 41.9587 30.3557 41.9587H23.2082L23.1928 47.4843H27.8396C28.5361 47.4843 29.0977 48.0458 29.0977 48.7421C29.0977 49.4385 28.5361 50 27.8396 50H7.86769C7.17126 50 6.60962 49.4385 6.60962 48.7421C6.60962 48.0458 7.17126 47.4843 7.86769 47.4843H12.4992L12.5146 41.9587H5.35149C4.16082 41.9587 3.06 41.4645 2.2737 40.6784C1.48741 39.8922 0.993164 38.7916 0.993164 37.6011C0.993164 36.4106 1.48741 35.31 2.2737 34.5238C2.88437 33.9133 3.68474 33.4788 4.56958 33.3152L4.82779 23.4241C4.72932 23.4271 4.63334 23.4314 4.51247 23.4369C4.3114 23.446 4.04146 23.4581 3.57663 23.4727C2.90266 23.4951 2.31855 22.956 2.29609 22.2597C2.27362 21.5859 2.8128 21.0019 3.50923 20.9794C3.98488 20.965 4.26402 20.9529 4.47273 20.9438C4.63574 20.9368 4.75578 20.9316 4.89293 20.9286L5.32902 4.22282C5.35149 3.05481 5.84573 1.9991 6.60956 1.2354C7.37339 0.471698 8.42928 0 9.59749 0H26.0873C27.2555 0 28.3114 0.471698 29.0752 1.2354C29.839 1.9991 30.3108 3.05481 30.3557 4.22282L30.7921 20.9384C30.8322 20.94 30.8743 20.9419 30.9198 20.9438C31.1286 20.9529 31.4077 20.965 31.8833 20.9794C32.5798 21.0019 33.1189 21.5859 33.0965 22.2597C33.074 22.956 32.4899 23.4951 31.8159 23.4727C31.3511 23.4581 31.0812 23.446 30.8801 23.4369C30.8724 23.4365 30.8648 23.4362 30.8573 23.4359L31.1151 33.3111ZM20.6991 47.4843L20.7145 41.9587H15.0083L14.9929 47.4843H20.6991ZM27.8171 4.26775L28.5809 33.221H7.05887L7.82271 4.26775C7.82271 3.77359 8.0249 3.32435 8.36188 2.98742C8.6764 2.67296 9.10325 2.4708 9.57502 2.4708H26.0648C26.5366 2.4708 26.9634 2.67296 27.2779 2.98742C27.5925 3.32435 27.7946 3.77359 27.8171 4.26775ZM30.3557 35.7368H5.35149C4.83479 35.7368 4.38547 35.9389 4.04849 36.2759C3.7115 36.6128 3.50931 37.0845 3.50931 37.5787C3.50931 38.0953 3.7115 38.5445 4.04849 38.8814C4.38547 39.2184 4.85725 39.4205 5.35149 39.4205H30.3557C30.8724 39.4205 31.3218 39.2184 31.6587 38.8814C31.9957 38.5445 32.1979 38.0728 32.1979 37.5787C32.1979 37.062 31.9957 36.6128 31.6587 36.2759C31.3218 35.9389 30.85 35.7368 30.3557 35.7368Z"></path></svg>',
   pitch:
     '<svg width="74" height="51" viewBox="0 0 74 51" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.98892 0.152473C1.60004 0.510215 0.442636 1.49927 0.253243 3.2038V3.30902C-0.503624 20.2124 0.272842 21.9085 4.82805 31.8585L4.84076 31.8863L4.99918 32.2325L4.99924 32.2327L4.99927 32.2327C5.87007 34.1358 6.88816 36.3607 8.01834 38.978C8.334 39.7355 8.64965 40.2616 9.36514 40.6615C9.9754 40.9982 10.754 41.1455 12.0166 41.1665C13.2619 41.187 14.4597 41.2 15.6234 41.2077L17.9559 48.0057H11.2591C10.5857 48.0057 10.0175 48.5528 10.0175 49.2473C10.0175 49.9207 10.5646 50.4888 11.2591 50.4888H19.5541C19.6426 50.4987 19.7329 50.499 19.8235 50.4888H31.2295C31.9029 50.4888 32.471 49.9417 32.471 49.2473C32.471 48.5739 31.9239 48.0057 31.2295 48.0057H20.5872L18.2578 41.2168C20.2165 41.2179 22.1025 41.2077 23.9874 41.1974H23.9883H23.9892L23.992 41.1974L23.9947 41.1974C24.6238 41.194 25.2528 41.1906 25.8844 41.1876C26.7241 41.1876 27.5679 41.1835 28.5151 41.179H28.5156H28.5162C29.7287 41.1731 31.1108 41.1665 32.8709 41.1665C34.1335 41.1876 34.9752 40.3037 35.3961 39.1253C35.5434 38.7044 35.6276 38.2415 35.6486 37.7785C35.6697 37.3155 35.6276 36.8315 35.5224 36.3896C35.2067 35.148 34.4071 34.1379 32.9761 34.0117C28.6832 33.6539 25.8213 33.4014 22.9804 33.1489C21.6481 33.0323 20.3191 32.9124 19.0403 32.7971L19.0374 32.7968L19.0368 32.7968L19.0366 32.7968C17.085 32.6207 15.2506 32.4553 13.7001 32.3282C8.18669 20.3544 7.00825 17.5976 7.9973 3.43528C8.10252 1.96223 7.23973 0.910044 6.04024 0.383953C5.57728 0.173516 5.07224 0.0472546 4.54614 0.00516733C4.02005 -0.0158763 3.49396 0.026211 2.98892 0.152473ZM16.7077 38.6924C19.9006 38.7099 22.8527 38.691 25.8633 38.6623C28.4728 38.6413 31.1032 38.6202 32.8498 38.6202H32.8709C32.8709 38.6202 32.934 38.4729 33.0182 38.2625C33.0813 38.0731 33.1234 37.8416 33.1444 37.6101C33.1655 37.3787 33.1444 37.1472 33.0813 36.9367C33.0182 36.6632 32.913 36.4738 32.7446 36.4527C32.2021 36.4054 31.6163 36.3545 30.9963 36.3006L30.9954 36.3005C28.5853 36.0911 25.6566 35.8367 22.7278 35.5689L22.7265 35.5688L22.7256 35.5687L22.7244 35.5686C19.8846 35.3162 17.0443 35.0637 12.7321 34.7061L12.0166 34.643L11.722 33.9906L11.6378 33.8223C5.70355 20.9646 4.44093 18.2079 5.49311 3.24589C5.51415 2.97232 5.30371 2.76188 5.0091 2.63562C4.81971 2.55145 4.58823 2.48832 4.33571 2.46727C4.08319 2.44623 3.83066 2.46727 3.59918 2.5304L3.62022 2.55145C3.17831 2.67771 2.79952 2.97232 2.73639 3.45632C2.02158 19.7078 2.75606 21.3194 7.08023 30.8073L7.09242 30.8341C7.9973 32.7911 9.04948 35.0849 10.2911 37.9679C10.3963 38.2415 10.5015 38.4098 10.5857 38.4519C10.7961 38.5781 11.217 38.6202 12.0377 38.6413C13.5277 38.6658 14.948 38.6814 16.322 38.6901C16.4521 38.67 16.5821 38.6715 16.7077 38.6924ZM40.9889 0.152473C39.6 0.510215 38.4426 1.49927 38.2532 3.2038V3.30902C37.4964 20.2124 38.2728 21.9085 42.828 31.8585L42.8408 31.8863L42.9991 32.2323C43.8699 34.1355 44.8881 36.3605 46.0183 38.978C46.334 39.7355 46.6497 40.2616 47.3651 40.6615C47.9754 40.9982 48.754 41.1455 50.0166 41.1665C51.2619 41.187 52.4597 41.2 53.6234 41.2077L55.9559 48.0057H49.2591C48.5857 48.0057 48.0175 48.5528 48.0175 49.2473C48.0175 49.9207 48.5646 50.4888 49.2591 50.4888H57.5541C57.6426 50.4987 57.7329 50.499 57.8235 50.4888H69.2295C69.9029 50.4888 70.471 49.9417 70.471 49.2473C70.471 48.5739 69.9239 48.0057 69.2295 48.0057H58.5872L56.2578 41.2168C58.2165 41.2179 60.1025 41.2077 61.9874 41.1974H61.9883H61.9892C62.6201 41.194 63.251 41.1906 63.8844 41.1876C64.7241 41.1876 65.5679 41.1835 66.5151 41.179H66.5156H66.5162C67.7288 41.1731 69.1108 41.1665 70.8709 41.1665C72.1335 41.1876 72.9752 40.3037 73.3961 39.1253C73.5434 38.7044 73.6276 38.2415 73.6486 37.7785C73.6697 37.3155 73.6276 36.8315 73.5224 36.3896C73.2067 35.148 72.4071 34.1379 70.9761 34.0117C66.6832 33.6539 63.8213 33.4014 60.9804 33.1489C59.6486 33.0324 58.3201 32.9125 57.0417 32.7972L57.0376 32.7969L57.0368 32.7968L57.0366 32.7968L57.0361 32.7967C55.0847 32.6207 53.2505 32.4553 51.7001 32.3282C46.1867 20.3544 45.0083 17.5976 45.9973 3.43528C46.1025 1.96223 45.2397 0.910044 44.0402 0.383953C43.5773 0.173516 43.0722 0.0472546 42.5461 0.00516733C42.0201 -0.0158763 41.494 0.026211 40.9889 0.152473ZM54.7077 38.6924C57.9006 38.7099 60.8527 38.691 63.8633 38.6623C66.4728 38.6413 69.1032 38.6202 70.8498 38.6202H70.8709C70.8709 38.6202 70.934 38.4729 71.0182 38.2625C71.0813 38.0731 71.1234 37.8416 71.1444 37.6101C71.1655 37.3787 71.1444 37.1472 71.0813 36.9367C71.0182 36.6632 70.913 36.4738 70.7446 36.4527C70.2021 36.4054 69.6163 36.3545 68.9963 36.3006L68.9954 36.3005C66.5853 36.0911 63.6566 35.8367 60.7278 35.5689L60.7265 35.5688C57.886 35.3163 55.0454 35.0638 50.7321 34.7061L50.0166 34.643L49.722 33.9906L49.6378 33.8223C43.7035 20.9646 42.4409 18.2079 43.4931 3.24589C43.5142 2.97232 43.3037 2.76188 43.0091 2.63562C42.8197 2.55145 42.5882 2.48832 42.3357 2.46727C42.0832 2.44623 41.8307 2.46727 41.5992 2.5304L41.6202 2.55145C41.1783 2.67771 40.7995 2.97232 40.7364 3.45632C40.0216 19.7078 40.7561 21.3194 45.0802 30.8073L45.0924 30.8341C45.9973 32.7911 47.0495 35.0849 48.2911 37.9679C48.3963 38.2415 48.5015 38.4098 48.5857 38.4519C48.7961 38.5781 49.217 38.6202 50.0377 38.6413C51.5277 38.6658 52.948 38.6814 54.322 38.6901C54.4521 38.67 54.5821 38.6715 54.7077 38.6924Z"></path></svg>',
-}
+};
 
 export class JetsContentPreparer {
-  _dataHelper = null
-  _deckTitleHeight = 0
+  _dataHelper = null;
+  _deckTitleHeight = 0;
 
   constructor() {
-    this._dataHelper = new JetsDataHelper()
+    this._dataHelper = new JetsDataHelper();
   }
 
   prepareData = (apiData, config) => {
-    if (!apiData) return []
+    if (!apiData) return [];
 
-    const {seatDetails} = apiData
+    const {seatDetails} = apiData;
 
-    const decks = seatDetails?.decks
+    const decks = seatDetails?.decks;
 
-    const isDeckExist = decks && decks.length
-    this._deckTitleHeight = decks && decks.length > 1 ? DEFAULT_DECK_TITLE_HEIGHT : 0
+    const isDeckExist = decks && decks.length;
+    this._deckTitleHeight = decks && decks.length > 1 ? DEFAULT_DECK_TITLE_HEIGHT : 0;
 
-    const preparedBulks = isDeckExist ? this._prepareBulks(decks) : []
-    const preparedExits = isDeckExist ? this._prepareExits(decks) : []
+    const preparedBulks = isDeckExist ? this._prepareBulks(decks) : [];
+    const preparedExits = isDeckExist ? this._prepareExits(decks) : [];
 
     const preparedDecks = isDeckExist
       ? decks.map((deck, index) => {
-          const bulks = preparedBulks[index]
-          const exits = preparedExits[index]
+          const bulks = preparedBulks[index];
+          const exits = preparedExits[index];
 
-          return {...this._prepareDeck(deck, bulks, exits, apiData, config), number: index + 1}
+          return {...this._prepareDeck(deck, bulks, exits, apiData, config), number: index + 1};
         })
-      : []
+      : [];
 
-    const isWingsExist = Math.max(...preparedDecks.map(deck => deck.wingsInfo.length)) > 0
+    const isWingsExist = Math.max(...preparedDecks.map(deck => deck.wingsInfo.length)) > 0;
 
-    const finalDecks = preparedDecks.map(deck => this._updateDeckWithWings(deck, isWingsExist, config))
+    const finalDecks = preparedDecks.map(deck => this._updateDeckWithWings(deck, isWingsExist, config));
 
-    const params = this._dataHelper.getSeatMapParams(finalDecks, config)
+    const params = this._dataHelper.getSeatMapParams(finalDecks, config);
 
     return {
       content: finalDecks,
       params,
       exits: preparedExits,
       bulks: preparedBulks,
-    }
-  }
+    };
+  };
 
   _mergeCabinFeatures(cabin, entertainment, power, wifi) {
-    const merged = {...cabin}
+    const merged = {...cabin};
 
     if (entertainment?.exists && entertainment?.summary) {
-      merged['audioVideo'] = entertainment.summary
+      merged['audioVideo'] = entertainment.summary;
     }
 
     if (power?.exists && power?.summary) {
-      merged['power'] = power.summary
+      merged['power'] = power.summary;
     }
 
     if (wifi?.exists && wifi?.summary) {
-      merged['wifi'] = wifi.summary
+      merged['wifi'] = wifi.summary;
     }
 
-    return merged
+    return merged;
   }
 
   _prepareExits(decks) {
-    return this._updateAllDeckItemsTopOffset(decks, 'exits')
+    return this._updateAllDeckItemsTopOffset(decks, 'exits');
   }
 
   _prepareBulks(decks) {
-    return this._updateAllDeckItemsTopOffset(decks, 'bulks')
+    return this._updateAllDeckItemsTopOffset(decks, 'bulks');
   }
 
   _getFirstElementDeckOffset(deck) {
     const bulksMinOffset = deck.bulks.reduce((minimum, item) => {
-      return item.topOffset < minimum ? item.topOffset : minimum
-    }, 0)
+      return item.topOffset < minimum ? item.topOffset : minimum;
+    }, 0);
     const exitsMinOffset = deck.exits.reduce((minimum, item) => {
-      return item.topOffset < minimum ? item.topOffset : minimum
-    }, 0)
+      return item.topOffset < minimum ? item.topOffset : minimum;
+    }, 0);
 
     const firstRow = deck.rows
       .sort((a, b) => {
-        a.topOffset - b.topOffset
+        a.topOffset - b.topOffset;
       })
-      .at(0)
+      .at(0);
 
     const seatsMinOffset = firstRow.seats.reduce((minimum, item) => {
-      return item.topOffset < minimum ? item.topOffset : minimum
-    }, 0)
+      return item.topOffset < minimum ? item.topOffset : minimum;
+    }, 0);
 
-    const firstElementOffset = Math.min(bulksMinOffset, exitsMinOffset, seatsMinOffset)
-    const offset = firstElementOffset < 0 ? -firstElementOffset : firstElementOffset
-    return offset + this._deckTitleHeight + DEFAULT_INDEX_ROW_HEIGHT
+    const firstElementOffset = Math.min(bulksMinOffset, exitsMinOffset, seatsMinOffset);
+    const offset = firstElementOffset < 0 ? -firstElementOffset : firstElementOffset;
+    return offset + this._deckTitleHeight + DEFAULT_INDEX_ROW_HEIGHT;
   }
 
   _updateAllDeckItemsTopOffset(decks, itemsName) {
     return decks.map(deck => {
-      const firstElementOffset = this._getFirstElementDeckOffset(deck)
-      return this._updateDeckItemsTopOffset(deck, itemsName, firstElementOffset)
-    })
+      const firstElementOffset = this._getFirstElementDeckOffset(deck);
+      return this._updateDeckItemsTopOffset(deck, itemsName, firstElementOffset);
+    });
   }
 
   _updateDeckItemsTopOffset(deck, itemsName, offset = 0) {
     return deck[itemsName].map(deckItem => {
-      const updatedItem = {...deckItem, uniqId: Utils.generateId()}
-      const updatedTopOffset = updatedItem.topOffset + offset
+      const updatedItem = {...deckItem, uniqId: Utils.generateId()};
+      const updatedTopOffset = updatedItem.topOffset + offset;
 
-      updatedItem.topOffset = updatedTopOffset
+      updatedItem.topOffset = updatedTopOffset;
 
-      return updatedItem
-    })
+      return updatedItem;
+    });
   }
 
   _prepareDeck(deck, preparedBulks, preparedExits, apiData, config) {
-    const rowGroups = this._groupRowsByCabinClass(deck.rows)
+    const rowGroups = this._groupRowsByCabinClass(deck.rows);
 
-    const cabinClassWidths = []
+    const cabinClassWidths = [];
     for (const rowGroup of rowGroups) {
-      const biggestDeckRow = this._dataHelper.findBiggestDeckRow(rowGroup.rows)
-      const preparedBiggestDeckRow = this._prepareRow(biggestDeckRow, {}, config.lang)
-      cabinClassWidths.push(preparedBiggestDeckRow.width)
+      const biggestDeckRow = this._dataHelper.findBiggestDeckRow(rowGroup.rows);
+      const preparedBiggestDeckRow = this._prepareRow(biggestDeckRow, {}, config.lang);
+      cabinClassWidths.push(preparedBiggestDeckRow.width);
       // rowGroup.width = preparedBiggestDeckRow.width;
     }
 
     // console.log('cabinClassWidths', cabinClassWidths);
-    const sum = cabinClassWidths.reduce((acc, d) => acc + d, 0)
-    const targetDeckWidth = sum / cabinClassWidths.length // Math.avg(...cabinClassWidths);
+    const sum = cabinClassWidths.reduce((acc, d) => acc + d, 0);
+    const targetDeckWidth = sum / cabinClassWidths.length; // Math.avg(...cabinClassWidths);
 
     for (const rowGroup of rowGroups) {
-      const {cabin, entertainment, power, wifi} = apiData[rowGroup.classCode] || {}
-      const cabinFeatures = this._mergeCabinFeatures(cabin, entertainment, power, wifi)
-      const firstElementOffset = this._getFirstElementDeckOffset(deck)
-      const rows = this._prepareRows(rowGroup.rows, cabinFeatures, config.lang, firstElementOffset, targetDeckWidth)
+      const {cabin, entertainment, power, wifi} = apiData[rowGroup.classCode] || {};
+      const cabinFeatures = this._mergeCabinFeatures(cabin, entertainment, power, wifi);
+      const firstElementOffset = this._getFirstElementDeckOffset(deck);
+      const rows = this._prepareRows(rowGroup.rows, cabinFeatures, config.lang, firstElementOffset, targetDeckWidth);
 
-      rowGroup.rows = rows
+      rowGroup.rows = rows;
     }
 
-    const rows = rowGroups.flatMap(g => g.rows)
+    const rows = rowGroups.flatMap(g => g.rows);
 
-    const innerDeckWidth = this._dataHelper.getDeckInnerWidth(targetDeckWidth, config)
-    const deckHeight = this._dataHelper.calculateDeckHeight(rows, preparedBulks, preparedExits)
+    const innerDeckWidth = this._dataHelper.getDeckInnerWidth(targetDeckWidth, config);
+    const deckHeight = this._dataHelper.calculateDeckHeight(rows, preparedBulks, preparedExits);
 
-    const preparedWingsInfo = this._prepareWingsForDeck(deck.wingsInfo, rows[0].topOffset, deckHeight)
+    const preparedWingsInfo = this._prepareWingsForDeck(deck.wingsInfo, rows[0].topOffset, deckHeight);
 
     return {
       uniqId: Utils.generateId(),
@@ -187,31 +187,31 @@ export class JetsContentPreparer {
       level: deck.level,
       rows,
       wingsInfo: preparedWingsInfo,
-    }
+    };
   }
 
   _groupRowsByCabinClass(rows) {
-    const groups = []
-    let currentClassCode = null
-    let currentGroup = null
+    const groups = [];
+    let currentClassCode = null;
+    let currentGroup = null;
 
     for (const row of rows) {
       if (row.classCode !== currentClassCode) {
-        currentClassCode = row.classCode
-        currentGroup = {rows: [], topOffset: row.topOffset, classCode: currentClassCode, width: 0}
-        groups.push(currentGroup)
+        currentClassCode = row.classCode;
+        currentGroup = {rows: [], topOffset: row.topOffset, classCode: currentClassCode, width: 0};
+        groups.push(currentGroup);
       }
-      currentGroup.rows.push(row)
+      currentGroup.rows.push(row);
     }
 
-    return groups
+    return groups;
   }
 
   _updateDeckWithWings(deck, isWingsExist, config) {
     return {
       ...deck,
       width: this._dataHelper.getDeckInnerWidthWithWings(deck, isWingsExist, config),
-    }
+    };
   }
 
   _prepareWingsForDeck(wingsInfo, offset, deckHeight) {
@@ -219,46 +219,46 @@ export class JetsContentPreparer {
       start: 0,
       finish: 0,
       length: 0,
-    }
+    };
 
     if (!wingsInfo) {
-      return intersection
+      return intersection;
     }
 
-    const deckOffset = offset
+    const deckOffset = offset;
 
-    const {topOffset, height} = wingsInfo
+    const {topOffset, height} = wingsInfo;
 
-    const wingA = deckOffset + topOffset
-    const wingB = wingA + height
+    const wingA = deckOffset + topOffset;
+    const wingB = wingA + height;
 
-    const deckA = 0
-    const deckB = deckHeight
+    const deckA = 0;
+    const deckB = deckHeight;
 
     // const min1 = Math.min(wingA, wingB);
     // const max1 = Math.max(wingA, wingB);
     // const min2 = Math.min(deckA, deckB);
     // const max2 = Math.min(deckA, deckB);
 
-    intersection.start = Math.max(deckA, wingA)
-    intersection.finish = Math.min(deckB, wingB)
-    intersection.length = Math.max(intersection.finish - intersection.start, 0)
+    intersection.start = Math.max(deckA, wingA);
+    intersection.finish = Math.min(deckB, wingB);
+    intersection.length = Math.max(intersection.finish - intersection.start, 0);
 
-    return intersection
+    return intersection;
   }
 
   _prepareRows = (rows, cabinFeatures, lang, offset, maxRowWidth = 0) => {
-    if (!rows?.length) return []
-    const prepared = rows.map(row => this._prepareRow(row, cabinFeatures, lang, offset, maxRowWidth))
+    if (!rows?.length) return [];
+    const prepared = rows.map(row => this._prepareRow(row, cabinFeatures, lang, offset, maxRowWidth));
 
-    return prepared
-  }
+    return prepared;
+  };
 
   _prepareRow = (row, cabinFeatures, lang, offset, maxRowWidth = 0) => {
-    const {number, topOffset, seatScheme, classCode, seatType} = row
-    const _topOffset = topOffset + offset
-    const preparedSeats = this._prepareSeats(row, cabinFeatures, lang, maxRowWidth)
-    const rowWidth = preparedSeats.map(seat => seat.size.width).reduce((a, b) => a + b, 0)
+    const {number, topOffset, seatScheme, classCode, seatType} = row;
+    const _topOffset = topOffset + offset;
+    const preparedSeats = this._prepareSeats(row, cabinFeatures, lang, maxRowWidth);
+    const rowWidth = preparedSeats.map(seat => seat.size.width).reduce((a, b) => a + b, 0);
 
     return {
       seats: preparedSeats,
@@ -269,86 +269,86 @@ export class JetsContentPreparer {
       seatScheme,
       classCode,
       seatType,
-    }
-  }
+    };
+  };
 
   _prepareSeats = (row, cabinFeatures, lang, maxRowWidth = 0) => {
-    const {seatScheme, seats, seatType} = row
+    const {seatScheme, seats, seatType} = row;
 
-    if (!seats?.length) return []
+    if (!seats?.length) return [];
 
-    let seatsCounter = 0
-    const rowElements = seatScheme.split('')
+    let seatsCounter = 0;
+    const rowElements = seatScheme.split('');
 
-    let aisleWidth = 0
+    let aisleWidth = 0;
 
     // resize aisles if maxRowWidth is set
     if (maxRowWidth) {
-      const [width] = SEAT_SIZE_BY_TYPE[seatType]
-      const seatsCount = seatScheme.match(/S|E/g).length
-      const aislesCount = seatScheme.match(/-/g).length
-      const seatsWidth = seatsCount * width
-      const widthDiff = maxRowWidth - seatsWidth
-      const targetAisleWidth = widthDiff / aislesCount
+      const [width] = SEAT_SIZE_BY_TYPE[seatType];
+      const seatsCount = seatScheme.match(/S|E/g).length;
+      const aislesCount = seatScheme.match(/-/g).length;
+      const seatsWidth = seatsCount * width;
+      const widthDiff = maxRowWidth - seatsWidth;
+      const targetAisleWidth = widthDiff / aislesCount;
 
-      aisleWidth = targetAisleWidth > 0 ? Math.min(targetAisleWidth, width) : 1
+      aisleWidth = targetAisleWidth > 0 ? Math.min(targetAisleWidth, width) : 1;
     }
 
     const result = rowElements.reduce((acc, item) => {
-      let element = {}
+      let element = {};
 
       if (item === ENTITY_SCHEME_MAP.aisle) {
-        element = this._prepareAisle(row, aisleWidth)
+        element = this._prepareAisle(row, aisleWidth);
       } else if (item === ENTITY_SCHEME_MAP.empty) {
-        element = this._prepareEmpty(row)
+        element = this._prepareEmpty(row);
       } else if (item === ENTITY_SCHEME_MAP.seat) {
-        element = this._prepareSeat(seats[seatsCounter], row, cabinFeatures, lang)
-        seatsCounter++
+        element = this._prepareSeat(seats[seatsCounter], row, cabinFeatures, lang);
+        seatsCounter++;
       }
 
-      acc.push(element)
+      acc.push(element);
 
-      return acc
-    }, [])
+      return acc;
+    }, []);
 
-    return result
-  }
+    return result;
+  };
 
   _prepareIndexRow = row => {
     const seats = row.seats.map(element => {
-      element.letter = element.type === ENTITY_TYPE_MAP.aisle ? '' : element.letter
-      element.type = element.type === ENTITY_TYPE_MAP.aisle ? ENTITY_TYPE_MAP.empty : ENTITY_TYPE_MAP.index
-      element.status = ENTITY_STATUS_MAP.disabled
-      element.topOffset = element.topOffset - element.size.height / 2
-      element.number = ''
+      element.letter = element.type === ENTITY_TYPE_MAP.aisle ? '' : element.letter;
+      element.type = element.type === ENTITY_TYPE_MAP.aisle ? ENTITY_TYPE_MAP.empty : ENTITY_TYPE_MAP.index;
+      element.status = ENTITY_STATUS_MAP.disabled;
+      element.topOffset = element.topOffset - element.size.height / 2;
+      element.number = '';
       element.size = {
         width: element.size.width,
         height: DEFAULT_INDEX_ROW_SEAT_HEIGHT,
-      }
-      element.seatScheme = row.seatScheme
+      };
+      element.seatScheme = row.seatScheme;
 
-      element.rotation = '' // resetting rotation for the case when biggest row has rotated seats
+      element.rotation = ''; // resetting rotation for the case when biggest row has rotated seats
 
-      return element
-    })
+      return element;
+    });
 
-    return {...row, number: '', seats, topOffset: row.topOffset}
-  }
+    return {...row, number: '', seats, topOffset: row.topOffset};
+  };
 
   _prepareSeat = (seat, row, cabinFeatures, lang) => {
-    const {number, classCode, name: rowName, seatType: _rowSeatType} = row
-    const prepared = this._prepareSeatFeatures(seat, cabinFeatures, lang)
-    const features = prepared.features
-    const measurements = prepared.measurements
-    const classType = CLASS_CODE_MAP[classCode.toLowerCase()] || ''
-    const seatNumber = number + seat?.letter || ''
-    const type = ENTITY_TYPE_MAP.seat
-    const status = ENTITY_STATUS_MAP.available
-    const seatType = seat.seatType || _rowSeatType
-    const seatClassAndType = `${classCode}-${seatType}`
+    const {number, classCode, name: rowName, seatType: _rowSeatType} = row;
+    const prepared = this._prepareSeatFeatures(seat, cabinFeatures, lang);
+    const features = prepared.features;
+    const measurements = prepared.measurements;
+    const classType = CLASS_CODE_MAP[classCode.toLowerCase()] || '';
+    const seatNumber = number + seat?.letter || '';
+    const type = ENTITY_TYPE_MAP.seat;
+    const status = ENTITY_STATUS_MAP.available;
+    const seatType = seat.seatType || _rowSeatType;
+    const seatClassAndType = `${classCode}-${seatType}`;
 
-    const [seatWidthByRow, seatHeightByRow] = SEAT_SIZE_BY_TYPE[_rowSeatType]
-    const [seatWidth, seatHeight] = SEAT_SIZE_BY_TYPE[seatType]
+    const [seatWidthByRow, seatHeightByRow] = SEAT_SIZE_BY_TYPE[_rowSeatType];
+    const [seatWidth, seatHeight] = SEAT_SIZE_BY_TYPE[seatType];
 
     return {
       uniqId: Utils.generateId(),
@@ -364,69 +364,69 @@ export class JetsContentPreparer {
       seatType: seatClassAndType,
       seatIconType: seatType,
       size: {width: Math.max(seatWidthByRow, seatWidth), height: seatHeight},
-    }
-  }
+    };
+  };
 
   _prepareAisle = (row, maxWidth = 0) => {
-    const {number: rowNumber, seatType} = row
-    const [width, height] = SEAT_SIZE_BY_TYPE[seatType]
-    const size = {width: maxWidth || width, height}
-    const type = ENTITY_TYPE_MAP.aisle
-    const status = ENTITY_STATUS_MAP.disabled
+    const {number: rowNumber, seatType} = row;
+    const [width, height] = SEAT_SIZE_BY_TYPE[seatType];
+    const size = {width: maxWidth || width, height};
+    const type = ENTITY_TYPE_MAP.aisle;
+    const status = ENTITY_STATUS_MAP.disabled;
 
-    return {uniqId: Utils.generateId(), letter: rowNumber, type, status, size}
-  }
+    return {uniqId: Utils.generateId(), letter: rowNumber, type, status, size};
+  };
 
   _prepareEmpty = row => {
-    const [width, height] = SEAT_SIZE_BY_TYPE[row.seatType]
-    const size = {width, height}
-    const type = ENTITY_TYPE_MAP.empty
-    const status = ENTITY_STATUS_MAP.disabled
+    const [width, height] = SEAT_SIZE_BY_TYPE[row.seatType];
+    const size = {width, height};
+    const type = ENTITY_TYPE_MAP.empty;
+    const status = ENTITY_STATUS_MAP.disabled;
 
-    return {uniqId: Utils.generateId(), letter: '', status, type, size}
-  }
+    return {uniqId: Utils.generateId(), letter: '', status, type, size};
+  };
 
   _prepareSeatFeatures = (seat, cabin, lang) => {
-    const {pitch: cabinSeatPitch, width: cabinSeatWidth, recline: cabinSeatRecline, audioVideo, power, wifi} = cabin
-    const {pitch: seatPitch, width: seatWidth, recline: seatRecline} = seat.features || {}
-    const features = {audioVideo, power, wifi, ...seat.features}
+    const {pitch: cabinSeatPitch, width: cabinSeatWidth, recline: cabinSeatRecline, audioVideo, power, wifi} = cabin;
+    const {pitch: seatPitch, width: seatWidth, recline: seatRecline} = seat.features || {};
+    const features = {audioVideo, power, wifi, ...seat.features};
     const measurements = {
       pitch: seatPitch || cabinSeatPitch,
       width: seatWidth || cabinSeatWidth,
       recline: seatRecline || cabinSeatRecline,
-    }
+    };
 
-    const prosOrCons = ['+', '-']
+    const prosOrCons = ['+', '-'];
 
     const preparedFeatures = Object.entries(features)
       .filter(([key, value]) => !!value && !measurements[key])
       .map(([key, value]) => {
-        const uniqId = Utils.generateId()
-        const localized = LOCALES_MAP[lang][key] || key
+        const uniqId = Utils.generateId();
+        const localized = LOCALES_MAP[lang][key] || key;
         if (prosOrCons.includes(value)) {
           // swap key-value for pros-cons features
-          const icon = SEAT_FEATURES_ICONS[value] || ''
+          const icon = SEAT_FEATURES_ICONS[value] || '';
 
-          return {uniqId, title: null, icon, value: localized, key}
+          return {uniqId, title: null, icon, value: localized, key};
         } else {
-          const icon = SEAT_FEATURES_ICONS[key] || ''
+          const icon = SEAT_FEATURES_ICONS[key] || '';
 
-          return {uniqId, title: localized, icon, value, key}
+          return {uniqId, title: localized, icon, value, key};
         }
-      })
+      });
 
     const preparedMeasurements = Object.entries(measurements).map(([key, value]) => {
-      const localized = LOCALES_MAP[lang][key] || key
-      const icon = SEAT_MEASUREMENTS_ICONS[key] || ''
+      const localized = LOCALES_MAP[lang][key] || key;
+      const icon = SEAT_MEASUREMENTS_ICONS[key] || '';
 
-      return {uniqId: Utils.generateId(), title: localized, icon, value, key}
-    })
+      return {uniqId: Utils.generateId(), title: localized, icon, value, key};
+    });
 
-    return {features: preparedFeatures, measurements: preparedMeasurements}
-  }
+    return {features: preparedFeatures, measurements: preparedMeasurements};
+  };
 
   _prepareSeatAdditionalProps = seat => {
-    const {additionalProps} = seat || {}
+    const {additionalProps} = seat || {};
 
     const preparedAdditionalProps = additionalProps?.map(item => {
       return {
@@ -435,9 +435,9 @@ export class JetsContentPreparer {
         uniqId: Utils.generateId(),
         value: item?.label,
         cssClass: item?.cssClass,
-      }
-    })
+      };
+    });
 
-    return preparedAdditionalProps
-  }
+    return preparedAdditionalProps;
+  };
 }

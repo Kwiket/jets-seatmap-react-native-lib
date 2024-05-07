@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import { JetsButton } from '../Button/JetsButton';
-import { JetsSeatMap } from '../SeatMap';
-import { FLIGHT_MOCK, AVAILABILITY_MOCK, PASSENGERS_MOCK, CONFIG_MOCK } from './constants';
-
-
+import React, {useState} from 'react';
+import {JetsButton} from '../Button/JetsButton';
+import {JetsSeatMap} from '../SeatMap';
+import {FLIGHT_MOCK, AVAILABILITY_MOCK, PASSENGERS_MOCK, CONFIG_MOCK} from './constants';
 
 export const DemoComponent = () => {
   const [flight, setFlight] = useState(null);

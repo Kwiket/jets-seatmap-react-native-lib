@@ -1,100 +1,100 @@
-import base64 from 'react-native-base64'
+import base64 from 'react-native-base64';
 
-const JWT_TOKEN = 'jetsJwtToken'
-const TOKEN_EXPIRATION_BUFFER_IN_MS = 300000
+const JWT_TOKEN = 'jetsJwtToken';
+const TOKEN_EXPIRATION_BUFFER_IN_MS = 300000;
 
 export class JetsApiService {
   constructor(appId, key, url, localStorage) {
-    this._appId = appId
-    this._apiKey = key
-    this._apiUrl = url
-    this._localStorage = localStorage
+    this._appId = appId;
+    this._apiKey = key;
+    this._apiUrl = url;
+    this._localStorage = localStorage;
   }
 
   getData = async (url, options = {}) => {
-    const basicOptions = {}
+    const basicOptions = {};
     if (!options?.headers?.authorization) {
-      basicOptions = await this._getRequestOptions()
+      basicOptions = await this._getRequestOptions();
     }
 
-    const reqOptions = {...options, ...basicOptions}
-    const response = await fetch(`${this._apiUrl}/${url}`, reqOptions)
-    const responseData = await response.json()
+    const reqOptions = {...options, ...basicOptions};
+    const response = await fetch(`${this._apiUrl}/${url}`, reqOptions);
+    const responseData = await response.json();
     if (!response.ok) {
-      throw new Error(`getData: ${response.status} - ${responseData.message}`)
+      throw new Error(`getData: ${response.status} - ${responseData.message}`);
     }
 
-    return await responseData
-  }
+    return await responseData;
+  };
 
   postData = async (url, body, options = {}) => {
-    const basicOptions = await this._getRequestOptions()
+    const basicOptions = await this._getRequestOptions();
 
-    const params = {...options, method: 'post', body: JSON.stringify(body), ...basicOptions}
-    const path = `${this._apiUrl}/${url}`
-    const response = await fetch(path, params)
-    const responseData = await response.json()
+    const params = {...options, method: 'post', body: JSON.stringify(body), ...basicOptions};
+    const path = `${this._apiUrl}/${url}`;
+    const response = await fetch(path, params);
+    const responseData = await response.json();
 
     if (!response.ok) {
-      throw new Error(`postData: ${response.status} - ${responseData.message}`)
+      throw new Error(`postData: ${response.status} - ${responseData.message}`);
     }
 
-    return responseData
-  }
+    return responseData;
+  };
 
   _getRequestOptions = async () => {
-    const token = await this._getToken()
+    const token = await this._getToken();
 
     return {
       headers: {
         'content-type': 'application/json',
         authorization: `Bearer ${token}`,
       },
-    }
-  }
+    };
+  };
 
   _getAuthRequestOptions = key => {
     return {
       headers: {
         authorization: `Bearer ${key}`,
       },
-    }
-  }
+    };
+  };
 
   _getToken = async () => {
     // const token = this._localStorage ? await this._localStorage.getData(JWT_TOKEN) : null
 
     // if (token) return token
 
-    const path = `auth?appId=${this._appId}`
-    const {accessToken} = await this.getData(path, this._getAuthRequestOptions(this._apiKey))
+    const path = `auth?appId=${this._appId}`;
+    const {accessToken} = await this.getData(path, this._getAuthRequestOptions(this._apiKey));
 
     if (!accessToken) {
-      throw new Error('Unable to authenticate')
+      throw new Error('Unable to authenticate');
     }
 
     // this._saveToken(accessToken)
 
-    return accessToken
-  }
+    return accessToken;
+  };
 
   _saveToken = token => {
-    if (!token || !this._localStorage) return
+    if (!token || !this._localStorage) return;
 
-    const {exp} = this._parseJwt(token)
-    const tokenTTL = this._getTokenTTL(exp)
-    this._localStorage.setData(JWT_TOKEN, token, tokenTTL)
-  }
+    const {exp} = this._parseJwt(token);
+    const tokenTTL = this._getTokenTTL(exp);
+    this._localStorage.setData(JWT_TOKEN, token, tokenTTL);
+  };
 
   _getTokenTTL(exp) {
-    return exp * 1000 - Date.now() - TOKEN_EXPIRATION_BUFFER_IN_MS
+    return exp * 1000 - Date.now() - TOKEN_EXPIRATION_BUFFER_IN_MS;
   }
 
   _parseJwt(token) {
-    var base64Url = token.split('.')[1]
-    var base645 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
-    var jsonPayload = decodeURIComponent(base64.decode(base645))
+    var base64Url = token.split('.')[1];
+    var base645 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(base64.decode(base645));
 
-    return JSON.parse(jsonPayload)
+    return JSON.parse(jsonPayload);
   }
 }

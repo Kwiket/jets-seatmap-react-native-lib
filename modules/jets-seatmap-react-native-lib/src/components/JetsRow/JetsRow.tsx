@@ -1,45 +1,45 @@
-import React, {useContext, useRef} from 'react'
-import {View, TouchableOpacity, StyleSheet} from 'react-native'
-import {JetsContext} from '../../common'
-import {JetsSeat} from '../Seat'
-import {TooltipViewModel} from '../TooltipGlobal/TooltipViewModel'
-import {getSeatRotationStyle} from '../Seat/models/SeatTypes'
+import React, {useContext, useRef} from 'react';
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
+import {JetsContext} from '../../common';
+import {JetsSeat} from '../Seat';
+import {TooltipViewModel} from '../TooltipGlobal/TooltipViewModel';
+import {getSeatRotationStyle} from '../Seat/models/SeatTypes';
 
 export const JetsRow = ({seats, top, onPress, scrollOffset, flatListHeight, config}: RowModel) => {
-  const tooltipViewModel = useContext(TooltipViewModel)
+  const tooltipViewModel = useContext(TooltipViewModel);
 
-  const {params, colorTheme, onTooltipRequested} = useContext(JetsContext)
+  const {params, colorTheme, onTooltipRequested} = useContext(JetsContext);
 
-  const seatMeasurements: any = useRef({})
+  const seatMeasurements: any = useRef({});
 
   const onSeatLayout = (event: any, seatId: any) => {
     event.target.measureInWindow((x: number, y: number, width: number, height: number) => {
-      seatMeasurements.current[seatId] = {x, y, width, height}
-    })
-  }
+      seatMeasurements.current[seatId] = {x, y, width, height};
+    });
+  };
 
   const handlePress = (seat: SeatModel) => {
-    const {x, y, width, height} = seatMeasurements.current[seat.uniqId]
+    const {x, y, width, height} = seatMeasurements.current[seat.uniqId];
 
-    const screenHeight = config.height
+    const screenHeight = config.height;
 
-    const tailHeight = y - ((params.innerWidth - colorTheme.wingsWidth * 2) * 240) / 200
+    const tailHeight = y - ((params.innerWidth - colorTheme.wingsWidth * 2) * 240) / 200;
 
-    tooltipViewModel?.topOffset.setState(top + seat.topOffset)
-    tooltipViewModel?.xOffset.setState(x / params.scale)
+    tooltipViewModel?.topOffset.setState(top + seat.topOffset);
+    tooltipViewModel?.xOffset.setState(x / params.scale);
 
-    onPress(seat)
-    onTooltipRequested(seat)
-    tooltipViewModel?.isActive.setState(true)
+    onPress(seat);
+    onTooltipRequested(seat);
+    tooltipViewModel?.isActive.setState(true);
 
     if (flatListHeight - tailHeight > 0 && flatListHeight - tailHeight < screenHeight) {
-      tooltipViewModel?.position.setState('bottom')
+      tooltipViewModel?.position.setState('bottom');
     } else if (y - scrollOffset * params.scale < screenHeight * 0.5) {
-      tooltipViewModel?.position.setState('top')
+      tooltipViewModel?.position.setState('top');
     } else {
-      tooltipViewModel?.position.setState('bottom')
+      tooltipViewModel?.position.setState('bottom');
     }
-  }
+  };
 
   return (
     <View style={[styles.row]}>
@@ -60,11 +60,11 @@ export const JetsRow = ({seats, top, onPress, scrollOffset, flatListHeight, conf
               getSeatRotationStyle(seat.rotation),
             ]}
           />
-        )
+        );
       })}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   row: {
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
     alignContent: 'flex-start',
     flexDirection: 'row',
   },
-})
+});

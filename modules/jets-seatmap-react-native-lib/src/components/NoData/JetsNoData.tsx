@@ -1,21 +1,21 @@
-import React, {useContext} from 'react'
-import {View, Text, StyleSheet} from 'react-native'
-import {JetsContext} from '../../common'
+import React, {useContext} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import {JetsContext} from '../../common';
 
 export const JetsNoData = () => {
-  const {params} = useContext(JetsContext)
+  const {params} = useContext(JetsContext);
 
   const containerStyle = {
     transform: [{scale: params?.antiScale || 1}],
-  }
+  };
 
   return (
     <View
       children={<Text children={'Seat map is not found for the flight'} style={styles.text} />}
       style={[styles.container, containerStyle]}
     />
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-})
+});

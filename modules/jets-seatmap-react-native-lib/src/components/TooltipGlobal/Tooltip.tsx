@@ -1,14 +1,14 @@
-import React, {useContext, useState} from 'react'
-import {View, Text, StyleSheet} from 'react-native'
-import {SvgXml} from 'react-native-svg'
-import {DEFAULT_SEAT_PASSENGER_TYPES, JetsContext, LOCALES_MAP} from '../../common'
-import {JetsButton} from '../Button/JetsButton'
-import {TooltipViewModel} from './TooltipViewModel'
+import React, {useContext, useState} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import {SvgXml} from 'react-native-svg';
+import {DEFAULT_SEAT_PASSENGER_TYPES, JetsContext, LOCALES_MAP} from '../../common';
+import {JetsButton} from '../Button/JetsButton';
+import {TooltipViewModel} from './TooltipViewModel';
 
 const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
-  const viewModel = useContext(TooltipViewModel)
+  const viewModel = useContext(TooltipViewModel);
 
-  const {colorTheme, params, onSeatSelect, onSeatUnselect, isSeatSelectDisabled} = useContext(JetsContext)
+  const {colorTheme, params, onSeatSelect, onSeatUnselect, isSeatSelectDisabled} = useContext(JetsContext);
 
   const {
     tooltipBackgroundColor,
@@ -23,44 +23,44 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
     tooltipCancelButtonTextColor,
     tooltipCancelButtonBackgroundColor,
     wingsWidth,
-  } = colorTheme
+  } = colorTheme;
 
-  const CANCEL_BTN_KEY = 'cancel'
+  const CANCEL_BTN_KEY = 'cancel';
 
-  const SELECT_BTN_KEY = 'select'
+  const SELECT_BTN_KEY = 'select';
 
-  const UNSELECT_BTN_KEY = 'unselect'
+  const UNSELECT_BTN_KEY = 'unselect';
 
-  const PASSENGER_KEY = 'passenger'
+  const PASSENGER_KEY = 'passenger';
 
-  const RESTRICTION_KEY = 'seatRestrictions'
+  const RESTRICTION_KEY = 'seatRestrictions';
 
-  const [viewHeight, setViewHeight] = useState(0)
+  const [viewHeight, setViewHeight] = useState(0);
 
   const onLayout = (event: any) => {
-    const {height} = event.nativeEvent.layout
+    const {height} = event.nativeEvent.layout;
 
-    setViewHeight(height)
-  }
+    setViewHeight(height);
+  };
 
-  const tooltipWidth = params.innerWidth - (params.visibleWings ? colorTheme.wingsWidth * 2 : 0)
+  const tooltipWidth = params.innerWidth - (params.visibleWings ? colorTheme.wingsWidth * 2 : 0);
 
-  let restrictionsLabel = ''
+  let restrictionsLabel = '';
   if (seat.passengerTypes) {
-    const existingRestrictions = DEFAULT_SEAT_PASSENGER_TYPES
+    const existingRestrictions = DEFAULT_SEAT_PASSENGER_TYPES;
 
-    const filteredPassengerTypes = seat.passengerTypes.filter(type => existingRestrictions.includes(type))
+    const filteredPassengerTypes = seat.passengerTypes.filter(type => existingRestrictions.includes(type));
 
-    let typeStrings = filteredPassengerTypes.map(type => LOCALES_MAP[lang][type])
+    let typeStrings = filteredPassengerTypes.map(type => LOCALES_MAP[lang][type]);
 
-    const isRestrictionApplied = filteredPassengerTypes.length < existingRestrictions.length
+    const isRestrictionApplied = filteredPassengerTypes.length < existingRestrictions.length;
 
-    restrictionsLabel = isRestrictionApplied ? `${LOCALES_MAP[lang][RESTRICTION_KEY]}: ${typeStrings.join(', ')}` : ''
+    restrictionsLabel = isRestrictionApplied ? `${LOCALES_MAP[lang][RESTRICTION_KEY]}: ${typeStrings.join(', ')}` : '';
   }
 
-  let passengerLabel = ''
+  let passengerLabel = '';
   if (seat.passenger) {
-    passengerLabel = seat.passenger?.passengerLabel || `${LOCALES_MAP['EN'][PASSENGER_KEY]} ${seat.passenger?.id}`
+    passengerLabel = seat.passenger?.passengerLabel || `${LOCALES_MAP['EN'][PASSENGER_KEY]} ${seat.passenger?.id}`;
   }
 
   return (
@@ -242,8 +242,8 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
             {seat.passenger ? (
               <JetsButton
                 onPress={() => {
-                  onSeatUnselect(seat)
-                  viewModel?.isActive.setState(false)
+                  onSeatUnselect(seat);
+                  viewModel?.isActive.setState(false);
                 }}
                 content={LOCALES_MAP[lang][UNSELECT_BTN_KEY]}
                 disabled={seat.passenger.readonly}
@@ -256,8 +256,8 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
             ) : (
               <JetsButton
                 onPress={() => {
-                  onSeatSelect(seat)
-                  viewModel?.isActive.setState(false)
+                  onSeatSelect(seat);
+                  viewModel?.isActive.setState(false);
                 }}
                 content={LOCALES_MAP[lang][SELECT_BTN_KEY]}
                 disabled={isSeatSelectDisabled(seat)}
@@ -273,8 +273,8 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
         style={{flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 20, paddingTop: 40}}
       />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   tooltip: {
@@ -303,6 +303,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
   },
-})
+});
 
-export default TooltipModal
+export default TooltipModal;

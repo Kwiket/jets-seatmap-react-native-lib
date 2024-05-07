@@ -1,4 +1,4 @@
-import {Dimensions} from 'react-native'
+import {Dimensions} from 'react-native';
 
 const CONFIG_MOCK = {
   width: Dimensions.get('window').width,
@@ -72,6 +72,6 @@ const CONFIG_MOCK = {
     exitIconUrlLeft: 'https://panorama.quicket.io/icons/exit_icon_red.svg',
     exitIconUrlRight: 'https://panorama.quicket.io/icons/exit_icon_red.svg',
   },
-}
+};
 
-export default CONFIG_MOCK
+export default CONFIG_MOCK;

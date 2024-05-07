@@ -1,5 +1,5 @@
-import React from 'react'
-import {TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle} from 'react-native'
+import React from 'react';
+import {TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle} from 'react-native';
 
 export const JetsButton = ({
   content,
@@ -9,11 +9,11 @@ export const JetsButton = ({
   foregroundColor,
   ...attrs
 }: {
-  content: string
-  onPress: () => void
-  disabled: boolean
-  style: ViewStyle
-  foregroundColor: TextStyle
+  content: string;
+  onPress: () => void;
+  disabled: boolean;
+  style: ViewStyle;
+  foregroundColor: TextStyle;
 }) => {
   return (
     <TouchableOpacity
@@ -24,14 +24,14 @@ export const JetsButton = ({
       disabled={disabled}
       activeOpacity={0.7}
     />
-  )
-}
+  );
+};
 
 JetsButton.defaultProps = {
   content: 'Btn',
   disabled: false,
   onPress: () => {},
-}
+};
 
 const styles = StyleSheet.create({
   button: {
@@ -58,4 +58,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
     color: '#000',
   },
-})
+});

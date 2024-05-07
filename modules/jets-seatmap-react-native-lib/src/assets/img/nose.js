@@ -1,5 +1,5 @@
-import * as React from 'react'
-import Svg, {Path} from 'react-native-svg'
+import * as React from 'react';
+import Svg, {Path} from 'react-native-svg';
 
 const SVGComponent = props => (
   <Svg
@@ -53,5 +53,5 @@ const SVGComponent = props => (
       d="M70.0001 97.3C65.4001 98.6 62.1001 99.9 59.6001 101.2L64.1001 117.8C66.1001 117.2 68.1001 116.7 70.0001 116.3C79.1001 114.3 98.0001 114.3 98.0001 114.3V94C98.0001 94 81.2001 94.1 70.0001 97.3Z"
     />
   </Svg>
-)
-export default SVGComponent
+);
+export default SVGComponent;

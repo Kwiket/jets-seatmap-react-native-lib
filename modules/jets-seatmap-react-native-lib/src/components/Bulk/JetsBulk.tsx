@@ -1,25 +1,25 @@
-import {useContext} from 'react'
-import {View} from 'react-native'
-import {SvgXml} from 'react-native-svg'
-import {JetsContext} from '../../common'
-import {BULK_TEMPLATE_MAP, STICKER_TEMPLATE_MAP} from './constants'
+import {useContext} from 'react';
+import {View} from 'react-native';
+import {SvgXml} from 'react-native-svg';
+import {JetsContext} from '../../common';
+import {BULK_TEMPLATE_MAP, STICKER_TEMPLATE_MAP} from './constants';
 
 export const JetsBulk = ({item}: {item: BulkModel}) => {
-  const {params, colorTheme} = useContext(JetsContext)
+  const {params, colorTheme} = useContext(JetsContext);
 
-  const {bulkBaseColor, bulkCutColor, bulkIconColor} = colorTheme
+  const {bulkBaseColor, bulkCutColor, bulkIconColor} = colorTheme;
 
-  const bulkScaleCoff = 0.7
+  const bulkScaleCoff = 0.7;
 
-  let coloredBulkSVG = BULK_TEMPLATE_MAP.get(item.id)
+  let coloredBulkSVG = BULK_TEMPLATE_MAP.get(item.id);
 
-  let coloredStickerSVG = STICKER_TEMPLATE_MAP.get(item.iconType ? item.iconType.toLowerCase().trim() : '')
+  let coloredStickerSVG = STICKER_TEMPLATE_MAP.get(item.iconType ? item.iconType.toLowerCase().trim() : '');
 
-  coloredStickerSVG = coloredStickerSVG?.replace('$stickerColor', bulkIconColor)
+  coloredStickerSVG = coloredStickerSVG?.replace('$stickerColor', bulkIconColor);
 
-  coloredBulkSVG = coloredBulkSVG?.replace('$baseColor', bulkBaseColor)
-  
-  coloredBulkSVG = coloredBulkSVG?.replace('$cutColor', bulkCutColor)
+  coloredBulkSVG = coloredBulkSVG?.replace('$baseColor', bulkBaseColor);
+
+  coloredBulkSVG = coloredBulkSVG?.replace('$cutColor', bulkCutColor);
 
   return (
     <View
@@ -62,5 +62,5 @@ export const JetsBulk = ({item}: {item: BulkModel}) => {
         },
       ]}
     />
-  )
-}
+  );
+};

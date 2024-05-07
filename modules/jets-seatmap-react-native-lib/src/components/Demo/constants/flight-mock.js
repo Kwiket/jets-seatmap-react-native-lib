@@ -6,7 +6,7 @@ const FLIGHT_MOCK0 = {
   departure: 'KWI',
   arrival: 'BEY',
   cabinClass: 'B',
-}
+};
 
 const FLIGHT_MOCK1 = {
   id: '1111',
@@ -17,7 +17,7 @@ const FLIGHT_MOCK1 = {
   arrival: 'FLL',
   cabinClass: 'E',
   passengerType: 'ADT',
-}
+};
 
 const FLIGHT_MOCK2 = {
   id: '1111',
@@ -28,7 +28,7 @@ const FLIGHT_MOCK2 = {
   arrival: 'DXB',
   cabinClass: 'B',
   passengerType: 'ADT',
-}
+};
 
 const FLIGHT_MOCK3 = {
   id: '1111',
@@ -39,7 +39,7 @@ const FLIGHT_MOCK3 = {
   arrival: 'LHR',
   cabinClass: 'A',
   passengerType: 'ADT',
-}
+};
 
 const FLIGHT_MOCK4 = {
   id: '1111',
@@ -49,7 +49,7 @@ const FLIGHT_MOCK4 = {
   departure: 'JFK',
   arrival: 'MIA',
   cabinClass: 'B',
-}
+};
 
 const FLIGHT_MOCK5 = {
   id: '1111',
@@ -60,18 +60,18 @@ const FLIGHT_MOCK5 = {
   arrival: 'CAK',
   cabinClass: 'A',
   passengerType: 'ADT',
-}
+};
 
 const FLIGHT_MOCK = {
-  "id": "111",
-  "airlineCode": "LH",
-  "flightNo": "7060",
-  "departureDate": "2024-05-25",
-  "departure": "PEK",
-  "arrival": "CAN",
-  "cabinClass": "A",
-  "planeCode": ""
-}
+  id: '111',
+  airlineCode: 'LH',
+  flightNo: '7060',
+  departureDate: '2024-05-25',
+  departure: 'PEK',
+  arrival: 'CAN',
+  cabinClass: 'A',
+  planeCode: '',
+};
 
 const FLIGHT_MOCK7 = {
   id: '111',
@@ -81,6 +81,6 @@ const FLIGHT_MOCK7 = {
   departure: 'MUC',
   arrival: 'BOS',
   cabinClass: 'E',
-}
+};
 
-export default FLIGHT_MOCK
+export default FLIGHT_MOCK;

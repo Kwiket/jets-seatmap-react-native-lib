@@ -1,9 +1,9 @@
-import React, {useContext} from 'react'
-import {View} from 'react-native'
-import {JetsContext} from '../../common'
+import React, {useContext} from 'react';
+import {View} from 'react-native';
+import {JetsContext} from '../../common';
 
 export const JetsWing = ({item}: {item: {wingsInfo: {start: number; finish: number}}}) => {
-  const {params, colorTheme} = useContext(JetsContext)
+  const {params, colorTheme} = useContext(JetsContext);
 
   return (
     <View
@@ -17,5 +17,5 @@ export const JetsWing = ({item}: {item: {wingsInfo: {start: number; finish: numb
         zIndex: -1,
       }}
     />
-  )
-}
+  );
+};

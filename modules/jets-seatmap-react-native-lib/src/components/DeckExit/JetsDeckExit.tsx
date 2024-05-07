@@ -1,16 +1,16 @@
-import React, {useState, useContext} from 'react'
-import {View} from 'react-native'
-import Svg, {Path, G, SvgUri} from 'react-native-svg'
-import {DEFAULT_STYLE_POSITION, JetsContext} from '../../common'
+import React, {useState, useContext} from 'react';
+import {View} from 'react-native';
+import Svg, {Path, G, SvgUri} from 'react-native-svg';
+import {DEFAULT_STYLE_POSITION, JetsContext} from '../../common';
 
 export const JetsDeckExit = ({type, topOffset}: {type: string; topOffset: number}) => {
-  const {colorTheme} = useContext(JetsContext)
-  
-  const {exitIconUrlLeft, exitIconUrlRight, exitIconWidth, exitIconHeight} = colorTheme
+  const {colorTheme} = useContext(JetsContext);
 
-  const isBuiltInIcons = !exitIconUrlLeft || !exitIconUrlRight
+  const {exitIconUrlLeft, exitIconUrlRight, exitIconWidth, exitIconHeight} = colorTheme;
 
-  const xOffset = 0
+  const isBuiltInIcons = !exitIconUrlLeft || !exitIconUrlRight;
+
+  const xOffset = 0;
 
   const ArrowSvg = ({direction}: {direction: string}) => (
     <Svg width="72" height="72" viewBox="0 0 114 114">
@@ -22,7 +22,7 @@ export const JetsDeckExit = ({type, topOffset}: {type: string; topOffset: number
         )}
       </G>
     </Svg>
-  )
+  );
 
   return (
     <View
@@ -53,5 +53,5 @@ export const JetsDeckExit = ({type, topOffset}: {type: string; topOffset: number
         height: 72,
       }}
     />
-  )
-}
+  );
+};

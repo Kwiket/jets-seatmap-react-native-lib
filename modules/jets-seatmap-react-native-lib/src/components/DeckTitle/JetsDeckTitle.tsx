@@ -1,18 +1,18 @@
-import React, {useContext, useRef} from 'react'
-import {View, Text, StyleSheet, ViewStyle, TextStyle} from 'react-native'
-import {JetsContext, LOCALES_MAP, DEFAULT_DECK_TITLE_HEIGHT} from '../../common'
+import React, {useContext, useRef} from 'react';
+import {View, Text, StyleSheet, ViewStyle, TextStyle} from 'react-native';
+import {JetsContext, LOCALES_MAP, DEFAULT_DECK_TITLE_HEIGHT} from '../../common';
 
 export const JetsDeckTitle = ({number, lang, localeKey}: {number: number; lang: string; localeKey: string}) => {
-  const {params, colorTheme} = useContext(JetsContext)
+  const {params, colorTheme} = useContext(JetsContext);
 
-  const elementRef = useRef(null)
+  const elementRef = useRef(null);
 
   const style: ViewStyle = {
     transform: [{scale: params.antiScale}, {translateY: 30}],
     height: DEFAULT_DECK_TITLE_HEIGHT,
     position: 'absolute',
     top: 0,
-  }
+  };
 
   return (
     <View
@@ -29,5 +29,5 @@ export const JetsDeckTitle = ({number, lang, localeKey}: {number: number; lang: 
       }
       style={[style]}
     />
-  )
-}
+  );
+};

@@ -30,6 +30,6 @@ const PASSENGERS_MOCK = [
     passengerLabel: 'John Snow',
     passengerColor: 'orange',
   },
-]
+];
 
-export default PASSENGERS_MOCK
+export default PASSENGERS_MOCK;
