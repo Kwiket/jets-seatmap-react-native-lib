@@ -338,7 +338,7 @@ export const JetsSeatMap = ({
             </>
           }
           style={{
-            height: config.height != undefined ? config.height : '100%',
+            height: config.height != undefined && params != undefined ? config.height / params?.scale : '100%',
             transformOrigin: `${scaleWrapStyle.transformOrigin}`,
             width: scaleWrapStyle?.width,
             transform: [{scale: params?.scale ?? 1}],

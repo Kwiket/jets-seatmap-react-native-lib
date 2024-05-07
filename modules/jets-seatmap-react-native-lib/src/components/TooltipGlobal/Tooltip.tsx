@@ -22,6 +22,7 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
     tooltipSelectButtonBackgroundColor,
     tooltipCancelButtonTextColor,
     tooltipCancelButtonBackgroundColor,
+    wingsWidth,
   } = colorTheme
 
   const CANCEL_BTN_KEY = 'cancel'
@@ -36,8 +37,6 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
     const {height} = event.nativeEvent.layout
     setViewHeight(height)
   }
-
-  console.log(params)
 
   const tooltipWidth = params.innerWidth - (params.visibleWings ? colorTheme.wingsWidth * 2 : 0)
 
@@ -79,7 +78,12 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
           {
             top:
               viewModel?.topOffset.state != undefined ? (viewModel.position.state == 'top' ? -50 : viewHeight - 10) : 0,
-            left: viewModel?.xOffset.state != undefined ? viewModel.xOffset.state : 0,
+            left:
+              viewModel?.xOffset.state != undefined
+                ? params.visibleWings
+                  ? viewModel.xOffset.state - wingsWidth
+                  : viewModel.xOffset.state
+                : 0,
             borderColor: tooltipBackgroundColor,
             transform: [{scaleY: viewModel?.position.state == 'bottom' ? -1 : 1}],
           },
