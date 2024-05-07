@@ -81,8 +81,8 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
             left:
               viewModel?.xOffset.state != undefined
                 ? params.visibleWings
-                  ? viewModel.xOffset.state - wingsWidth
-                  : viewModel.xOffset.state
+                  ? viewModel.xOffset.state - wingsWidth + seat.size.width / 2 - 35
+                  : viewModel.xOffset.state + seat.size.width / 2 - 35
                 : 0,
             borderColor: tooltipBackgroundColor,
             transform: [{scaleY: viewModel?.position.state == 'bottom' ? -1 : 1}],
@@ -95,7 +95,9 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
             <Text style={[styles.title, {color: tooltipHeaderColor}]}>{`${seat.classType || seat.rowName} ${
               seat.number
             }`}</Text>
-            <Text style={[styles.title, {color: tooltipHeaderColor}]}>{`${seat.price}`}</Text>
+            <Text style={[styles.title, {color: tooltipHeaderColor}]}>{`${
+              seat.price != undefined ? seat.price : ''
+            }`}</Text>
           </>
         }
         style={{flexDirection: 'row', justifyContent: 'space-between'}}
