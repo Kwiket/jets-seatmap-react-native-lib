@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {JetsSeatMapService} from './service'
+import {JetsSeatMapService} from './library/service'
 import {JetsDataHelper} from '../../common/data-helper'
 
 import {
@@ -72,8 +72,6 @@ export const JetsSeatMap = ({
   onSeatUnselected,
   onTooltipRequested,
   onLayoutUpdated,
-  onSeatMouseLeave,
-  onSeatMouseClick,
   seatOverride,
 }) => {
   const colorTheme = JetsDataHelper.mergeColorThemeWithConstraints(
@@ -89,7 +87,7 @@ export const JetsSeatMap = ({
   const [activeTooltip, setActiveTooltip] = useState(null)
   const [isSelectAvailable, setSelectAvailable] = useState(false)
   const [activeDeck, setActiveDeck] = useState(0)
-  const [params, setParams] = useState(null)
+  const [params, setParams] = useState<ParamsModel | null>(null)
 
   const [exits, setExits] = useState([])
   const [bulks, setBulks] = useState([])
@@ -160,25 +158,17 @@ export const JetsSeatMap = ({
     if (!hasReceivedFirstParams.current && params) {
       hasReceivedFirstParams.current = true
       switchDeck(currentDeckIndex)
-      scrollRTL()
       emitSeatmapData()
     }
   }, [params])
 
   useEffect(() => {
-    scrollRTL()
     emitSeatmapData()
   }, [activeDeck])
 
   useEffect(() => {
     switchDeck(currentDeckIndex)
   }, [currentDeckIndex])
-
-  const scrollRTL = () => {
-    if (params?.isHorizontal && params?.rightToLeft) {
-      seatMapRef.current.parentElement.scrollLeft = params.totalDecksHeight
-    }
-  }
 
   const switchDeck = (value: number) => {
     if (!shouldShowOnlyOneDeck || content.length < 2) {
@@ -212,34 +202,6 @@ export const JetsSeatMap = ({
     setPassengersList(passengers)
   }
 
-  const onSeatClick = (data, element, event) => {
-    const shouldSelectOnClick = params?.tooltipOnHover && !params?.isTouchDevice
-
-    if (shouldSelectOnClick) {
-      if (params.externalPassengerManagement) {
-        // if (!params.builtInTooltip) {
-        const seat = prepareSeatDataForEmit(data)
-        onSeatMouseClick({seat, element: element.current, event: event.nativeEvent})
-        // }
-        return
-      }
-
-      if (data?.passenger) {
-        if (data?.passenger?.readOnly) {
-          return
-        }
-        onSeatUnselect(data)
-      } else {
-        if (isSeatSelectDisabled(data)) {
-          return
-        }
-        onSeatSelect(data)
-      }
-    } else {
-      showTooltip(data, element, event)
-    }
-  }
-
   const emitSeatmapData = () => {
     if (!params) {
       return
@@ -258,17 +220,7 @@ export const JetsSeatMap = ({
     onLayoutUpdated(data)
   }
 
-  const prepareSeatDataForEmit = data => {
-    const tmpData = {...data, label: data.number}
-    delete tmpData.number
-    delete tmpData.leftOffset
-    delete tmpData.topOffset
-    delete tmpData.size
-
-    return tmpData
-  }
-
-  const onSeatSelect = seat => {
+  const onSeatSelect = (seat: SeatModel) => {
     const {data, passengers: newPassengers} = service.selectSeatHandler(content, seat, passengersList)
 
     setContent(data)
@@ -278,7 +230,7 @@ export const JetsSeatMap = ({
     onSeatSelected(newPassengers)
   }
 
-  const onSeatUnselect = seat => {
+  const onSeatUnselect = (seat: SeatModel) => {
     const {data, passengers: newPassengers} = service.unselectSeatHandler(content, seat, passengersList)
 
     setContent(data)
@@ -288,7 +240,7 @@ export const JetsSeatMap = ({
     onSeatUnselected(newPassengers)
   }
 
-  const isSeatSelectDisabled = seatData => {
+  const isSeatSelectDisabled = (seatData: SeatModel) => {
     const nextPassenger = service.getNextPassenger(passengersList)
     return (
       !nextPassenger ||
@@ -300,7 +252,7 @@ export const JetsSeatMap = ({
 
   const scaleTransformValue = ` ${params?.rotation} ${params?.offset} scale(${params?.scale})`
 
-  const scaleWrapStyle = {
+  const scaleWrapStyle: ScaleWrapperModel = {
     transform: scaleTransformValue,
     transformOrigin: 'top left',
     width: params?.innerWidth,
@@ -308,7 +260,6 @@ export const JetsSeatMap = ({
   }
 
   const providerValue = {
-    onSeatClick,
     onSeatSelect,
     onSeatUnselect,
     isSeatSelectDisabled,
@@ -319,6 +270,8 @@ export const JetsSeatMap = ({
     seatOverride,
     onTooltipRequested,
   }
+
+  console.log(scaleWrapStyle)
 
   return (
     <JetsContext.Provider value={providerValue}>

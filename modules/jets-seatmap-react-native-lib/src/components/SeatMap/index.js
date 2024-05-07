@@ -1,3 +1,3 @@
-export * from './api';
+export * from './library/api';
 export * from './SeatMap';
-export * from './service';
+export * from './library/service';

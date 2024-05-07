@@ -4,7 +4,7 @@ import {SvgXml} from 'react-native-svg'
 import {JetsContext} from '../../common'
 import {seatTemplateService} from '../Seat'
 import {TooltipViewModel} from '../TooltipGlobal/TooltipViewModel'
-import {getContainerStyleByNumber, getSeatRotationStyle, getStyleByNumber} from './SeatTypes'
+import {getContainerStyleByNumber, getSeatRotationStyle, getStyleByNumber} from './models/SeatTypes'
 
 export const JetsRow = ({
   seats,
@@ -12,12 +12,14 @@ export const JetsRow = ({
   onPress,
   scrollOffset,
   flatListHeight,
+  config,
 }: {
   seats: SeatModel[]
   top: number
   onPress: (seat: SeatModel) => void
   scrollOffset: number
   flatListHeight: number
+  config: any
 }) => {
   const tooltipViewModel = useContext(TooltipViewModel)
   const {params, colorTheme, onTooltipRequested, seatOverride} = useContext(JetsContext)
@@ -42,9 +44,14 @@ export const JetsRow = ({
 
     tooltipViewModel?.isActive.setState(true)
 
-    const screenHeight = Dimensions.get('screen').height
+    const screenHeight = config.height
 
-    if (y - scrollOffset * 0.3 < screenHeight * 0.4) {
+    if (
+      flatListHeight - (y - ((params.innerWidth - colorTheme.wingsWidth * 2) * 240) / 200) > 0 &&
+      flatListHeight - (y - ((params.innerWidth - colorTheme.wingsWidth * 2) * 240) / 200) < screenHeight / 2
+    ) {
+      tooltipViewModel?.position.setState('bottom')
+    } else if (y - scrollOffset * 0.3 < screenHeight * 0.4) {
       tooltipViewModel?.position.setState('top')
     } else {
       tooltipViewModel?.position.setState('bottom')

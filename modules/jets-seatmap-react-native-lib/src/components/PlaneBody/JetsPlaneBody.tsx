@@ -14,13 +14,15 @@ export const JetsPlaneBody = ({
   bulks,
   config,
   showOneDeck,
+  isSeatMapInited,
 }: {
   activeDeck: number
   content: any
   exits: ExitModel[]
   bulks: BulkModel[]
-  showOneDeck: boolean
+  showOneDeck: boolean | undefined
   config: any
+  isSeatMapInited: boolean
 }) => {
   const {params, colorTheme} = useContext(JetsContext)
 
@@ -75,6 +77,7 @@ export const JetsPlaneBody = ({
             scrollOffset={scrollOffset}
             isSingleDeck={content.length === 1}
             flatListHeight={flatListHeight}
+            config={config}
           />
         </View>
         {index < content.length - 1 && !showOneDeck && (
@@ -86,16 +89,11 @@ export const JetsPlaneBody = ({
   }
 
   const keyExtractor = (item: any) => item.uniqId.toString()
-  //   const wingsSpace = params?.visibleWings ? wingsWidth * 2 : 0
-  //   const bodyWidth = (params?.innerWidth || 0) - wingsSpace
 
-  const bodyStyle = {
-    width: bodyWidth || config.width,
-  }
-
-  const handleLayout = event => {
+  const handleLayout = (event: any) => {
     const {height, width} = event.nativeEvent.layout
     setFlatListHeight(height)
+    console.log(height)
   }
 
   return (

@@ -19,14 +19,16 @@ export const JetsDeck = ({
   isSingleDeck,
   scrollOffset,
   flatListHeight,
+  config,
 }: {
   deck: any
   lang: string
-  exits: ExitModel[]
-  bulks: BulkModel[]
+  exits: ExitModel
+  bulks: BulkModel
   isSingleDeck: boolean
   scrollOffset: number
   flatListHeight: number
+  config: any
 }) => {
   const {rows, number, height, width, wingsInfo} = deck || {}
   const {params} = useContext(JetsContext)
@@ -62,22 +64,8 @@ export const JetsDeck = ({
               onPress={handlePressSeat}
               scrollOffset={scrollOffset}
               flatListHeight={flatListHeight}
+              config={config}
             />
-            {/* {index == 1 ? (
-              <View
-                style={{
-                  position: 'absolute',
-                  height: 1000,
-                  width: 10000,
-                  top: 100,
-                  left: -100,
-                  backgroundColor: 'green',
-                  zIndex: 0,
-                }}
-              />
-            ) : (
-              <></>
-            )} */}
           </>
         }
         style={{top: item.topOffset, position: 'absolute', width: '100%', alignItems: 'center'}}
@@ -105,8 +93,6 @@ export const JetsDeck = ({
 
   return (
     <View style={[styles.deck, deckStyle]} ref={elementRef}>
-      {/* {params?.visibleWings && <JetsWing wingsInfo={wingsInfo} />} */}
-
       {number && !isSingleDeck && <JetsDeckTitle number={number} lang={lang} localeKey={DECK_LOCALE_KEY} />}
 
       <View
@@ -127,7 +113,7 @@ export const JetsDeck = ({
           style={{zIndex: 5, position: 'absolute', width: '100%'}}
         />
       )}
-      {params.builtInTooltip && tooltipViewModel.isActive.state && activeTooltip && (
+      {params?.builtInTooltip && tooltipViewModel?.isActive.state && activeTooltip && (
         <TooltipModal seat={activeTooltip.seat} lang={lang} />
       )}
     </View>
@@ -141,6 +127,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     position: 'absolute',
-    zIndex: 1
+    zIndex: 1,
   },
 })

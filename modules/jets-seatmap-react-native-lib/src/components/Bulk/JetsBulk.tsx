@@ -4,7 +4,7 @@ import {SvgXml} from 'react-native-svg'
 import {JetsContext} from '../../common'
 import {BULK_TEMPLATE_MAP, STICKER_TEMPLATE_MAP} from './constants'
 
-export const JetsBulk = ({item}: {item: any}) => {
+export const JetsBulk = ({item}: {item: BulkModel}) => {
   const {params, colorTheme} = useContext(JetsContext)
   const {bulkBaseColor, bulkCutColor, bulkIconColor} = colorTheme
 
@@ -16,11 +16,6 @@ export const JetsBulk = ({item}: {item: any}) => {
   coloredStickerSVG = coloredStickerSVG?.replace('$stickerColor', bulkIconColor)
   coloredBulkSVG = coloredBulkSVG?.replace('$baseColor', bulkBaseColor)
   coloredBulkSVG = coloredBulkSVG?.replace('$cutColor', bulkCutColor)
-
-  //   console.log(
-  //     Math.abs((item.width / 2) * 0.7 * params.antiScale) - item.width,
-  //     Math.abs((item.height / 2) * 0.7 * params.antiScale) - item.height,
-  //   )
 
   return (
     <View
@@ -35,12 +30,7 @@ export const JetsBulk = ({item}: {item: any}) => {
                     <SvgXml xml={coloredStickerSVG} width={Math.abs((item.height / 2) * 0.5)} height={'100%'} />
                   }
                   style={{
-                    // position: 'absolute',
-                    // top: '50%',
-                    // left: '50%',
                     transform: [{translateY: -50}],
-                    // width: 100,
-                    // height: Math.abs((item.height / 2) * 0.7 * params.antiScale) - item.height,
                   }}
                 />
               }
@@ -49,7 +39,6 @@ export const JetsBulk = ({item}: {item: any}) => {
                 top: 0,
                 left: 0,
                 width: '100%',
-                // backgroundColor: 'red',
                 height: item.height * 0.7,
                 alignItems: 'center',
                 justifyContent: 'center',

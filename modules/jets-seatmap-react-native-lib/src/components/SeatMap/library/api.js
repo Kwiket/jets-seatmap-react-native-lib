@@ -1,4 +1,4 @@
-import {DEFAULT_LANG, DEFAULT_UNITS, JetsApiService} from '../../common'
+import {DEFAULT_LANG, DEFAULT_UNITS, JetsApiService} from '../../../common'
 
 const API_SUPPORTED_LANGUAGES = [
   'AR',

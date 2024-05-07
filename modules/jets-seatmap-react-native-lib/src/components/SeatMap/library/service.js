@@ -1,7 +1,7 @@
-import {ENTITY_STATUS_MAP, ENTITY_TYPE_MAP, JetsLocalStorageService, DEFAULT_SEAT_PASSENGER_TYPES} from '../../common'
+import {ENTITY_STATUS_MAP, ENTITY_TYPE_MAP, JetsLocalStorageService, DEFAULT_SEAT_PASSENGER_TYPES} from '../../../common'
 import {JetsSeatMapApiService} from './api'
-import {JetsContentPreparer} from '../../common/data-preparer'
-import {JetsDataHelper} from '../../common/data-helper'
+import {JetsContentPreparer} from '../../../common/data-preparer'
+import {JetsDataHelper} from '../../../common/data-helper'
 
 export class JetsSeatMapService {
   constructor(configuration) {

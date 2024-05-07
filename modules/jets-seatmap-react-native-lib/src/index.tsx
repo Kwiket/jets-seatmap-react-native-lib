@@ -2,7 +2,7 @@ import {Text, View} from 'react-native'
 import {SvgXml} from 'react-native-svg'
 import {JetsSeatMap, seatTemplateService} from './components'
 import {AVAILABILITY_MOCK, CONFIG_MOCK, FLIGHT_MOCK, PASSENGERS_MOCK} from './components/Demo/constants'
-import {getContainerStyleByNumber, getStyleByNumber} from './components/JetsRow/SeatTypes'
+import {getContainerStyleByNumber, getStyleByNumber} from './components/JetsRow/models/SeatTypes'
 
 const SeatOverride = ({seat}: {seat: SeatModel}) => {
   return (
@@ -90,7 +90,7 @@ export const SeatMap = ({flight}) => {
           config={CONFIG_MOCK}
           passengers={PASSENGERS_MOCK}
           currentDeckIndex={1}
-          availability={AVAILABILITY_MOCK}
+        //   availability={AVAILABILITY_MOCK}
         //   seatOverride={SeatOverride}
         />
       ) : (

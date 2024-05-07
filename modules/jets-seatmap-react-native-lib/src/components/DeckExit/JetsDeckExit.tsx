@@ -18,7 +18,6 @@ export const JetsDeckExit = ({type, topOffset}: {type: string; topOffset: number
       right: type === 'right' ? xOffset : DEFAULT_STYLE_POSITION,
       width: 72,
       height: 72,
-      // zIndex: 1,
     }
   })
 
