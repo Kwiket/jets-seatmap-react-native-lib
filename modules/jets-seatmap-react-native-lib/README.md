@@ -57,7 +57,7 @@ If you're unable to run the project, please, make sure to [download and install]
     1. cd android && ./gradlew clean 
     2. cd iOS && pod install --repo-update
 
-15. Add api derails to `config-mock.js` or to you own config:
+15. Add api details to `config-mock.js` or to you own config:
 
 ```
   apiUrl: JETS_BASE_API_URL,
