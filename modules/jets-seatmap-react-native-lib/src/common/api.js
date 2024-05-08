@@ -12,7 +12,7 @@ export class JetsApiService {
   }
 
   getData = async (url, options = {}) => {
-    const basicOptions = {};
+    let basicOptions = {};
     if (!options?.headers?.authorization) {
       basicOptions = await this._getRequestOptions();
     }
@@ -79,7 +79,9 @@ export class JetsApiService {
   };
 
   _saveToken = token => {
-    if (!token || !this._localStorage) return;
+    if (!token || !this._localStorage) {
+      return;
+    }
 
     const {exp} = this._parseJwt(token);
     const tokenTTL = this._getTokenTTL(exp);
