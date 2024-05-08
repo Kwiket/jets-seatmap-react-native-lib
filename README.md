@@ -71,3 +71,17 @@ Run App:
 
 By default you will see a loading progress bar - just input your flight parameters and seat map will be rendered
 
+Now you can customize the source code of the library, first of all apply you styles as StyleSheet or jsx/tsx styles.
+
+To connect the library to the project, you need to run:
+
+`yarn add name-of-your-lib-variation`
+
+or include this string into your package.json dependencies if you use the github repo:
+
+`"jets-seatmap-react-native-lib": "github:Kwiket/jets-seatmap-react-native-lib#branch"`
+
+or you can maulay link module, add source code to the modules folder and add this string into your package.json.
+
+`"jets-seatmap-react-native-lib": "link:./modules/jets-seatmap-react-native-lib"`
+
