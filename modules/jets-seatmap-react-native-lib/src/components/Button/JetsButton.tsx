@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle} from 'react-native';
+import {JetsContext} from '../../common';
 
 export const JetsButton = ({
   content,
@@ -15,9 +16,11 @@ export const JetsButton = ({
   style: ViewStyle;
   foregroundColor: TextStyle;
 }) => {
+  const {colorTheme} = useContext(JetsContext);
+
   return (
     <TouchableOpacity
-      children={<Text children={content} style={[styles.text, foregroundColor]} />}
+      children={<Text children={content} style={[styles.text, foregroundColor, {fontFamily: colorTheme.fontFamily}]} />}
       {...attrs}
       style={[styles.button, style, disabled && styles.disabled]}
       onPress={onPress}

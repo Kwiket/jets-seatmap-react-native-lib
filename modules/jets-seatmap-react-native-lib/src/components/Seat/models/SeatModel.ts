@@ -1,4 +1,5 @@
 interface SeatModel {
+  additionalProps: any[];
   classCode: string;
   classType: string;
   color: string;

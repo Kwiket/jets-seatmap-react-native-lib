@@ -39,6 +39,7 @@ Create your [config](#config) and embed seatmap into your component page via `<J
     - [ onSeatSelected](#-onseatselected)
     - [ onSeatUnselected](#-onseatunselected)
     - [ seatOverride](#-seatOverride)
+    - [ customFont](#-customFont)
 
 The `flight` prop is requred.
 
@@ -566,3 +567,7 @@ const SeatOverride = ({seat}: {seat: ISeatData}) => {
   );
 };
 ```
+
+### <a name="customFont"></a> seatOverride
+
+To apply custom font to the seat map label components, you need to add font to the RN app, then link fonts using npx link or npx react-native-asset, and add the font name to the config

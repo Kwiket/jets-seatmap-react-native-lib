@@ -33,6 +33,7 @@ export const JetsSeat = ({seat}: {seat: SeatModel}) => {
                     fontSize: 30,
                     color: colorTheme.seatLabelColor ?? 'white',
                     textAlign: 'center',
+                    fontFamily: colorTheme.fontFamily,
                   },
                   getStyleByNumber(seat.seatIconType),
                 ]}
@@ -50,7 +51,10 @@ export const JetsSeat = ({seat}: {seat: SeatModel}) => {
           {seat.passenger != undefined ? (
             <View
               children={
-                <Text children={seat.passenger.abbr} style={{color: 'white', fontSize: 36, fontWeight: 'bold'}} />
+                <Text
+                  children={seat.passenger.abbr}
+                  style={{color: 'white', fontSize: 36, fontWeight: 'bold', fontFamily: colorTheme.fontFamily}}
+                />
               }
               style={[
                 {

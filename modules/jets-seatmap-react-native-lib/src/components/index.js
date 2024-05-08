@@ -3,7 +3,6 @@ export * from './Button/JetsButton';
 export * from './Deck/JetsDeck';
 export * from './DeckExit/JetsDeckExit';
 export * from './DeckSelector/JetsDeckSelector';
-export * from './Demo';
 export * from './NoData/JetsNoData';
 export * from './NotInit/JetsNotInit';
 export * from './PlaneBody/JetsPlaneBody';

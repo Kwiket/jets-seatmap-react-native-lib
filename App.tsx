@@ -2,18 +2,24 @@ import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
-import {JetsSeatMap} from 'react-native-jets-seatmap-react-native-lib';
+import {demoConstants, JetsSeatMap} from 'react-native-jets-seatmap-react-native-lib';
 
 const DemoScreen = ({route, navigation}) => {
-  const {config} = route.params;
+  const {config, flight, availability, passengers} = route.params;
 
-  return <SafeAreaView children={<JetsSeatMap flight={config} />} />;
+  return (
+    <SafeAreaView
+      children={<JetsSeatMap flight={flight} availability={availability} passengers={passengers} config={config} />}
+    />
+  );
 };
 
 const FirstScreen = () => {
   const navigation = useNavigation();
 
-  const firstType = {
+  const config = demoConstants.CONFIG_MOCK;
+
+  const flight = {
     id: '111',
     airlineCode: 'LH',
     flightNo: '7060',
@@ -24,38 +30,9 @@ const FirstScreen = () => {
     planeCode: '',
   };
 
-  const secondType = {
-    id: '111',
-    airlineCode: 'LH',
-    flightNo: '7060',
-    departureDate: '2024-05-25',
-    departure: 'PEK',
-    arrival: 'CAN',
-    cabinClass: 'A',
-    planeCode: '',
-  };
+  const availability = demoConstants.AVAILABILITY_MOCK;
 
-  const thirdType = {
-    id: '111',
-    airlineCode: 'LH',
-    flightNo: '400',
-    departureDate: '2024-10-29',
-    departure: 'FRA',
-    arrival: 'JFK',
-    cabinClass: 'A',
-    planeCode: '',
-  };
-
-  const forthType = {
-    id: '111',
-    airlineCode: 'EK',
-    flightNo: '50',
-    departureDate: '2024-10-29',
-    departure: 'MUC',
-    arrival: 'DXB',
-    cabinClass: 'A',
-    planeCode: '',
-  };
+  const passengers = demoConstants.PASSENGERS_MOCK;
 
   return (
     <View
@@ -64,34 +41,13 @@ const FirstScreen = () => {
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('demoScreen', {
-                config: firstType,
+                flight: flight,
+                config: config,
+                availability: availability,
+                passengers: passengers,
               });
             }}
             children={<Text children="config 1" />}
-          />
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('demoScreen', {
-                config: secondType,
-              });
-            }}
-            children={<Text children="config 2" />}
-          />
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('demoScreen', {
-                config: thirdType,
-              });
-            }}
-            children={<Text children="config 3" />}
-          />
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('demoScreen', {
-                config: forthType,
-              });
-            }}
-            children={<Text children="config 4" />}
           />
         </>
       }
