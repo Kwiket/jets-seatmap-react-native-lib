@@ -1,5 +1,5 @@
 import React, {useContext, useRef} from 'react';
-import {View, Text, StyleSheet, ViewStyle, TextStyle} from 'react-native';
+import {View, Text, ViewStyle} from 'react-native';
 import {JetsContext, LOCALES_MAP, DEFAULT_DECK_TITLE_HEIGHT} from '../../common';
 
 export const JetsDeckTitle = ({number, lang, localeKey}: {number: number; lang: string; localeKey: string}) => {
@@ -20,11 +20,14 @@ export const JetsDeckTitle = ({number, lang, localeKey}: {number: number; lang: 
       children={
         <Text
           children={`${LOCALES_MAP[lang][localeKey]}: ${number}`}
-          style={{
-            color: colorTheme.deckLabelTitleColor,
-            fontSize: 14,
-            fontWeight: 'bold',
-          }}
+          style={[
+            {
+              color: colorTheme.deckLabelTitleColor,
+              fontSize: 14,
+              fontWeight: 'bold',
+              fontFamily: colorTheme.fontFamily,
+            },
+          ]}
         />
       }
       style={[style]}

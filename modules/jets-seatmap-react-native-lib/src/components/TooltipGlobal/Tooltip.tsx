@@ -101,10 +101,10 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
       <View
         children={
           <>
-            <Text style={[styles.title, {color: tooltipHeaderColor}]}>{`${seat.classType || seat.rowName} ${
-              seat.number
-            }`}</Text>
-            <Text style={[styles.title, {color: tooltipHeaderColor}]}>{`${
+            <Text style={[styles.title, {color: tooltipHeaderColor, fontFamily: colorTheme.fontFamily}]}>{`${
+              seat.classType || seat.rowName
+            } ${seat.number}`}</Text>
+            <Text style={[styles.title, {color: tooltipHeaderColor, fontFamily: colorTheme.fontFamily}]}>{`${
               seat.price != undefined ? seat.price : ''
             }`}</Text>
           </>
@@ -112,7 +112,7 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
         style={{flexDirection: 'row', justifyContent: 'space-between'}}
       />
 
-      <Text style={[styles.title, {color: tooltipHeaderColor}]}>{`${
+      <Text style={[styles.title, {color: tooltipHeaderColor, fontFamily: colorTheme.fontFamily}]}>{`${
         passengerLabel.length ? passengerLabel : restrictionsLabel
       }`}</Text>
 
@@ -138,13 +138,25 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
                     ) : (
                       <Text
                         children={item.title}
-                        style={{fontSize: 45, textAlign: 'left', marginLeft: 10, color: tooltipFontColor}}
+                        style={{
+                          fontSize: 45,
+                          textAlign: 'left',
+                          marginLeft: 10,
+                          color: tooltipFontColor,
+                          fontFamily: colorTheme.fontFamily,
+                        }}
                       />
                     )}
 
                     <Text
                       children={item.value}
-                      style={{fontSize: 45, textAlign: 'left', marginLeft: 10, color: tooltipFontColor}}
+                      style={{
+                        fontSize: 45,
+                        textAlign: 'left',
+                        marginLeft: 10,
+                        color: tooltipFontColor,
+                        fontFamily: colorTheme.fontFamily,
+                      }}
                     />
                   </>
                 }
@@ -175,13 +187,25 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
                     ) : (
                       <Text
                         children={item.title}
-                        style={{fontSize: 45, textAlign: 'left', marginLeft: 10, color: tooltipFontColor}}
+                        style={{
+                          fontSize: 45,
+                          textAlign: 'left',
+                          marginLeft: 10,
+                          color: tooltipFontColor,
+                          fontFamily: colorTheme.fontFamily,
+                        }}
                       />
                     )}
 
                     <Text
                       children={item.value}
-                      style={{fontSize: 45, textAlign: 'left', marginLeft: 10, color: tooltipFontColor}}
+                      style={{
+                        fontSize: 45,
+                        textAlign: 'left',
+                        marginLeft: 10,
+                        color: tooltipFontColor,
+                        fontFamily: colorTheme.fontFamily,
+                      }}
                     />
                   </>
                 }
@@ -199,8 +223,14 @@ const TooltipModal = ({seat, lang}: {seat: SeatModel; lang: string}) => {
                 children={
                   <>
                     <SvgXml xml={item.icon} width={100} height={100} fill={tooltipIconColor} />
-                    <Text children={item.title} style={{fontSize: 45, color: tooltipFontColor}} />
-                    <Text children={item.value} style={{fontSize: 45, color: tooltipFontColor}} />
+                    <Text
+                      children={item.title}
+                      style={{fontSize: 45, color: tooltipFontColor, fontFamily: colorTheme.fontFamily}}
+                    />
+                    <Text
+                      children={item.value}
+                      style={{fontSize: 45, color: tooltipFontColor, fontFamily: colorTheme.fontFamily}}
+                    />
                   </>
                 }
                 style={{

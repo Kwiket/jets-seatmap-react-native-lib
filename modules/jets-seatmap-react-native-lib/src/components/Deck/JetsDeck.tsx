@@ -29,7 +29,7 @@ export const JetsDeck = ({
   flatListHeight: number;
   config: any;
 }) => {
-  const {rows, number, height, width, wingsInfo} = deck || {};
+  const {rows, number, height, width} = deck || {};
 
   const {params} = useContext(JetsContext);
 

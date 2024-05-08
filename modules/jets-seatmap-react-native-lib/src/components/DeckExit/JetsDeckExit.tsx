@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useContext} from 'react';
 import {View} from 'react-native';
 import Svg, {Path, G, SvgUri} from 'react-native-svg';
 import {DEFAULT_STYLE_POSITION, JetsContext} from '../../common';

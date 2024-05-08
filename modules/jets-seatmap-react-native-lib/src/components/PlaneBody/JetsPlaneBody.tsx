@@ -14,7 +14,6 @@ export const JetsPlaneBody = ({
   bulks,
   config,
   showOneDeck,
-  isSeatMapInited,
 }: {
   activeDeck: number;
   content: any;
@@ -22,7 +21,6 @@ export const JetsPlaneBody = ({
   bulks: BulkModel[][];
   showOneDeck: boolean | undefined;
   config: any;
-  isSeatMapInited: boolean;
 }) => {
   const {params, colorTheme} = useContext(JetsContext);
 
@@ -118,7 +116,7 @@ export const JetsPlaneBody = ({
             key={activeDeck}
             ref={flatListRef}
             onLayout={handleLayout}
-            data={content.length != 0 ? [content[activeDeck]] : []}
+            data={content.length != 0 ? (content.length == 1 ? content : [content[activeDeck]]) : []}
             renderItem={renderItem}
             keyExtractor={keyExtractor}
             extraData={activeDeck}

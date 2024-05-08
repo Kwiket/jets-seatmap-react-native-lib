@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {JetsContext} from '../../common';
 
 export const JetsWing = ({item}: {item: {wingsInfo: {start: number; finish: number}}}) => {
-  const {params, colorTheme} = useContext(JetsContext);
+  const {colorTheme} = useContext(JetsContext);
 
   return (
     <View

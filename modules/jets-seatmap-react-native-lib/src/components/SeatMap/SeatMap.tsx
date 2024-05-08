@@ -52,10 +52,9 @@ import {
   THEME_EXIT_ICON_WIDTH,
   THEME_EXIT_ICON_HEIGHT,
 } from '../../common';
-import {Dimensions, Text, TouchableOpacity, View} from 'react-native';
+import {View, ViewStyle} from 'react-native';
 import {JetsPlaneBody} from '../PlaneBody/JetsPlaneBody';
 import {TooltipViewModelProvider} from '../TooltipGlobal/TooltipViewModel';
-import {JetsNoData} from '../NoData/JetsNoData';
 import {JetsNotInit} from '../NotInit/JetsNotInit';
 import {JetsDeckSelector} from '../DeckSelector/JetsDeckSelector';
 
@@ -271,13 +270,12 @@ export const JetsSeatMap = ({
     );
   };
 
-  const scaleTransformValue = ` ${params?.rotation} ${params?.offset} scale(${params?.scale})`;
-
-  const scaleWrapStyle: ScaleWrapperModel = {
-    transform: scaleTransformValue,
-    transformOrigin: 'top left',
+  const scaleWrapStyle: ViewStyle = {
+    height: config.height != undefined && params != undefined ? config.height / params?.scale : '100%',
+    transformOrigin: `'top left'`,
     width: params?.innerWidth,
-    height: params?.scaledTotalDecksHeight,
+    transform: [{scale: params?.scale ?? 1}],
+    alignItems: 'center',
   };
 
   const providerValue = {
@@ -308,18 +306,11 @@ export const JetsSeatMap = ({
                 content={content}
                 exits={exits}
                 bulks={bulks}
-                isSeatMapInited={isSeatMapInited}
                 config={configuration}
               />
             </>
           }
-          style={{
-            height: config.height != undefined && params != undefined ? config.height / params?.scale : '100%',
-            transformOrigin: `${scaleWrapStyle.transformOrigin}`,
-            width: scaleWrapStyle?.width,
-            transform: [{scale: params?.scale ?? 1}],
-            alignItems: 'center',
-          }}
+          style={scaleWrapStyle}
         />
         {!isSeatMapInited ? <JetsNotInit /> : <></>}
         {shouldShowBuiltInDeckSelector && (

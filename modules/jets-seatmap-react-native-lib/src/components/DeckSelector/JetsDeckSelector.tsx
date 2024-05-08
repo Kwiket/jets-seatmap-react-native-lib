@@ -4,7 +4,7 @@ import {SvgXml} from 'react-native-svg';
 import {JetsContext} from '../../common';
 
 export const JetsDeckSelector = ({activeDeck, onPress}: {activeDeck: number; onPress: () => void}) => {
-  const {params, colorTheme, switchDeck} = useContext(JetsContext);
+  const {params, colorTheme} = useContext(JetsContext);
 
   const {deckSelectorStrokeColor, deckSelectorFillColor, deckSelectorSize} = colorTheme;
 

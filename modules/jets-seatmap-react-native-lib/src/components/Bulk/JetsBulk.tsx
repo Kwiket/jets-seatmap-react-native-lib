@@ -5,7 +5,7 @@ import {JetsContext} from '../../common';
 import {BULK_TEMPLATE_MAP, STICKER_TEMPLATE_MAP} from './constants';
 
 export const JetsBulk = ({item}: {item: BulkModel}) => {
-  const {params, colorTheme} = useContext(JetsContext);
+  const {colorTheme} = useContext(JetsContext);
 
   const {bulkBaseColor, bulkCutColor, bulkIconColor} = colorTheme;
 

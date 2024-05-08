@@ -3,7 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import {JetsContext} from '../../common';
 
 export const JetsNoData = () => {
-  const {params} = useContext(JetsContext);
+  const {params, colorTheme} = useContext(JetsContext);
 
   const containerStyle = {
     transform: [{scale: params?.antiScale || 1}],
@@ -11,7 +11,12 @@ export const JetsNoData = () => {
 
   return (
     <View
-      children={<Text children={'Seat map is not found for the flight'} style={styles.text} />}
+      children={
+        <Text
+          children={'Seat map is not found for the flight'}
+          style={[styles.text, {fontFamily: colorTheme.fontFamily}]}
+        />
+      }
       style={[styles.container, containerStyle]}
     />
   );
