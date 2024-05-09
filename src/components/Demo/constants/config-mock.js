@@ -40,7 +40,7 @@ const CONFIG_MOCK = {
     bulkIconColor: 'darkslategray',
 
     defaultPassengerBadgeColor: 'darkred',
-    fontFamily: 'Montserrat, sans-serif',
+    fontFamily: 'Montserrat-Regular',
 
     tooltipBackgroundColor: 'rgb(255,255,255)',
     tooltipHeaderColor: '#4f6f8f',
