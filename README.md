@@ -1,6 +1,6 @@
 # jets-seatmap-react-native-lib
 
-React Native library that helps to render a plane seat map by flight relying on Quicket GmbH API and data.
+**POC** of React Native seat map library, it helps to render a plane seat map by flight, relying on Quicket GmbH API and data.
 
 
 Prerequisites:
@@ -16,7 +16,7 @@ Prerequisites:
 - react-native-base64
 
 
-If you're unable to run the project, please, make sure to [download and install](https://reactnative.dev/docs/environment-setup) the latest SDK for corresponding OS
+If you're unable to run the project, please make sure to [download and install](https://reactnative.dev/docs/environment-setup) the latest SDK for the corresponding OS
 
 
 ## Installation Guide
